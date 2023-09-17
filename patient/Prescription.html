@@ -11,52 +11,33 @@
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 /* Styles de la page de chat */
-.chat {
-    border: none;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #f7f7f7;
+.chat-list {
+    list-style: none;
+    padding: 0;
 }
 
-.message {
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-}
-
-.patient {
-    background-color: #DCF8C6;
-}
-
-.doctor {
-    background-color: #B2E0FF;
-}
-
-.message-input {
+.chat-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    border-top: bone;
-    padding: 10px;
-    
-}
-
-input[type="text"] {
-    width: 80%;
-    padding: 5px;
     border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
+    transition: transform 0.3s, background-color 0.3s;
+    background-color: white; /* Fond blanc */
 }
 
-button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
+.chat-item:hover {
+    transform: scale(1.02);
     cursor: pointer;
+    background-color: rgb(88, 103, 97);
+    color: rgb(0, 0, 0);
 }
 
+
+.chat-preview {
+    flex-grow: 1;
+}
        
  
 </style>
@@ -67,6 +48,7 @@ button {
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
   <span class="w3-bar-item w3-right" style="font-family: 'Pacifico', cursive;">Healthy</span>
+
 </div>
 
 <!-- Sidebar/menu -->
@@ -76,8 +58,8 @@ button {
       <img src="https://cdn-icons-png.flaticon.com/128/552/552721.png" class="w3-circle w3-margin-right" style="width:46px">
     </div>
     <div class="w3-col s8 w3-bar">
-      <span>Bienvenue, <strong>Mike</strong></span><br>
-     
+      <span>Bienvenue, <strong>John</strong></span><br>
+  
     </div>
   </div>
   <hr>
@@ -87,7 +69,7 @@ button {
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-bell fa-fw"></i>  Notifications</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Patients</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-stethoscope fa-fw"></i>  MaSanté</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Rendez-vous</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-heart fa-fw"></i>  ConseilsSanté</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i>  Log Out</a><br><br>
@@ -102,21 +84,28 @@ button {
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
   <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-stethoscope"></i> Mes Prescriptions</b></h5>
+  </header>
  
   <main>
-    <div class="chat">
-        <div class="message patient">
-            <p>John Doe : Bonjour, docteur. J'ai des douleurs à la poitrine.</p>
-        </div>
-        <div class="message doctor">
-            <p>Moi : Bonjour. Je suis là pour vous aider. Pouvez-vous décrire vos symptômes plus en détail ?</p>
-        </div>
-        <!-- Ajoutez d'autres messages ici -->
-    </div>
-    <div class="message-input">
-        <input type="text" placeholder="Écrivez votre message...">
-        <button>Envoyer</button>
-    </div>
+    <ul class="chat-list">
+        <li class="chat-item">
+            <div class="chat-preview">
+                <h2>Paracetamol</h2>
+                <p> 1 comprimé le matin</p>
+                <p>2 comprimés le soir</p>
+            </div>
+        </li>
+        <li class="chat-item">
+            <div class="chat-preview">
+                <h2>Noscapine</h2>
+                <p>1 comprimé le matin</p>
+            </div>
+        </li>
+
+        <!-- Ajoutez d'autres chats ici -->
+    </ul>
 </main>
  
 

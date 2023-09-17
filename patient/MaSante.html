@@ -10,54 +10,55 @@
 
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-/* Styles de la page de chat */
-.chat {
-    border: none;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #f7f7f7;
-}
 
-.message {
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-}
 
-.patient {
-    background-color: #DCF8C6;
-}
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+        }
 
-.doctor {
-    background-color: #B2E0FF;
-}
+        .left-div, .right-div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            height: 400px;
+            transition: transform 0.3s ease;
+        }
 
-.message-input {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: bone;
-    padding: 10px;
-    
-}
+        .left-div:hover, .right-div:hover {
+            transform: scale(1.05);
+        }
 
-input[type="text"] {
-    width: 80%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #333;
+        }
 
-button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        p {
+            font-size: 16px;
+            color: #666;
+        }
 
-       
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-div, .right-div {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
  
 </style>
 </head>
@@ -67,6 +68,7 @@ button {
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
   <span class="w3-bar-item w3-right" style="font-family: 'Pacifico', cursive;">Healthy</span>
+
 </div>
 
 <!-- Sidebar/menu -->
@@ -76,8 +78,8 @@ button {
       <img src="https://cdn-icons-png.flaticon.com/128/552/552721.png" class="w3-circle w3-margin-right" style="width:46px">
     </div>
     <div class="w3-col s8 w3-bar">
-      <span>Bienvenue, <strong>Mike</strong></span><br>
-     
+      <span>Bienvenue, <strong>John</strong></span><br>
+    
     </div>
   </div>
   <hr>
@@ -87,7 +89,7 @@ button {
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-bell fa-fw"></i>  Notifications</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Patients</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-stethoscope fa-fw"></i>  MaSanté</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Rendez-vous</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-heart fa-fw"></i>  ConseilsSanté</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i>  Log Out</a><br><br>
@@ -103,21 +105,20 @@ button {
 
   <!-- Header -->
  
-  <main>
-    <div class="chat">
-        <div class="message patient">
-            <p>John Doe : Bonjour, docteur. J'ai des douleurs à la poitrine.</p>
-        </div>
-        <div class="message doctor">
-            <p>Moi : Bonjour. Je suis là pour vous aider. Pouvez-vous décrire vos symptômes plus en détail ?</p>
-        </div>
-        <!-- Ajoutez d'autres messages ici -->
+
+  <div class="container">
+    <div class="left-div">
+        <h1>Ma Prescription</h1>
+        <p>Cliquez ici pour consulter les prescriptions du médecin.</p>
     </div>
-    <div class="message-input">
-        <input type="text" placeholder="Écrivez votre message...">
-        <button>Envoyer</button>
+    <div class="right-div">
+        <h1>Mon Etat</h1>
+        <p>Cliquez ici pour mettre à jour ou surveiller votre état de santé.</p>
     </div>
-</main>
+</div>
+
+ 
+  
  
 
   <!-- End page content -->

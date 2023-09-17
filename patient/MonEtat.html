@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
  #customers {
@@ -36,32 +37,93 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       {
         margin-bottom: 80px;
       }
-      main {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
+
+      body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.conseils {
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.patient-info {
+    margin-bottom: 20px;
+}
+
+
+
+.constants, .symptoms, .appointment, .prescription,.rdv {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+
+.prescription {
+    position: relative; /* Permet de positionner le texte de l'état du traitement */
+}
+
+/* Style pour le texte avec fond vert */
+.etat-traitement {
+    background-color: #047408; /* Vert */
+    color: #fff; /* Texte blanc */
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s; /* Transition fluide */
+}
+
+/* Style pour le texte avec fond rouge */
+
+
+/* Style pour la liste des symptômes */
+.symptoms ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+/* Style pour les éléments de la liste des symptômes */
+.symptoms ul li {
+    margin-bottom: 5px;
+}
+.medicament {
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
     display: flex;
-    flex-direction: column;
 }
 
-.conseil {
-    border: none;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background-color: #f5f5f5e2;
+/* Animation au survol */
+.medicament:hover {
+    background-color: #04AA6D;
+    color: white;
+}
+.content {
+    flex-grow: 1; /* Permet au contenu de s'étendre pour occuper l'espace disponible */
 }
 
-.conseil h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+.icones {
+    margin-left: auto; /* Pousse les icônes vers la droite (fin) */
 }
-
-     
 </style>
 </head>
 <body class="w3-light-grey">
@@ -80,8 +142,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <img src="https://cdn-icons-png.flaticon.com/128/552/552721.png" class="w3-circle w3-margin-right" style="width:46px">
     </div>
     <div class="w3-col s8 w3-bar">
-      <span>Bienvenue, <strong>Mike</strong></span><br>
-   
+      <span>Bienvenue, <strong>John</strong></span><br>
+
     </div>
   </div>
   <hr>
@@ -89,9 +151,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <h5>Dashboard</h5>
   </div>
   <div class="w3-bar-block">
-    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-bell fa-fw"></i>  Notifications</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Patients</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-stethoscope fa-fw"></i>  MaSante</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Rendez-vous</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-heart fa-fw"></i>  ConseilsSanté</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i>  Log Out</a><br><br>
@@ -106,64 +167,45 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
   <!-- Header -->
-  <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-heart fa-fw"></i> Mes Conseils</b></h5>
-  </header>
-
-  <div class="w3-row-padding w3-margin-bottom">
-    
-    <main>
-        <section class="conseils">
-            <article class="conseil">
-                <table>
-                    <tr>
-                        <td><h2>Conseil du jour </h2></td>
-                        <td><i class='fa fa-exclamation' style='font-size:45px;color:red'></i></td>
-                        <td></td><td></td><td></td>
-                        <td>
-                           
-                        </td>
-                    </tr>
-                    
-                        <i class="fa fa-pencil" style="color: blue;"></i> &nbsp;&nbsp;&nbsp; <!-- Icône de modification -->
-                        <i class="fa fa-trash" style="color: red;"></i> <!-- Icône de suppression -->
-                      
-                </table>
-                <p>Mangez 5 fruits et mégumes par jour</p>
-                
-            </article>
-            <article class="conseil">
-                <table>
-                    <tr>
-                        <td><h2>Conseil du jour </h2></td>
-                        <td><i class='fa fa-exclamation' style='font-size:45px;color:red'></i></td>
-                    </tr>
-                    <i class="fa fa-pencil" style="color: blue;"></i> &nbsp;&nbsp;&nbsp; <!-- Icône de modification -->
-                        <i class="fa fa-trash" style="color: red;"></i> 
-                </table>
-                <p>Faites au moins 30 minutes d'exercice par jour.</p>
-            </article>
-            <article class="conseil">
-                <table>
-                    <tr>
-                        <td><h2>Conseil du jour </h2></td>
-                        <td><i class='fa fa-exclamation' style='font-size:45px;color:red'></i></td>
-                    </tr>
-                    <i class="fa fa-pencil" style="color: blue;"></i> &nbsp;&nbsp;&nbsp; <!-- Icône de modification -->
-                        <i class="fa fa-trash" style="color: red;"></i> 
-                </table>
-                <p>Boire au moins 8 verres d'eau par jour aide à maintenir une hydratation adéquate, favorise la digestion et contribue à la santé de la peau.</p>
-            </article>
-            <!-- Ajoutez plus de conseils ici -->
-        </section>
-    </main>
-   
-    
-  </div>
-  <br>
   
- 
 
+  <div class="container">
+
+        <div class="constants">
+            <table>
+                <tr>
+                    <td><h2>Mes Constantes  </h2></td>
+                    <td></td><td></td>
+                    <td><i class="fa fa-pencil" style="color: blue;"></i></td>
+                </tr>
+            </table>
+<p><strong><i class="fa fa-balance-scale" style="color: rgb(0, 255, 140);"></i> Poids :</strong> 70 kg</p>
+<p><strong><i class="fa fa-stethoscope" style="color: green;"></i> Tension Artérielle :</strong> 120/80 mmHg</p>
+<p><strong><i class="fa fa-heartbeat"style="color: red;"></i> Fréquence Cardiaque :</strong> 80 bpm</p>
+<p><strong><i class="fa fa-cloud"style="color: rgb(0, 136, 255) ;"></i>  Fréquence Respiratoire :</strong> 16 cycles/min</p>
+<p><strong><i class="fa fa-thermometer" style="color: rgb(236, 141, 6);"></i> Température :</strong> 39°C</p>
+
+          
+            <!-- Ajoutez d'autres constantes ici -->
+        </div>
+        <div class="symptoms">
+            <table>
+                <tr>
+                    <td><h2> Mes Symptômes </h2></td>
+                    <td></td><td></td>
+                    <td><i class="fa fa-plus" style="color: green;"></i> </td>
+                </tr>
+            </table>
+            
+            <ul>
+                <li>Fatigue &nbsp;&nbsp;&nbsp; <i class="fa fa-trash" style="color: red;"></i></li>
+                <li>Maux de tête &nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="color: red;"></i></li>
+                <!-- Ajoutez d'autres symptômes ici -->
+            </ul>
+        </div>
+    
+    </div>
+    
   <!-- End page content -->
 </div>
 
