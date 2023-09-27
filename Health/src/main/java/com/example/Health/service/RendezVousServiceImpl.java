@@ -37,4 +37,14 @@ public class RendezVousServiceImpl implements RendezVousService{
         rendezVousRepository.deleteById(id);
         return "RendezVous bien supprimé";
     }
+
+    @Override
+    public List<RendezVous> LireParMedecin(Long medecin_id) {
+        return rendezVousRepository.findByMedecin_id(medecin_id);
+    }
+
+    @Override
+    public List<RendezVous> LireParPatient(Long patient_id) {
+        return rendezVousRepository.findByPatient_id(patient_id) ;
+    }
 }

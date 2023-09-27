@@ -11,4 +11,6 @@ import java.util.List;
 public interface RendezVousRepository extends JpaRepository<RendezVous,Long> {
     @Query("SELECT r FROM RendezVous r WHERE r.patient.id = ?1")
     List<RendezVous> findByPatient_id(Long patient_id);
+    @Query("SELECT r FROM RendezVous r WHERE r.medecin.id = ?1")
+    List<RendezVous> findByMedecin_id(Long patient_id);
 }

@@ -10,6 +10,8 @@ public interface RendezVousService {
     List<RendezVous> Lire();
     RendezVous Modifier (RendezVous rendezVous,Long id);
     String Supprimer(Long id);
+    List<RendezVous> LireParMedecin(Long medecin_id);
+    List<RendezVous>LireParPatient(Long patient_id);
 
 //    List<Conseil> LireP(String user_id);
 //    Conseil Accepter (Long id);

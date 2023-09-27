@@ -10,13 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+@RestController
+@RequestMapping(path="/api/conseils")
+
 @AllArgsConstructor
 
 public class ConseilController {
     @Autowired
     private  final ConseilService conseilService;
-    @GetMapping
-    public List<Conseil> read()
+
+    @GetMapping()
+    public List<Conseil> read(@RequestHeader(value = "Accept")String acceptHeader)
     {
         return conseilService.Lire();
     }
