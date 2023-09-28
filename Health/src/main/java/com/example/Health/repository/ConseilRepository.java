@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ConseilRepository extends JpaRepository<Conseil,Long> {
-    @Query("SELECT co FROM Conseil co WHERE co.medecin.id = ?1")
-    List<Conseil> Medecin_id(Long patient_id);
+    @Query("SELECT co FROM Conseil co WHERE co.medecin_id = ?1")
+    List<Conseil> findByMedecin(String medecin_id);
 }

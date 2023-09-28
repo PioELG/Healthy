@@ -28,8 +28,7 @@ public class Medecin {
     private String email;
     @Column
     private String specialite;
-    @OneToMany(mappedBy = "medecin")
-    List<Conseil> conseilList;
+
     @OneToMany(mappedBy = "medecin")
     List<Patient> patientList;
     @OneToMany(mappedBy = "medecin")

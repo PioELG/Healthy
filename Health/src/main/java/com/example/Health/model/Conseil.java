@@ -19,7 +19,9 @@ public class Conseil {
     @Column
     private String contenu;
 
-    @ManyToOne
-    @JoinColumn(name="medecin_id")
-    private Medecin medecin;
+//    @ManyToOne
+//    @JoinColumn(name="medecin_id")
+//    private Medecin medecin;
+ @Column
+ private String medecin_id;
 }

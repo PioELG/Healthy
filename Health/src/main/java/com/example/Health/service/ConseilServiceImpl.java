@@ -38,4 +38,9 @@ public class ConseilServiceImpl implements ConseilService{
         conseilRepository.deleteById(id);
         return "Supprimé avec succès";
     }
+
+    @Override
+    public List<Conseil> LireP(String medecin_id) {
+        return conseilRepository.findByMedecin(medecin_id);
+    }
 }
