@@ -17,4 +17,5 @@ public interface PatientService {
     // Medecin Rejeter(Long id);
     // String SupprimerAll();
     // void SupprimerBy(String user_id);
+
 }

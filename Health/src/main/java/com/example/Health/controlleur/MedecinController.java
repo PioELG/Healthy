@@ -1,6 +1,4 @@
 package com.example.Health.controlleur;
-
-import com.example.Health.model.Constantes;
 import com.example.Health.model.Medecin;
 import com.example.Health.service.ConstantesService;
 import com.example.Health.service.MedecinService;

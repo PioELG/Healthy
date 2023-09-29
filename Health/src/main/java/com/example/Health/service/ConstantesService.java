@@ -1,16 +1,18 @@
 package com.example.Health.service;
 
-import com.example.Health.model.Constantes;
+import com.example.Health.model.Constante;
+
 
 import java.util.List;
 
 public interface ConstantesService {
-    Constantes Creer(Constantes constantes);
-    List<Constantes> Lire();
-    Constantes Modifier (Constantes constantes,Long id);
+    Constante Creer(Constante constantes);
+    List<Constante> Lire();
+    Constante Modifier (Constante constantes,Long id);
     String Supprimer(Long id);
 
-//    List<Constantes> LireP(String user_id);
+  List<Constante> LireP(String user_id);
+
 //    Constantes Accepter (Long id);
 //   Constantes Rejeter (Long id);
 //    String SupprimerAll();

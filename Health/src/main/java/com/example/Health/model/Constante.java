@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="Constantes")
+@Table(name="Constante")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Constantes {
+public class Constante {
    @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -28,8 +28,7 @@ public class Constantes {
    @Column
     private String temperature;
 
-    @OneToOne
-    @JoinColumn(name="patient_id")
-    private Patient patient;
+    @Column
+    private String patient_id;
 
 }

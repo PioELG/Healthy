@@ -11,7 +11,7 @@ public interface SymptomesService {
     List<Symptomes> Lire();
     Symptomes Modifier(Symptomes symptomes, Long id);
     String Supprimer(Long id);
-    List<Symptomes> LireParPatient(Long patient_id);
+    List<Symptomes> LireParPatient(String patient_id);
 
     // Vous pouvez également décommenter ces méthodes si nécessaire
     // List<Medecin> LireP(String user_id);

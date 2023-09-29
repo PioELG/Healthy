@@ -7,18 +7,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="Symptomes")
+@Table(name="doctor")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Symptomes {
-        @Id
-   @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
-        @Column
+public class Doctor {
+    @Id
+    private String id;
+    @Column
     private String nom;
     @Column
-    private String patient_id;
+    private String prenom;
+    @Column
+    private String email;
 
 }

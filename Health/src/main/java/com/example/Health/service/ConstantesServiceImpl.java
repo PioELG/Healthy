@@ -1,6 +1,6 @@
 package com.example.Health.service;
 
-import com.example.Health.model.Constantes;
+import com.example.Health.model.Constante;
 import com.example.Health.repository.ConstantesRepository;
 import com.example.Health.repository.SymptomesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,23 +12,23 @@ public class ConstantesServiceImpl implements ConstantesService{
     @Autowired
     private ConstantesRepository constantesRepository;
     @Override
-    public Constantes Creer(Constantes constantes) {
-        return constantesRepository.save(constantes);
+    public Constante Creer(Constante constante) {
+        return constantesRepository.save(constante);
     }
 
     @Override
-    public List<Constantes> Lire() {
+    public List<Constante> Lire() {
         return constantesRepository.findAll();
     }
 
     @Override
-    public Constantes Modifier(Constantes constantes, Long id) {
+    public Constante Modifier(Constante constante, Long id) {
         return constantesRepository.findById(id).map(c->{
-            c.setPoids(constantes.getPoids());
-            c.setFreqCar(constantes.getFreqCar());
-            c.setFreqRes(constantes.getFreqRes());
-            c.setTemperature(constantes.getTemperature());
-            c.setPressionArterielle(constantes.getPressionArterielle());
+            c.setPoids(constante.getPoids());
+            c.setFreqCar(constante.getFreqCar());
+            c.setFreqRes(constante.getFreqRes());
+            c.setTemperature(constante.getTemperature());
+            c.setPressionArterielle(constante.getPressionArterielle());
 
             return constantesRepository.save(c);
 
@@ -41,4 +41,11 @@ public class ConstantesServiceImpl implements ConstantesService{
         constantesRepository.deleteById(id);
         return "Constantes bien supprimée";
     }
+
+    @Override
+    public List<Constante> LireP(String user_id) {
+        return constantesRepository.findByPatient_id(user_id);
+    }
+
+
 }

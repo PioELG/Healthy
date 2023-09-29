@@ -39,7 +39,7 @@ public class SymptomesServiceImpl implements SymptomesService{
     }
 
     @Override
-    public List<Symptomes> LireParPatient(Long patient_id) {
+    public List<Symptomes> LireParPatient(String patient_id) {
         return symptomesRepository.findByPatient_id(patient_id);
     }
 }

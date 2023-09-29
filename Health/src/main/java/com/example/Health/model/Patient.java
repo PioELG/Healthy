@@ -32,9 +32,7 @@ public class Patient {
 //    @OneToMany(mappedBy ="patient")
 //    private List<Symptomes> symptomesList;
 
-    @OneToOne
-    @JoinColumn(name="constantes_id")
-     private Constantes constantes;
+
 
     @ManyToOne
     @JoinColumn(name="medecin_id")

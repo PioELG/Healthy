@@ -42,4 +42,6 @@ public class PatientServiceImpl implements PatientService{
         patientRepository.deleteById(id);
         return "Patient bien supprimé" ;
     }
+
+
 }

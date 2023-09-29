@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface SymptomesRepository extends JpaRepository <Symptomes,Long> {
-    @Query("SELECT s FROM Symptomes s WHERE s.patient.id = ?1")
-    List<Symptomes> findByPatient_id(Long patient_id);
+    @Query("SELECT s FROM Symptomes s WHERE s.patient_id = ?1")
+    List<Symptomes> findByPatient_id(String patient_id);
 }

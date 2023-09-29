@@ -6,6 +6,7 @@ import com.example.Health.service.SymptomesService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,20 +18,27 @@ public class SymptomesController {
     @Autowired
     private  final SymptomesService symptomesService;
     @GetMapping
-    public List<Symptomes> read(Authentication authentication)
+    public List<Symptomes> read(@RequestHeader(value = "Accept")String acceptHeader, Authentication authentication)
     {
-       return symptomesService.Lire();
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+
+        String id = jwt.getClaimAsString("sub");
+       return symptomesService.LireParPatient(id);
     }
 
-//    @GetMapping("/{id}")
-//    public List<Symptomes> readParPatient(@PathVariable Long id)
-//    {
-//
-//        return symptomesService.LireParPatient(id);
-//    }
-    @PostMapping
-    public Symptomes create(@RequestBody Symptomes symptomes)
+    @GetMapping("/{id}")
+    public List<Symptomes> readParPatient(@PathVariable String id)
     {
+
+        return symptomesService.LireParPatient(id);
+    }
+    @PostMapping
+    public Symptomes create(@RequestBody Symptomes symptomes,@RequestHeader(value = "Accept")String acceptHeader, Authentication authentication)
+    {
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+
+        String id = jwt.getClaimAsString("sub");
+        symptomes.setPatient_id(id);
         return symptomesService.Creer(symptomes);
     }
     @PutMapping("/{id}")
