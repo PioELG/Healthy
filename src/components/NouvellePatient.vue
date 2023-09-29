@@ -36,7 +36,7 @@
               </div>
               
               <div class="w3-quarter">
-                <router-link to="/Mesconseils">
+                <router-link to="/Mesconseils" class="link">
                 <div class="w3-container w3-teal w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-heart w3-xxxlarge"></i></div>
                   <div class="w3-right">
@@ -49,6 +49,7 @@
               </div>
               
               <div class="w3-quarter">
+                <router-link to="/MonEtat" class="link">
                 <div class="w3-container w3-orange w3-text-white w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-stethoscope w3-xxxlarge" ></i></div>
                   <div class="w3-right">
@@ -57,7 +58,10 @@
                   <div class="w3-clear"></div>
                   <h4>MonEtat</h4>
                 </div>
+            </router-link>
               </div>
+              
+              
             </div>
           
             <div class="w3-panel">
@@ -67,14 +71,14 @@
                   <h5>Notifications</h5>
                   <table class="w3-table w3-striped w3-white">
                     <tr>
-                      <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-                      <td>Vous avez ajouté un utilisateur.</td>
+                      <td><i class="fa fa-stethoscope" style="font-size:24px"></i></td>
+                      <td>Vous venez de faire une mis à jour de votre état de santé</td>
                       <td><i>10 mins</i></td>
                     </tr>
                     
                     <tr>
                       <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
-                      <td>Le patient John Doe n'a pas pris son médicament à temps</td>
+                      <td>Vous n'avez pas pris votre médicament à temps</td>
                       <td><i>15 mins</i></td>
                     </tr>
                     
@@ -86,13 +90,13 @@
                     
                     <tr>
                       <td><i class="fa fa-share-alt w3-text-green w3-large"></i></td>
-                      <td>Vous venez de partager un nouveau conseil de santé</td>
+                      <td>Vous venez de recevoir un nouveau conseil de santé</td>
                       <td><i>39 mins</i></td>
                     </tr>
           
                     <tr>
                       <td><i class="fa fa-address-book w3-text-red w3-large"></i></td>
-                      <td>Votre Rendez-vous avec le patient Charlie Chaplin est pour demain .</td>
+                      <td>Votre Rendez-vous avec le docteur Mike est pour demain .</td>
                       <td><i>1h</i></td>
                     </tr>
           
@@ -150,6 +154,9 @@
 {
     padding: 16 px;
 }
-
+.link
+    {
+        text-decoration: none;
+    }
   </style>
   

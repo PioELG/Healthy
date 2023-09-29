@@ -36,7 +36,7 @@
               </div>
               
               <div class="w3-quarter">
-                <router-link to="/Mesconseils">
+                <router-link to="/Mesconseils" class="link">
                 <div class="w3-container w3-teal w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-heart w3-xxxlarge"></i></div>
                   <div class="w3-right">
@@ -49,6 +49,7 @@
               </div>
               
               <div class="w3-quarter">
+                <router-link to="/MesPatients" class="link">
                 <div class="w3-container w3-orange w3-text-white w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
                   <div class="w3-right">
@@ -57,7 +58,9 @@
                   <div class="w3-clear"></div>
                   <h4>MesPatients</h4>
                 </div>
+            </router-link>
               </div>
+            
             </div>
           
             <div class="w3-panel">
@@ -123,6 +126,10 @@
   
   <style scoped>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+  .link
+    {
+        text-decoration: none;
+    }
 .w3-container-rounded {
   border-radius: 10px; /* Vous pouvez ajuster le rayon selon vos préférences */
 }

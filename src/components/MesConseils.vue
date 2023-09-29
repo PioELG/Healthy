@@ -29,8 +29,6 @@
                   <tr>
                     <td>
                         <i class="fa fa-pencil" style="color: blue;" @click="activerEdition(conseil)"></i> &nbsp;&nbsp;&nbsp; <!-- Icône de modification -->
-
-                      
                     
                       <i class="fa fa-trash" style="color: red;" @click="supprimerConseil(conseil.id)"></i> <!-- Icône de suppression -->
                     
@@ -50,6 +48,7 @@
           </main>
         
       </div>
+      
     
     </body>
     </html>

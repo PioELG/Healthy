@@ -17,6 +17,7 @@
             <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" ref="mySidebar">
               <!-- ... Votre contenu HTML ici ... -->
               <div class="w3-container w3-row">
+                
                 <div class="w3-col s4">
                   <img src="https://cdn-icons-png.flaticon.com/128/552/552721.png" class="w3-circle w3-margin-right" style="width:46px">
                 </div>
@@ -31,10 +32,10 @@
               </div>
               <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-                <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-bell fa-fw"></i> <router-link to="/">Notifications</router-link> </a>
-                <a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Patients</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-bell fa-fw"></i> <router-link to="/" class="link">Notifications</router-link> </a>
+                <router-link class="link" to="/ListePatient"><a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Patients</a></router-link>
                 <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Rendez-vous</a>
-                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-heart fa-fw"></i> <router-link to="/PublierConseil">ConseilsSanté</router-link> </a>
+                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-heart fa-fw"></i> <router-link to="/PublierConseil" class="link">ConseilsSanté</router-link> </a>
                 <a href="#" class="w3-bar-item w3-button w3-padding" @click="logout"><i class="fa fa-sign-out fa-fw"></i>  Log Out</a><br><br>
               </div>
               
@@ -98,5 +99,9 @@
   transition: transform 0.2s ease; /* Ajoutez une transition fluide */
   
 }
+.link
+    {
+        text-decoration: none;
+    }
   </style>
   

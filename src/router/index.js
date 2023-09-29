@@ -3,6 +3,13 @@ import HomeView from '../views/HomeView.vue'
 import MesConseils from '../components/MesConseils.vue'
 import Nouvelle from '../components/Nouvelle.vue'
 import PublierConseil from '../components/PublierConseil.vue'
+import MaSante from '../components/MaSante.vue'
+import AjouterConstantes from '../components/AjouterConstantes.vue'
+import MonEtat from '../components/MonEtat.vue'
+import AjouterSymptomes from '../components/AjouterSymptomes.vue'
+import ListePatient from '../components/ListePatient.vue'
+import MesPatients from '../components/MesPatients.vue'
+import InfosPatient from '../components/InfosPatient.vue'
 
 const routes = [
   {
@@ -29,6 +36,48 @@ const routes = [
     component:PublierConseil
     
   },
+  {
+    path: '/MaSante',
+    name: 'MaSante',
+    component:MaSante
+    
+  },
+  {
+    path: '/AjouterConstantes',
+    name: 'AjouterConstantes',
+    component:AjouterConstantes
+    
+  },
+  {
+    path: '/MonEtat',
+    name: 'MonEtat',
+    component:MonEtat
+    
+  },
+  {
+    path: '/AjouterSymptomes',
+    name: 'AjouterSymptomes',
+    component:AjouterSymptomes
+    
+  },
+  {
+    path: '/ListePatient',
+    name: 'ListePatient',
+    component:ListePatient
+    
+  },
+  {
+    path: '/MesPatients',
+    name: 'MesPatients',
+    component:MesPatients
+  },
+  {
+    path: '/InfosPatient/:id',
+    name: 'InfosPatient',
+    component: InfosPatient
+  }
+
+
 ]
 
 const router = createRouter({
