@@ -28,10 +28,11 @@ public class RdvController {
 
         return rdvService.LireM(idDoc);
     }
-    @GetMapping("/{idP}")
-    public List<Rdv> readParMedecin(@PathVariable String idP)
+    @GetMapping("/patient")
+    public List<Rdv> readParMedecin(Authentication authentication)
     {
-
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+        String idP = jwt.getClaimAsString("sub");
         return rdvService.LireP(idP);
     }
     @PostMapping()

@@ -19,10 +19,12 @@ public class Prescription {
        @Id
    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
+
        @Column
-    private Date date;
-
-
+       private String malade_id;
+    @Column
+    private String doctor_id;
 
 
     @OneToMany(mappedBy = "prescription")

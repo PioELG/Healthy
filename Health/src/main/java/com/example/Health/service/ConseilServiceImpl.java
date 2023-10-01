@@ -43,4 +43,9 @@ public class ConseilServiceImpl implements ConseilService{
     public List<Conseil> LireP(String medecin_id) {
         return conseilRepository.findByMedecin(medecin_id);
     }
+
+    @Override
+    public List<Conseil> LireDoc(String medecin_id) {
+        return conseilRepository.findByMedecin(medecin_id);
+    }
 }

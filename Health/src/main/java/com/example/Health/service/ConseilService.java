@@ -10,7 +10,7 @@ public interface ConseilService {
     Conseil Modifier (Conseil conseil,Long id);
     String Supprimer(Long id);
     List<Conseil> LireP(String medecin_id);
-
+    List<Conseil> LireDoc(String medecin_id);
 //    List<Conseil> LireP(String user_id);
 //    Conseil Accepter (Long id);
 //   Conseil Rejeter (Long id);

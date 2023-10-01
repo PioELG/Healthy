@@ -8,4 +8,6 @@ public interface DoctorService {
     Doctor Creer(Doctor doctor);
     List<Doctor> Lire();
     boolean exist(String id);
+
+    Doctor LireD(String doc_id);
 }

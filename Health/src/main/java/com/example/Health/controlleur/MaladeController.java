@@ -18,6 +18,7 @@ import java.util.List;
 public class MaladeController {
     @Autowired
     private  final MaladeService maladeService;
+
     @GetMapping("/{id}")
     public List<Malade> readParPatient(@RequestHeader(value = "Accept")String acceptHeader,@PathVariable String id)
    {
@@ -38,6 +39,7 @@ public class MaladeController {
         String id = jwt.getClaimAsString("sub");
         return maladeService.LireST(id);
     }
+
     @PostMapping
     public Malade create(@RequestBody Malade malade)
     {

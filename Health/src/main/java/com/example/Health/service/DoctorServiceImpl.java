@@ -24,8 +24,13 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public boolean exist(String id) {
         return doctorRepository.existsById(id);
+
     }
 
+    @Override
+    public Doctor LireD(String doc_id) {
+        return doctorRepository.findByDoc(doc_id);
+    }
 
 
 }

@@ -29,8 +29,7 @@ public class Medecin {
     @Column
     private String specialite;
 
-    @OneToMany(mappedBy = "medecin")
-    List<Patient> patientList;
+
 
 
 

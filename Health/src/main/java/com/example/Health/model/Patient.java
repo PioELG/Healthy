@@ -33,11 +33,6 @@ public class Patient {
 
 
 
-    @ManyToOne
-    @JoinColumn(name="medecin_id")
-    private Medecin medecin;
-
-
 
 
 

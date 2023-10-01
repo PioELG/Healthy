@@ -9,18 +9,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService{
-//    @Autowired
-//    private PrescriptionRepository prescriptionRepository;
-//    @Override
-//    public Prescription Creer(Prescription prescription) {
-//        return prescriptionRepository.save(prescription);
-//    }
-//
-//    @Override
-//    public List<Prescription> Lire() {
-//        return prescriptionRepository.findAll();
-//    }
-//
+    @Autowired
+    private PrescriptionRepository prescriptionRepository;
+    @Override
+    public Prescription Creer(Prescription prescription) {
+        return prescriptionRepository.save(prescription);
+    }
+
+    @Override
+    public List<Prescription> Lire() {
+        return prescriptionRepository.findAll();
+    }
+
 //    @Override
 //    public Prescription Modifier(Prescription prescription, Long id) {
 //        return prescriptionRepository.findById(id).map(p->{
@@ -31,10 +31,10 @@ public class PrescriptionServiceImpl implements PrescriptionService{
 //
 //        }).orElseThrow(()-> new RuntimeException("prescription non trouvé"));
 //    }
-//
-//    @Override
-//    public String Supprimer(Long id) {
-//         prescriptionRepository.deleteById(id);
-//         return "prescription bien supprimé";
-//    }
+
+    @Override
+    public String Supprimer(Long id) {
+         prescriptionRepository.deleteById(id);
+         return "prescription bien supprimé";
+    }
 }

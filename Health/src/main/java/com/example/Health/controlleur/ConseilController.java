@@ -1,26 +1,17 @@
 package com.example.Health.controlleur;
 
-import com.example.Health.model.Conseil;
-import com.example.Health.model.Doctor;
-import com.example.Health.model.Patient;
-import com.example.Health.model.Symptomes;
+import com.example.Health.model.*;
+import com.example.Health.repository.MaladeRepository;
 import com.example.Health.service.ConseilService;
 import com.example.Health.service.DoctorService;
-import com.example.Health.service.PatientService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path="/api/conseils")
@@ -34,6 +25,8 @@ public class ConseilController {
     DoctorService doctorService;
     @Autowired
     private  final ConseilService conseilService;
+    @Autowired
+    private MaladeRepository maladeRepository;
 
     @GetMapping()
     public List<Conseil> read(@RequestHeader(value = "Accept")String acceptHeader, Authentication authentication) {
@@ -74,6 +67,19 @@ public class ConseilController {
 
         return conseilService.LireP(id);
     }
+
+    @GetMapping("/doc")
+    public List<Conseil> LireDoc(Authentication authentication)
+    {
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+
+        String id = jwt.getClaimAsString("sub");
+        Malade malade=new Malade();
+        malade=maladeRepository.Single(id);
+        String doc=malade.getTraitant();
+
+        return conseilService.LireDoc(doc);
+    }
     @PostMapping
     public Conseil create(@RequestBody Conseil conseil,@RequestHeader(value = "Accept")String acceptHeader, Authentication authentication)
     {
@@ -84,6 +90,9 @@ public class ConseilController {
 
         return conseilService.Creer(conseil);
     }
+
+
+
     @PutMapping("/{id}")
     public Conseil update(@RequestBody Conseil conseil, @PathVariable Long id )
     {
