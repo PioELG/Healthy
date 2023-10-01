@@ -42,7 +42,9 @@
               </td>
               <td></td>
               <td>
+                <router-link :to="'/AjouterPrescription/' +$route.params.id">
                 <i class="fa fa-plus" style="color: green;"></i> 
+              </router-link>
               </td>
               
             </tr>

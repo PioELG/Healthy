@@ -12,8 +12,10 @@ import MesPatients from '../components/MesPatients.vue'
 import InfosPatient from '../components/InfosPatient.vue'
 import rdvMedecin from '../components/rdvMedecin.vue'
 import AjoutRdv from '../components/AjoutRdv.vue'
-
-
+import MesConseilsP from '../components/MesConseilsP.vue'
+import rdvPatient from '../components/rdvPatient.vue'
+import ModifierRdv from '../components/ModifierRdv.vue'
+import AjouterPrescription from '../components/AjouterPrescription.vue'
 const routes = [
   {
     path: '/',
@@ -88,7 +90,27 @@ const routes = [
     path:'/AjoutRdv/:id',
     name: 'AjoutRdv',
     component:AjoutRdv
-  }
+  },
+  {
+    path:'/MesConseilsP',
+    name: 'MesConseilsP',
+    component:MesConseilsP
+  },
+  {
+    path: '/rdvPatient',
+    name: 'rdvPatient',
+    component:rdvPatient
+  },
+  {
+    path: '/ModifierRdv/:id',
+    name: 'ModifierRdv',
+    component:ModifierRdv
+  },
+  {
+    path: '/AjouterPrescription/:id',
+    name: 'AjouterPrescription',
+    component:AjouterPrescription
+  },
   
   
 
