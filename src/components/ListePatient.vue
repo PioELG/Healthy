@@ -58,6 +58,7 @@
      
      <script>
         import keycloak from '@/main';
+        import jwtDecode from 'jwt-decode';
     import axios from 'axios';
    
      export default {
@@ -69,6 +70,7 @@
            malades:[],
            maladeEnCoursDeMiseAJour: null,
            nouvellePathologie: '',
+           idDoc:''
  
          };
        },
@@ -96,6 +98,7 @@ ouvrirFormulaire(malade) {
       // Ouvre le formulaire de mise à jour pour un malade spécifique
       this.maladeEnCoursDeMiseAJour = malade;
       this.nouvellePathologie = malade.pathologie;
+      this.idDoc=jwtDecode(keycloak.token).sub
       
     },
    soumettreFormulaire() {
@@ -112,10 +115,17 @@ const config = {
         // Mettez à jour les données du malade ici, puis réinitialisez le formulaire
         this.maladeEnCoursDeMiseAJour.pathologie = this.nouvellePathologie;
         this.maladeEnCoursDeMiseAJour.statut = "Sous traitement";
+        this.maladeEnCoursDeMiseAJour.traitant=jwtDecode(keycloak.token).sub;
+
+    
         
+        console.log(jwtDecode(keycloak.token).sub)
+        console.log("Bonjour")
+        console.log(this.maladeEnCoursDeMiseAJour.traitant)
         const newData = {
       pathologie: this.nouvellePathologie,
-      statut: this.nouveauStatut,
+      statut: this.maladeEnCoursDeMiseAJour.statut,
+      traitant: this.maladeEnCoursDeMiseAJour.traitant
     };
 
     axios
@@ -140,6 +150,9 @@ const config = {
        mounted(){
          // Les propriétés calculées de votre composant vont ici
          this.fetchMalade();
+         
+        
+         
          
        },
        // Autres options de composant (comme "props", "watch", etc.) vont ici

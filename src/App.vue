@@ -29,6 +29,10 @@ import AjouterSymptomes from './components/AjouterSymptomes.vue';
 import MesPatients from './components/MesPatients.vue';
 import ListePatient from './components/ListePatient.vue';
 import InfosPatient from './components/InfosPatient.vue';
+import rdvMedecin from './components/rdvMedecin.vue';
+import AjoutRdv from './components/AjoutRdv.vue';
+
+
 
 export default {
   components: {
@@ -42,7 +46,9 @@ export default {
     ListePatient,
     MesPatients,
     InfosPatient,
-
+    rdvMedecin,
+   
+   
 },
 
 };

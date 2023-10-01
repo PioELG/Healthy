@@ -10,6 +10,9 @@ import AjouterSymptomes from '../components/AjouterSymptomes.vue'
 import ListePatient from '../components/ListePatient.vue'
 import MesPatients from '../components/MesPatients.vue'
 import InfosPatient from '../components/InfosPatient.vue'
+import rdvMedecin from '../components/rdvMedecin.vue'
+import AjoutRdv from '../components/AjoutRdv.vue'
+
 
 const routes = [
   {
@@ -75,7 +78,19 @@ const routes = [
     path: '/InfosPatient/:id',
     name: 'InfosPatient',
     component: InfosPatient
+  },
+  {
+    path: '/rdvMedecin',
+    name: 'rdvMedecin',
+    component:rdvMedecin
+  },
+  {
+    path:'/AjoutRdv/:id',
+    name: 'AjoutRdv',
+    component:AjoutRdv
   }
+  
+  
 
 
 ]

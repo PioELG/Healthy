@@ -87,7 +87,9 @@
               </td>
               <td></td> <td></td>
               <td>
+                <router-link :to="'/AjoutRdv/' +$route.params.id">
                 <i class="fa fa-plus" style="color: green;"></i> 
+              </router-link>
               </td>
             </tr>
           </table>
@@ -114,7 +116,8 @@
           patient:[],
           loading: false ,
           constante:[],
-          symptomes:[]
+          symptomes:[],
+          idP:'',
         };
       },
       methods: {
@@ -129,7 +132,7 @@
     }
   };
   const id = this.$route.params.id;
- 
+  
  
  
 
@@ -157,6 +160,8 @@ fetchConstante() {
     }
   };
   const id = this.$route.params.id;
+  this.idp=this.$route.params.id;
+  console.log(this.idp);
  
  
  
@@ -185,6 +190,7 @@ fetchSymptomes() {
     }
   };
   const id = this.$route.params.id;
+
  
  
  
@@ -214,7 +220,7 @@ fetchSymptomes() {
            this.fetchMalade();
            this.fetchConstante();
            this.fetchSymptomes();
-           
+          
         },
       // Autres options de composant (comme "props", "watch", etc.) vont ici
     };
