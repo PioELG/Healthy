@@ -13,7 +13,10 @@ public interface MaladeService {
 
     String Supprimer(String  id);
     List<Malade> LireNT();
-    List<Malade> LireST();
+    List<Malade> LireST(String doc);
     List<Malade> LireParPat(String patient_id);
+
+    Malade ModifierS(Malade malade, String id);
+
     boolean exist(String id);
 }

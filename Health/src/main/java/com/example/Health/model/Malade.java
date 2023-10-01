@@ -28,4 +28,6 @@ public class Malade {
     private String pathologie;
     @Column
    private String statut;
+    @Column
+    private String traitant;
 }

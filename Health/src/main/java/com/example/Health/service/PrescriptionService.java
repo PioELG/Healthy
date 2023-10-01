@@ -7,10 +7,10 @@ import com.example.Health.repository.PrescriptionRepository;
 import java.util.List;
 
 public interface PrescriptionService{
-    Prescription Creer(Prescription prescription);
-    List<Prescription> Lire();
-    Prescription Modifier(Prescription prescription, Long id);
-    String Supprimer(Long id);
+//    Prescription Creer(Prescription prescription);
+//    List<Prescription> Lire();
+//    Prescription Modifier(Prescription prescription, Long id);
+//    String Supprimer(Long id);
 
     // Vous pouvez également décommenter ces méthodes si nécessaire
     // List<Medecin> LireP(String user_id);

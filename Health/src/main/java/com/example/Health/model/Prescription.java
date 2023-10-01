@@ -21,13 +21,9 @@ public class Prescription {
     private Long id;
        @Column
     private Date date;
- @ManyToOne
- @JoinColumn(name="patient_id")
- private Patient patient;
 
-    @ManyToOne
-    @JoinColumn(name="medecin_id")
-    private Medecin medecin;
+
+
 
     @OneToMany(mappedBy = "prescription")
     private List<Medicament> medicamentList;

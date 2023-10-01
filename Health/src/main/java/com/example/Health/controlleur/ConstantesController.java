@@ -4,6 +4,7 @@ import com.example.Health.model.Constante;
 import com.example.Health.model.Malade;
 import com.example.Health.model.Patient;
 import com.example.Health.model.Symptomes;
+import com.example.Health.repository.MaladeRepository;
 import com.example.Health.service.ConstantesService;
 import com.example.Health.service.DoctorService;
 import com.example.Health.service.MaladeService;
@@ -27,6 +28,9 @@ public class ConstantesController {
     MaladeService maladeService;
     @Autowired
     private  final ConstantesService constantesService;
+
+    @Autowired
+    private MaladeRepository maladeRepository;
     @GetMapping
     public Constante read(@RequestHeader(value = "Accept")String acceptHeader, Authentication authentication)
     {
@@ -58,12 +62,28 @@ public class ConstantesController {
             }
         }
         if (roles.contains("patient")) {
-            malade.setId(id);
-            malade.setEmail(email);
-            malade.setNom(nom);
-            malade.setPrenom(prenom);
-            malade.setStatut("Non traité");
-            maladeService.Creer(malade);
+
+
+            if(!maladeRepository.Status(id).contains(id))
+            {   malade.setId(id);
+                malade.setEmail(email);
+                malade.setNom(nom);
+                malade.setPrenom(prenom);
+
+                malade.setStatut("Non traité");
+
+                System.out.println(maladeRepository.Status(id));
+                maladeService.Creer(malade);
+
+            }
+//            else {
+//                malade.setStatut("Non traité");
+//                maladeService.ModifierS(malade,id);
+//            }
+
+
+
+
         }
 
         return constantesService.LireP(id).get(constantesService.LireP(id).size() - 1);

@@ -29,8 +29,7 @@ public class Patient {
         @Column
     private String statut;
 
-//    @OneToMany(mappedBy ="patient")
-//    private List<Symptomes> symptomesList;
+
 
 
 
@@ -38,11 +37,9 @@ public class Patient {
     @JoinColumn(name="medecin_id")
     private Medecin medecin;
 
-    @OneToMany(mappedBy = "patient")
-    private List<Prescription> prescriptionList;
 
-    @OneToMany(mappedBy = "patient")
-    private List<RendezVous> rendezVousList;
+
+
 
 
 

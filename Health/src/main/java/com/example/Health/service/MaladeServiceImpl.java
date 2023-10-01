@@ -1,5 +1,6 @@
 package com.example.Health.service;
 
+import com.example.Health.model.Constante;
 import com.example.Health.model.Malade;
 import com.example.Health.repository.MaladeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class MaladeServiceImpl implements MaladeService{
 
             m.setStatut(malade.getStatut());
             m.setPathologie(malade.getPathologie());
+             m.setTraitant(malade.getTraitant());
 
             return maladeRepository.save(m);
 
@@ -45,8 +47,8 @@ public class MaladeServiceImpl implements MaladeService{
     }
 
     @Override
-    public List<Malade> LireST() {
-        return maladeRepository.NonTraite("Sous traitement");
+    public List<Malade> LireST( String doc) {
+        return maladeRepository.SousT("Sous traitement",doc);
     }
 
     @Override
@@ -58,5 +60,16 @@ public class MaladeServiceImpl implements MaladeService{
     @Override
     public boolean exist(String id) {
         return maladeRepository.existsById(id);
+    }
+
+    public Malade ModifierS(Malade malade, String id) {
+        return maladeRepository.findById(id).map(m -> {
+            m.setStatut(malade.getStatut());
+
+
+
+            return maladeRepository.save(m);
+
+        }).orElseThrow(() -> new RuntimeException("constantes non trouvé"));
     }
 }

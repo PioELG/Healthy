@@ -31,9 +31,7 @@ public class Medecin {
 
     @OneToMany(mappedBy = "medecin")
     List<Patient> patientList;
-    @OneToMany(mappedBy = "medecin")
-    List<Prescription> prescriptionList;
-    @OneToMany(mappedBy = "medecin")
-    List<RendezVous> rendezVousList;
+
+
 
 }

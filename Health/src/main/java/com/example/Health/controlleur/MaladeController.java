@@ -6,6 +6,8 @@ import com.example.Health.service.MaladeService;
 import com.example.Health.service.PatientService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,10 +31,12 @@ public class MaladeController {
         return maladeService.LireNT();
     }
     @GetMapping("/St")
-    public List<Malade> readSt()
+    public List<Malade> readSt(Authentication authentication)
     {
+        Jwt jwt = (Jwt) authentication.getPrincipal();
 
-        return maladeService.LireST();
+        String id = jwt.getClaimAsString("sub");
+        return maladeService.LireST(id);
     }
     @PostMapping
     public Malade create(@RequestBody Malade malade)
