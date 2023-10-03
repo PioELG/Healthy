@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="Constante")
+@Table(name="message")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,6 +19,8 @@ public class Message {
         private Long id;
         @Column
         private String contenu;
+        @Column
+        private String sender;
         @Column
         private String medecin_id;
         @Column

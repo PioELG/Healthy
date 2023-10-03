@@ -35,7 +35,7 @@ public class NotificationController {
         String id = jwt.getClaimAsString("sub");
 
 
-        return notificationService.LireP(id);
+        return notificationService.LireC(id);
     }
     @GetMapping("/doc")
     public List<Notification> readD(Authentication authentication)
@@ -46,7 +46,7 @@ public class NotificationController {
         String id = jwt.getClaimAsString("sub");
 
 
-        return notificationService.LireM(id);
+        return notificationService.LireC(id);
     }
 
 
@@ -57,9 +57,10 @@ public class NotificationController {
         Jwt jwt = (Jwt) authentication.getPrincipal();
 
         String id = jwt.getClaimAsString("sub");
-        notification.setPatient_id(id);
+        notification.setInitiateur(id);;
         Malade malade= new Malade();
         malade= maladeRepository.findByPat(id);
+        notification.setCible(malade.getTraitant());
         return notificationService.Creer(notification);
     }
     @PostMapping("/doc")
@@ -68,7 +69,7 @@ public class NotificationController {
         Jwt jwt = (Jwt) authentication.getPrincipal();
 
         String id = jwt.getClaimAsString("sub");
-        notification.setMedecin_id(id);
+        notification.setInitiateur(id);
         return notificationService.Creer(notification);
     }
     @DeleteMapping("/{id}")

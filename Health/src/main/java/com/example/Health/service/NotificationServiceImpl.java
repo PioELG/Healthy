@@ -18,14 +18,11 @@ public class NotificationServiceImpl implements NotificationService{
     }
 
     @Override
-    public List<Notification> LireP(String patient_id) {
-        return notificationRepository.findByPatient(patient_id);
+    public List<Notification> LireC(String cible_id) {
+        return notificationRepository.findByCible(cible_id);
     }
 
-    @Override
-    public List<Notification> LireM(String medecin_id) {
-        return notificationRepository.findByMedecin(medecin_id);
-    }
+
 
     @Override
     public List<Notification> Lire() {

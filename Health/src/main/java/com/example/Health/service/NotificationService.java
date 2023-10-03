@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface NotificationService {
     Notification Creer(Notification notification);
-    List<Notification> LireP(String patient_id);
-    List<Notification> LireM(String medecin_id);
+    List<Notification> LireC(String cible_id);
+
     List<Notification> Lire();
 
     Notification Modifier(Notification notification, Long id);

@@ -19,7 +19,7 @@ public class Notification {
     @Column
     private String contexte;
     @Column
-    private String medecin_id;
+    private String cible;
     @Column
-    private String patient_id;
+    private String initiateur;
 }

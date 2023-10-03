@@ -1,9 +1,6 @@
 package com.example.Health.controlleur;
 
-import com.example.Health.model.Doctor;
-import com.example.Health.model.Malade;
-import com.example.Health.model.Message;
-import com.example.Health.model.Posologie;
+import com.example.Health.model.*;
 import com.example.Health.repository.MaladeRepository;
 import com.example.Health.service.MessageService;
 import lombok.AllArgsConstructor;
@@ -24,8 +21,8 @@ public class MessageController {
     @Autowired
     MaladeRepository maladeRepository;
 
-    @GetMapping("/Medecin")
-    public List<Message> read(Authentication authentication)
+    @GetMapping("/PatientMP")
+    public List<Message> readMP(Authentication authentication)
     {
         Malade malade=new Malade();
         Jwt jwt = (Jwt) authentication.getPrincipal();
@@ -34,6 +31,17 @@ public class MessageController {
         malade=maladeRepository.findByPat(id);
 
         return messageService.LireParMP(malade.getTraitant(),id);
+    }
+    @GetMapping("/MedecinMP/{idP}")
+    public List<Message> read(@PathVariable String idP,  Authentication authentication)
+    {
+
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+
+        String id = jwt.getClaimAsString("sub");
+
+
+        return messageService.LireParMP(id,idP);
     }
     @GetMapping("/Patient")
     public List<Message> readP(Authentication authentication)
@@ -58,10 +66,27 @@ public class MessageController {
         return messageService.LireParMed(id);
     }
 
-    @PostMapping
-    public Message create(@RequestBody Message message)
+    @PostMapping("/patient")
+    public Message create(@RequestBody Message message, Authentication authentication)
     {
+        Jwt jwt = (Jwt) authentication.getPrincipal();
 
+        String id = jwt.getClaimAsString("sub");
+       message.setPatient_id(id);
+       message.setSender("Patient");
+        Malade malade= new Malade();
+        malade= maladeRepository.findByPat(id);
+        message.setMedecin_id(malade.getTraitant());
+        return messageService.Creer(message);
+    }
+    @PostMapping("/doc")
+    public Message createM(@RequestBody Message message, Authentication authentication)
+    {
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+
+        String id = jwt.getClaimAsString("sub");
+        message.setMedecin_id(id);
+        message.setSender("Medecin");
         return messageService.Creer(message);
     }
 

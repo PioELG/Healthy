@@ -13,6 +13,6 @@ public interface MessageRepository extends JpaRepository<Message,Long> {
     @Query("SELECT m FROM Message m WHERE m.patient_id = ?1")
     List<Message> findByPatient(String patient_id);
 
-    @Query("SELECT m FROM Message m WHERE m.medecin_id = ?1 AND patient_id = ?2")
+    @Query("SELECT m FROM Message m WHERE m.medecin_id = ?1 AND m.patient_id = ?2")
     List<Message> findByMedPat(String medecin_id, String patient_id);
 }
