@@ -23,6 +23,18 @@ public class MedicamentServiceImpl implements MedicamentService{
     }
 
     @Override
+    public List<Medicament> LireParPat(String patient_id) {
+        return medicamentRepository.findByPatient(patient_id);
+    }
+
+    @Override
+    public List<Medicament> LireParMed(String medecin_id,String patient_id) {
+
+        return medicamentRepository.findByMedecin(medecin_id,patient_id);
+    }
+
+
+    @Override
     public Medicament Modifier(Medicament medicament, Long id) {
         return medicamentRepository.findById(id).map(m->{
             m.setNom(medicament.getNom());

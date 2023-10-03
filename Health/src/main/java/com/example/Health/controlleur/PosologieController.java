@@ -23,6 +23,7 @@ public class PosologieController {
     @PostMapping
     public Posologie create(@RequestBody Posologie posologie)
     {
+
         return posologieService.Creer(posologie);
     }
     @PutMapping("/{id}")

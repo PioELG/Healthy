@@ -8,6 +8,9 @@ import java.util.List;
 public interface MedicamentService {
     Medicament Creer(Medicament medicament);
     List<Medicament> Lire();
+    List<Medicament> LireParPat(String patient_id);
+    List<Medicament> LireParMed(String medecin_id,String patient_id);
+
     Medicament Modifier(Medicament medicament, Long id);
     String Supprimer(Long id);
 

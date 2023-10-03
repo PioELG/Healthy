@@ -28,6 +28,12 @@ public class RdvController {
 
         return rdvService.LireM(idDoc);
     }
+    @GetMapping("/{id}")
+    public List<Rdv> readParPat(@PathVariable String id)
+    {
+
+        return rdvService.LireP(id);
+    }
     @GetMapping("/patient")
     public List<Rdv> readParMedecin(Authentication authentication)
     {

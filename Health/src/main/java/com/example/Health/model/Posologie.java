@@ -25,10 +25,9 @@ public class Posologie {
     private String heurePrise;
     @Column
     private String unite;
+    @Column
+    private Long medicament_id;
 
 
-    @ManyToOne
-    @JoinColumn(name="medicament_id")
-    private Medicament medicament;
 
 }

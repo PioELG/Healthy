@@ -8,6 +8,8 @@ import java.util.List;
 public interface PosologieService {
     Posologie Creer(Posologie posologie);
     List<Posologie> Lire();
+
+    List<Posologie> LireP(Long id);
     Posologie Modifier(Posologie posologie, Long id);
     String Supprimer(Long id);
 

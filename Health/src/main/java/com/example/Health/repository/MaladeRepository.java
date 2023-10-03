@@ -16,6 +16,8 @@ public interface MaladeRepository extends JpaRepository<Malade,String> {
     List<Malade> SousT(String status,String doc);
 
 
+
+
     @Query("SELECT m FROM Malade m WHERE m.id = ?1")
     List<Malade> findByPatient_id(String patient_id);
 

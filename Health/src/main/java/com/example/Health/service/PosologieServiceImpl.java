@@ -22,10 +22,16 @@ public class PosologieServiceImpl implements PosologieService{
     }
 
     @Override
+    public List<Posologie> LireP(Long id) {
+        return posologieRepository.findByMedicament(id);
+    }
+
+    @Override
     public Posologie Modifier(Posologie posologie, Long id) {
         return posologieRepository.findById(id).map(p->{
             p.setHeurePrise(posologie.getHeurePrise());
             p.setQuantite(posologie.getQuantite());
+            p.setUnite(posologie.getUnite());
 
             return posologieRepository.save(p);
 
