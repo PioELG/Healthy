@@ -75,11 +75,14 @@
                     <tr v-for="notif in notifs " :key="notif.id">
                       <td><i class="fas fa-exclamation-circle" style="font-size:24px; color: rgb(243, 11, 11)"></i></td>
                       <td >
-                        <div class="contexte">
-                        Votre doctor vient d'ajouter un nouveau {{notif.contexte}}
+                        <div class="contexte" v-if="notif.contexte===rdv">
+                        Votre doctor vient d'ajouter  {{notif.contexte}}
+                        </div>
+                        <div class="contexte" v-else>
+                          Votre doctor vient d'ajouter  {{notif.contexte}}
                         </div>
                       </td>
-                      <td><i class="fas fa-check-circle" style="font-size:24px; color: green;"></i></td>
+                      <td><i class="fas fa-check-circle" style="font-size:24px; color: green;" @click="supprimerNotification(notif.id)"></i></td>
                       
                     </tr>
                     
@@ -128,6 +131,31 @@
       console.error('Erreur lors de la récupération des notifs :', error);
     });
 },
+async supprimerNotification(NotifId) {
+    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+// Définissez l'en-tête d'autorisation avec le jeton d'accès
+const config = {
+  headers: {
+    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+  }
+};
+    if (confirm("Êtes-vous sûr de vouloir supprimer cette notification ?")) {
+      try {
+        // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
+         await axios.delete(`http://192.168.224.1:8080/api/notification/${NotifId}`,config);
+
+        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
+        console.log('prescription supprimée avec succès !');
+
+        // Mettez à jour la liste des conseils en supprimant le conseil supprimé
+        this.notifs = this.notifs.filter(n => n.id !== NotifId);
+      } catch (error) {
+        console.error('Erreur lors de la suppression de la notification :', error);
+        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+      }
+    }
+  },
       
     },
     mounted() {

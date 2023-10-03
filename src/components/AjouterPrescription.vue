@@ -138,6 +138,8 @@ try {
       
       await axios.post('http://192.168.224.1:8080/api/posologie', { quantite:this.quantite,unite:this.unite,heurePrise:this.heurePrise,medicament_id:this.medicamentId},config);
 
+      await axios.post('http://192.168.224.1:8080/api/notification/doc', { contexte:"une prescription",cible:id},config);
+
      // Gérez la réponse de l'API (par exemple, affichez un message de succès)
      console.log('posologie ajouté avec succès !');
      // Réinitialisez le champ de texte

@@ -69,6 +69,8 @@ const config = {
     // Envoie les données à votre API Backend en utilisant Axios
     try {
        await axios.post('http://192.168.224.1:8080/api/constantes', { poids: this.poids,freqCar:this.fc,freqRes:this.fr,pressionArterielle:this.pa, temperature:this.temperature},config);
+       await axios.post('http://192.168.224.1:8080/api/notification/patient', { contexte:"ses constantes"},config);
+
 
       // Gérez la réponse de l'API (par exemple, affichez un message de succès)
       console.log('Constantes ajoutées avec succès !');
@@ -78,6 +80,8 @@ const config = {
       this.fr = '';
       this.fc = '';
       this.temperature='';
+
+      window.history.back();
     } catch (error) {
       console.error('Erreur lors de l\'ajout du conseil :', error);
       // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)

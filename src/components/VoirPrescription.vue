@@ -102,7 +102,7 @@ fetchPosologie() {
       console.error('Erreur lors de la récupération des posologies:', error);
     }).finally(()=> this.loading = false);
     
-   
+    
 },
 getPosologies(medId) {
     return this.posologies.filter(posologie => posologie.medicament_id === medId);

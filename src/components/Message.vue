@@ -4,18 +4,16 @@
         <!-- Header -->
        
         <main>
-          <div class="chat">
-              <div class="message patient">
-                  <p>John Doe : Bonjour, docteur. J'ai des douleurs à la poitrine.</p>
-              </div>
-              <div class="message doctor">
-                  <p>Moi : Bonjour. Je suis là pour vous aider. Pouvez-vous décrire vos symptômes plus en détail ?</p>
-              </div>
+          <div class="chat" v-for="message in messages" :key="message.id">
+            
+              
+            <p :class="['message', message.sender === 'patient' ? 'patient' : 'doctor']">{{ message.contenu }}</p>
+              
               <!-- Ajoutez d'autres messages ici -->
           </div>
           <div class="message-input">
-              <input type="text" placeholder="Écrivez votre message...">
-              <button>Envoyer</button>
+              <input type="text" placeholder="Écrivez votre message..." v-model="msg">
+              <button @click="submitMessage">Envoyer</button>
           </div>
       </main>
        
@@ -26,7 +24,7 @@
    </template>
      
      <script>
-   
+    import axios from 'axios';
     import keycloak from '../main.js';
    
    
@@ -35,20 +33,69 @@
        data() {
          return {
            // Les données de votre composant vont ici
-           doc:'',
-           decodedToken:{},
-           roles:{}
+           messages:[],
+           msg:'',
  
          };
        },
        methods: {
-         // Les méthodes de votre composant vont ici
+        async submitMessage() {
+            const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+// Définissez l'en-tête d'autorisation avec le jeton d'accès
+const config = {
+  headers: {
+    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+  }
+};
+const id = this.$route.params.id;
+
+    // Envoie les données à votre API Backend en utilisant Axios
+    try {
+       await axios.post('http://192.168.224.1:8080/api/message/doc', {contenu:this.msg,patient_id:id},config);
+       await axios.post('http://192.168.224.1:8080/api/notification/doc', { contexte:"un nouveau message",cible:id},config);
+
+
+      // Gérez la réponse de l'API (par exemple, affichez un message de succès)
+      console.log('message envoyé avec succès !');
+      // Réinitialisez le champ de texte
+      this.msg = '';
+      
+      
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout du message :', error);
+      // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+    }
+},  
+fetchMessage() {
+  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    }
+  };
+  const id = this.$route.params.id;
+
+
+  axios.get(`http://192.168.224.1:8080/api/message/MedecinMP/${id}`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+    .then(response => {
+      this.messages = response.data;
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des  du jour :', error);
+    });
+    
+},
  
-         
+
+
+        
        },
        mounted(){
          // Les propriétés calculées de votre composant vont ici
-         
+         this.fetchMessage();
        
        },
        // Autres options de composant (comme "props", "watch", etc.) vont ici
@@ -72,12 +119,14 @@
 }
 
 .patient {
-    background-color: #DCF8C6;
-}
-
-.doctor {
-    background-color: #B2E0FF;
-}
+    background-color: #B2E0FF; /* Bleu pour les messages du patient */
+    color: #000; /* Texte noir pour les messages du patient */
+  }
+  
+  .doctor {
+    background-color: #DCF8C6; /* Vert pour les messages du médecin */
+    color: #000; /* Texte noir pour les messages du médecin */
+  }
 
 .message-input {
     display: flex;

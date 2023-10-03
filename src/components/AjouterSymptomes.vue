@@ -48,11 +48,14 @@ const config = {
     // Envoie les données à votre API Backend en utilisant Axios
     try {
        await axios.post('http://192.168.224.1:8080/api/symptomes', {nom:this.titre},config);
+       await axios.post('http://192.168.224.1:8080/api/notification/patient', { contexte:"ses symptômes"},config);
+
 
       // Gérez la réponse de l'API (par exemple, affichez un message de succès)
       console.log('Symptôme ajouté avec succès !');
       // Réinitialisez le champ de texte
       this.titre = '';
+      window.history.back();
       
     } catch (error) {
       console.error('Erreur lors de l\'ajout du symptome :', error);

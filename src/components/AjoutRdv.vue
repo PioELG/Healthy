@@ -76,7 +76,7 @@ const id = this.$route.params.id;
         
        await axios.post('http://192.168.224.1:8080/api/rdv', { date:this.date,heure:this.heure,malade_id:id},config);
 
-       await axios.post('http://192.168.224.1:8080/api/notification/doc', { contexte:"Rdv",patient_id:id},config);
+       await axios.post('http://192.168.224.1:8080/api/notification/doc', { contexte:"un rendez-vous",cible:id},config);
 
 
       // Gérez la réponse de l'API (par exemple, affichez un message de succès)

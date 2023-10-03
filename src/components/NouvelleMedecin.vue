@@ -3,6 +3,7 @@
     <html>
     <head>
     <title>W3.CSS Template</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     </head>
     <body>
         <div class="w3-main" style="margin-left:300px;margin-top:0px;">
@@ -17,7 +18,7 @@
                 <div class="w3-container w3-black w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
                   <div class="w3-right">
-                    <h3>2</h3>
+                    
                   </div>
                   <div class="w3-clear"></div>
                   <h4>MesMessages</h4>
@@ -29,7 +30,7 @@
                 <div class="w3-container w3-blue w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
                   <div class="w3-right">
-                    <h3>2</h3>
+                    
                   </div>
                   <div class="w3-clear"></div>
                   <h4>MesRendez-Vous</h4>
@@ -43,7 +44,7 @@
                 <div class="w3-container w3-teal w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-heart w3-xxxlarge"></i></div>
                   <div class="w3-right">
-                    <h3>3</h3>
+                    
                   </div>
                   <div class="w3-clear"></div>
                   <h4>MesConseils</h4>
@@ -56,7 +57,7 @@
                 <div class="w3-container w3-orange w3-text-white w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
                   <div class="w3-right">
-                    <h3>3</h3>
+                    
                   </div>
                   <div class="w3-clear"></div>
                   <h4>MesPatients</h4>
@@ -72,35 +73,19 @@
                 <div class="w3-twothird">
                   <h5>Notifications</h5>
                   <table class="w3-table w3-striped w3-white">
-                    <tr>
-                      <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-                      <td>Vous avez ajouté un utilisateur.</td>
-                      <td><i>10 mins</i></td>
+                    <tr v-for="notif in notifs " :key="notif.id">
+                      <td><i class="fas fa-exclamation-circle" style="font-size:24px; color: rgb(243, 11, 11)"></i></td>
+                      <td >
+                        <div class="contexte">
+                        Le patient {{ getNomPrenom(notif.initiateur).nom }} {{ getNomPrenom(notif.initiateur).prenom }} vient de mettre à jour {{notif.contexte}}
+
+                        </div>
+                       
+                      </td>
+                      <td><i class="fas fa-check-circle" style="font-size:24px; color: green;" @click="supprimerNotification(notif.id)"></i></td>
+                      
                     </tr>
-                    
-                    <tr>
-                      <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
-                      <td>Le patient John Doe n'a pas pris son médicament à temps</td>
-                      <td><i>15 mins</i></td>
-                    </tr>
-                    
-                    <tr>
-                      <td><i class="fa fa-comment w3-text-red w3-large"></i></td>
-                      <td>Nouveau Message.</td>
-                      <td><i>25 mins</i></td>
-                    </tr>
-                    
-                    <tr>
-                      <td><i class="fa fa-share-alt w3-text-green w3-large"></i></td>
-                      <td>Vous venez de partager un nouveau conseil de santé</td>
-                      <td><i>39 mins</i></td>
-                    </tr>
-          
-                    <tr>
-                      <td><i class="fa fa-address-book w3-text-red w3-large"></i></td>
-                      <td>Votre Rendez-vous avec le patient Charlie Chaplin est pour demain .</td>
-                      <td><i>1h</i></td>
-                    </tr>
+                         
           
                   </table>
                 </div>
@@ -112,18 +97,93 @@
   </template>
   
   <script>
-  
+   import keycloak from '@/main';
+  import axios from 'axios';
 
   export default {
+    
     name: 'NouvelleMedecin', // Remplacez par le nom de votre composant
     data() {
     return {
-      
+      notifs:[],
+      malades:[],
     };
   },
   methods: {
+    fetchNotif() {
+  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    }
+  };
+
+  axios.get('http://192.168.224.1:8080/api/notification/doc', config) // Utilisez la configuration avec l'en-tête d'autorisation
+    .then(response => {
+      this.notifs = response.data;
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des notifs :', error);
+    });
+     
+    axios.get('http://192.168.224.1:8080/api/malade/St', config) // Utilisez la configuration avec l'en-tête d'autorisation
+    .then(response => {
+      this.malades = response.data;
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des malades :', error);
+    });
+},
+async supprimerNotification(NotifId) {
+    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+// Définissez l'en-tête d'autorisation avec le jeton d'accès
+const config = {
+  headers: {
+    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+  }
+};
+    if (confirm("Êtes-vous sûr de vouloir supprimer cette notification ?")) {
+      try {
+        // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
+         await axios.delete(`http://192.168.224.1:8080/api/notification/${NotifId}`,config);
+
+        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
+        console.log('prescription supprimée avec succès !');
+
+        // Mettez à jour la liste des conseils en supprimant le conseil supprimé
+        this.notifs = this.notifs.filter(n => n.id !== NotifId);
+      } catch (error) {
+        console.error('Erreur lors de la suppression de la notification :', error);
+        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+      }
+    }
+  },
+  getNomPrenom(maladeId) {
+        const malade = this.malades.find(m => m.id === maladeId);
+        if (malade) {
+          return {
+            nom: malade.nom,
+            prenom: malade.prenom,
+           
+          };
+        }
+        return { nom: '', prenom: '' };
+      },
+
+
     
   },
+  mounted() {
+      this.fetchNotif();
+      console.log(this.notifs);
+      console.log(this.malades);
+      
+      
+    }
+    
 };
   </script>
   
