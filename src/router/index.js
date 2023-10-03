@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+
 import MesConseils from '../components/MesConseils.vue'
 import Nouvelle from '../components/Nouvelle.vue'
 import PublierConseil from '../components/PublierConseil.vue'
@@ -16,6 +16,10 @@ import MesConseilsP from '../components/MesConseilsP.vue'
 import rdvPatient from '../components/rdvPatient.vue'
 import ModifierRdv from '../components/ModifierRdv.vue'
 import AjouterPrescription from '../components/AjouterPrescription.vue'
+import Message from '../components/Message.vue'
+import ModifierPosologie from '../components/ModifierPosologie.vue'
+import rdvMedecinPat from '../components/rdvMedecinPat.vue'
+import VoirPrescription from '../components/VoirPrescription.vue'
 const routes = [
   {
     path: '/',
@@ -111,10 +115,29 @@ const routes = [
     name: 'AjouterPrescription',
     component:AjouterPrescription
   },
+  {
+    path: '/Message/:id',
+    name: 'Message',
+    component:Message
+  },
+  {
+    path: '/ModifierPosologie/:id',
+    name: 'ModifierPosologie',
+    component:ModifierPosologie
+  },
+  {
+    path: '/rdvMedecinPat/:id',
+    name: 'rdvMedecinPat',
+    component:rdvMedecinPat
+  },
+  {
+    path: '/VoirPrescription',
+    name: 'VoirPrescription',
+    component:VoirPrescription
+  },
+
   
   
-
-
 ]
 
 const router = createRouter({

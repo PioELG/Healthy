@@ -51,31 +51,27 @@
           </table>
         
            
-          <div class="medicament">
-            <p>Paracetamol</p><br>
-            <ul>
-              <li>1 comprimé le matin</li>
-              <li>2 comprimés le soir</li>
-            </ul>
+          <ul class="chat-list" v-for="medicament in medicaments" :key="medicament.id">
+            <li class="chat-item">
+                <div class="chat-preview" >
+                  <p>
+                    <h2>{{ medicament.nom }}</h2>
+                    <i class="fa fa-trash" style="color: red;" @click="supprimerMedicament(medicament.id)"></i> &nbsp;&nbsp;&nbsp;
+                  </p>
+                    <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"> 
+                      {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
+
+                    <router-link :to="'/ModifierPosologie/' +$route.params.id"> <i class="fa fa-pencil" style="color: blue;" ></i> </router-link> &nbsp;&nbsp;&nbsp;
+                     
+                    </p>
+                    
+                </div>
+            </li>
             
-            <div class="icones">
-              <i class="fa fa-pencil" style="color: blue;"></i> &nbsp;&nbsp;&nbsp;<!-- Icône de modification -->
-              <i class="fa fa-trash" style="color: red;"></i> &nbsp;&nbsp;&nbsp;
-            </div>
-        </div>
-        <div class="medicament">
-            <p>Amoxicilline </p> 
-            <ul>
-              <li>1 comprimé le matin</li>
-              <li>1 comprimé le soir</li>
-            </ul>
-            
-            <p> </p>
-            <div class="icones">
-              <i class="fa fa-pencil" style="color: blue;"></i> &nbsp;&nbsp;&nbsp;<!-- Icône de modification -->
-              <i class="fa fa-trash" style="color: red;"></i> &nbsp;&nbsp;&nbsp;
-            </div>
-        </div>
+    
+            <!-- Ajoutez d'autres chats ici -->
+        </ul>
+        
             <br>
             <p ><!-- Ajoutez la classe 'vert' ou 'rouge' en fonction de l'état -->
                 Le patient est <strong class="etat-traitement">à jour</strong> dans son traitement.
@@ -96,7 +92,12 @@
             </tr>
           </table>
           
-          <p>Aucun rendez-vous prévu</p>
+          <p v-if="rdvs.length === 0">Aucun rendez-vous prévu</p>
+          <div v-else >
+          <router-link :to="'/rdvMedecinPat/' +$route.params.id">
+           <button class="btn"> Voir rdvs </button>
+          </router-link>
+        </div>
       </div>
     </div>
     </div>
@@ -120,6 +121,9 @@
           constante:[],
           symptomes:[],
           idP:'',
+          medicaments:[],
+          posologies:[],
+          rdvs:[]
         };
       },
       methods: {
@@ -147,7 +151,7 @@
       
     })
     .catch(error => {
-      console.error('Erreur lors de la récupération des conseils du jour :', error);
+      console.error('Erreur lors de la récupération des malades :', error);
     }).finally(()=> this.loading = false);
     
    
@@ -177,7 +181,7 @@ fetchConstante() {
       
     })
     .catch(error => {
-      console.error('Erreur lors de la récupération des conseils du jour :', error);
+      console.error('Erreur lors de la récupération des constantes :', error);
     }).finally(()=> this.loading = false);
     
    
@@ -211,17 +215,127 @@ fetchSymptomes() {
     
    
 },
+fetchMedicaments() {
+  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
         
+  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    }
+  };
+  const id = this.$route.params.id;
+  
+ 
+ 
+
+  axios.get(`http://192.168.224.1:8080/api/medicament/${id}`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+    .then(response => {
+      
+       
+        this.medicaments=response.data;
+      
+      
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des médicaments:', error);
+    }).finally(()=> this.loading = false);
+    
+   
+},
+fetchPosologie() {
+  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+        
+  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    }
+  };
+  const id = this.$route.params.id;
+  
+ 
+ 
+
+  axios.get(`http://192.168.224.1:8080/api/posologie`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+    .then(response => {
+      
+       
+        this.posologies=response.data;
+      
+      
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des posologies:', error);
+    }).finally(()=> this.loading = false);
+    
+   
+},
+getPosologies(medId) {
+    return this.posologies.filter(posologie => posologie.medicament_id === medId);
+  },
+
+  async supprimerMedicament(MedicamentId) {
+    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+// Définissez l'en-tête d'autorisation avec le jeton d'accès
+const config = {
+  headers: {
+    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+  }
+};
+    if (confirm("Êtes-vous sûr de vouloir supprimer cette prescription ?")) {
+      try {
+        // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
+         await axios.delete(`http://192.168.224.1:8080/api/medicament/${MedicamentId}`,config);
+
+        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
+        console.log('prescription supprimée avec succès !');
+
+        // Mettez à jour la liste des conseils en supprimant le conseil supprimé
+        this.medicaments = this.medicaments.filter(m => m.id !== MedicamentId);
+      } catch (error) {
+        console.error('Erreur lors de la suppression de la prescription :', error);
+        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+      }
+    }
+  },
+  async fetchRdv() {
+        const accessToken = keycloak.token;
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        };
+        const id = this.$route.params.id;
+  
+        try {
+          const rdvResponse = await axios.get(`http://192.168.224.1:8080/api/rdv/${id}`, config);
+          this.rdvs = rdvResponse.data;
+  
+         
+        } catch (error) {
+          console.error('Erreur lors de la récupération du doctor', error);
+        }
       },
+      
+    },
+        
+    
       mounted(){
           // Les propriétés calculées de votre composant vont ici
           this.patient = [],
           this.loading = true,
           this.constante=[],
           this.symptomes=[],
+          this.medicaments=[],
+          this.posologies= [],
            this.fetchMalade();
            this.fetchConstante();
            this.fetchSymptomes();
+           this.fetchMedicaments();
+           this.fetchPosologie();
+           this.fetchRdv();
           
         },
       // Autres options de composant (comme "props", "watch", etc.) vont ici
@@ -343,6 +457,46 @@ h1 {
 
 .icones {
     margin-left: auto; /* Pousse les icônes vers la droite (fin) */
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 10px; /* Augmentation du rayon pour un aspect plus arrondi */
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+.chat-list {
+  list-style: none;
+  padding: 0;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  transition: transform 0.3s, background-color 0.3s;
+  background-color: white; /* Fond blanc */
+}
+
+.chat-item:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+  background-color: rgb(88, 103, 97);
+  color: rgb(0, 0, 0);
+}
+
+
+.chat-preview {
+  flex-grow: 1;
 }
   
     </style>

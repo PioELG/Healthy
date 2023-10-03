@@ -3,6 +3,7 @@
     <html>
     <head>
     <title>W3.CSS Template</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     </head>
     <body>
         <div class="w3-main" style="margin-left:300px;margin-top:0px;">
@@ -17,7 +18,7 @@
                 <div class="w3-container w3-black w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
                   <div class="w3-right">
-                    <h3>2</h3>
+                    
                   </div>
                   <div class="w3-clear"></div>
                   <h4>MesMessages</h4>
@@ -28,7 +29,7 @@
                <router-link to="/rdvPatient" class="link"> <div class="w3-container w3-blue w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
                   <div class="w3-right">
-                    <h3>2</h3>
+                   
                   </div>
                   <div class="w3-clear"></div>
                   <h4>MesRendez-Vous</h4>
@@ -41,7 +42,7 @@
                 <div class="w3-container w3-teal w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-heart w3-xxxlarge"></i></div>
                   <div class="w3-right">
-                    <h3>3</h3>
+                    
                   </div>
                   <div class="w3-clear"></div>
                   <h4>MesConseils</h4>
@@ -71,35 +72,19 @@
                 <div class="w3-twothird">
                   <h5>Notifications</h5>
                   <table class="w3-table w3-striped w3-white">
-                    <tr>
-                      <td><i class="fa fa-stethoscope" style="font-size:24px"></i></td>
-                      <td>Vous venez de faire une mis à jour de votre état de santé</td>
-                      <td><i>10 mins</i></td>
+                    <tr v-for="notif in notifs " :key="notif.id">
+                      <td><i class="fas fa-exclamation-circle" style="font-size:24px; color: rgb(243, 11, 11)"></i></td>
+                      <td >
+                        <div class="contexte">
+                        Votre doctor vient d'ajouter un nouveau {{notif.contexte}}
+                        </div>
+                      </td>
+                      <td><i class="fas fa-check-circle" style="font-size:24px; color: green;"></i></td>
+                      
                     </tr>
                     
-                    <tr>
-                      <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
-                      <td>Vous n'avez pas pris votre médicament à temps</td>
-                      <td><i>15 mins</i></td>
-                    </tr>
                     
-                    <tr>
-                      <td><i class="fa fa-comment w3-text-red w3-large"></i></td>
-                      <td>Nouveau Message.</td>
-                      <td><i>25 mins</i></td>
-                    </tr>
                     
-                    <tr>
-                      <td><i class="fa fa-share-alt w3-text-green w3-large"></i></td>
-                      <td>Vous venez de recevoir un nouveau conseil de santé</td>
-                      <td><i>39 mins</i></td>
-                    </tr>
-          
-                    <tr>
-                      <td><i class="fa fa-address-book w3-text-red w3-large"></i></td>
-                      <td>Votre Rendez-vous avec le docteur Mike est pour demain .</td>
-                      <td><i>1h</i></td>
-                    </tr>
           
                   </table>
                 </div>
@@ -111,19 +96,48 @@
   </template>
   
   <script>
-  
+    import keycloak from '@/main';
+  import axios from 'axios';
 
   export default {
-    name: 'NouvellePatient', // Remplacez par le nom de votre composant
+
+    name:"NouvellePatient",
     data() {
-    return {
+      return {
+        // Les données de votre composant vont ici
+        notifs:[],
+       
+      };
+    },
+    methods: {
+      fetchNotif() {
+  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    }
+  };
+
+  axios.get('http://192.168.224.1:8080/api/notification/patient', config) // Utilisez la configuration avec l'en-tête d'autorisation
+    .then(response => {
+      this.notifs = response.data;
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des notifs :', error);
+    });
+},
       
-    };
-  },
-  methods: {
+    },
+    mounted() {
+      this.fetchNotif();
+      console.log(this.notifs);
+    }
     
-  },
-};
+  };
+ 
+
   </script>
   
   <style scoped>
@@ -158,6 +172,31 @@
 .link
     {
         text-decoration: none;
+    }
+
+    .w3-table td i {
+       /* Couleur de l'icône */
+      margin-right: 10px; /* Marge à droite de l'icône */
+    }
+  
+    /* Ajoutez une animation de transition pour les notifications */
+    .w3-table td {
+      transition: transform 0.2s ease;
+    }
+  
+    /* Lorsque vous survolez une ligne de notification, appliquez une transformation */
+    .w3-table tr:hover td {
+      transform: translateX(10px); /* Déplacez la ligne vers la droite au survol */
+    }
+  
+    /* Style pour le titre "Notifications" */
+    h5 {
+      font-size: 18px; /* Taille de police */
+      margin-bottom: 10px; /* Marge en bas du titre */
+    }
+    .contexte {
+      border-radius: 10px;
+      padding: 10px; /* Ajoutez un peu d'espace intérieur pour le contenu */
     }
   </style>
   

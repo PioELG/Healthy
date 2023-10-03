@@ -1,12 +1,14 @@
 <template>
     <div class="w3-main" style="margin-left:300px;margin-top:43px;">
       
-        <div class="container">
+       
+      <div class="container">
+        <router-link to="/VoirPrescription" class="link">
           <div class="left-div">
               <h1>Ma Prescription</h1>
               <p>Cliquez ici pour consulter les prescriptions du médecin.</p>
           </div>
-          
+        </router-link>
         <router-link to="/AjouterConstantes"  class="link" >
           <div class="right-div">
               <h1>Mon Etat</h1>

@@ -47,7 +47,8 @@
   import keycloak from '@/main';
   import axios from 'axios';
   export default {
-    name: 'AjoutRdv', // Remplacez par le nom de votre composant
+    name: 'AjoutRdv',
+    // Remplacez par le nom de votre composant
     data() {
       return {
         // Les données de votre composant vont ici
@@ -56,6 +57,7 @@
       };
     },
     methods: {
+       
         async submitForm() {
             const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
 
@@ -74,11 +76,16 @@ const id = this.$route.params.id;
         
        await axios.post('http://192.168.224.1:8080/api/rdv', { date:this.date,heure:this.heure,malade_id:id},config);
 
+       await axios.post('http://192.168.224.1:8080/api/notification/doc', { contexte:"Rdv",patient_id:id},config);
+
+
       // Gérez la réponse de l'API (par exemple, affichez un message de succès)
       console.log('rdv ajouté avec succès !');
       // Réinitialisez le champ de texte
       this.date = '';
       this.heure = '';
+      window.history.back();
+     
       
     } catch (error) {
       console.error('Erreur lors de l\'ajout du rdv :', error);

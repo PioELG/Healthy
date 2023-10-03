@@ -28,7 +28,8 @@
                         <i class="fa fa-pencil" style="color: blue;"></i>
                      </router-link><!-- Icône de modification -->&nbsp;&nbsp;&nbsp;
                     <i class="fa fa-trash" style="color: red;"></i> &nbsp;&nbsp;&nbsp;<!-- Icône de suppression -->
-                    <i class="fa fa-envelope"></i><!-- Icône de modification -->
+                   
+                    <router-link :to="'/Message/' + malade.id"><i class="fa fa-envelope"></i></router-link> 
                  
                 </td>
               

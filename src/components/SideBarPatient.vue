@@ -32,7 +32,7 @@
               <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
                 <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-bell fa-fw"></i> <router-link to="/" class="link">Notifications</router-link> </a>
-                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Rendez-vous</a>
+                <router-link to="/rdvPatient" class="link"> <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Rendez-vous</a></router-link>
                 <router-link to="/MesConseilsP" class="link"><a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-heart fa-fw"></i> ConseilsSanté </a></router-link>
                 <router-link to="/MaSante" class="link"><a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-stethoscope fa-fw"></i>&nbsp;&nbsp;MaSanté  </a></router-link>
                 <a href="#" class="w3-bar-item w3-button w3-padding" @click="logout"><i class="fa fa-sign-out fa-fw"></i>  Log Out</a><br><br>
