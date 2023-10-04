@@ -85,6 +85,18 @@
                       <td><i class="fas fa-check-circle" style="font-size:24px; color: green;" @click="supprimerNotification(notif.id)"></i></td>
                       
                     </tr>
+                    <tr v-for="rdv in rdvDemain " :key="rdv.id">
+                      <td><i class="fas fa-exclamation-circle" style="font-size:24px; color: rgb(243, 11, 11)"></i></td>
+                      <td >
+                        <div class="contexte">
+                        Votre rendez-vous avec le patient {{ getNomPrenom(rdv.malade_id).nom }} {{ getNomPrenom(rdv.malade_id).prenom }} est pour  demain à <strong>{{ rdv.heure }}</strong>
+
+                        </div>
+                       
+                      </td>
+                      <td><i class="fas fa-check-circle" style="font-size:24px; color: green;" @click="supprimerNotification(notif.id)"></i></td>
+                      
+                    </tr>
                          
           
                   </table>
@@ -107,6 +119,9 @@
     return {
       notifs:[],
       malades:[],
+      maladesRdv:[],
+      rdvs: [], 
+      rdvDemain: [], 
     };
   },
   methods: {
@@ -172,7 +187,31 @@ const config = {
         }
         return { nom: '', prenom: '' };
       },
+      async fetchRdv() {
+        const accessToken = keycloak.token;
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        };
+  
+      try {
+        const response = await axios.get('http://192.168.224.1:8080/api/rdv',config);
+        this.rdvs = response.data;
 
+        // Filtrer les rendez-vous pour obtenir ceux du lendemain
+        const demain = new Date();
+        demain.setDate(demain.getDate() + 1);
+
+       
+        this.rdvDemain = this.rdvs.filter(rdv => {
+          const rdvDate = new Date(rdv.date);
+          return rdvDate.toDateString() === demain.toDateString();
+        });
+      } catch (error) {
+        console.error('Erreur lors de la récupération des rendez-vous :', error);
+      }
+    },
 
     
   },
@@ -180,6 +219,7 @@ const config = {
       this.fetchNotif();
       console.log(this.notifs);
       console.log(this.malades);
+      this.fetchRdv();
       
       
     }
@@ -219,6 +259,20 @@ const config = {
 .w3-container
 {
     padding: 16 px;
+}
+.w3-table td i {
+  /* Couleur de l'icône */
+ margin-right: 10px; /* Marge à droite de l'icône */
+}
+
+/* Ajoutez une animation de transition pour les notifications */
+.w3-table td {
+ transition: transform 0.2s ease;
+}
+
+/* Lorsque vous survolez une ligne de notification, appliquez une transformation */
+.w3-table tr:hover td {
+ transform: translateX(10px); /* Déplacez la ligne vers la droite au survol */
 }
 
   </style>

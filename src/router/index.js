@@ -20,6 +20,7 @@ import Message from '../components/Message.vue'
 import ModifierPosologie from '../components/ModifierPosologie.vue'
 import rdvMedecinPat from '../components/rdvMedecinPat.vue'
 import VoirPrescription from '../components/VoirPrescription.vue'
+import MessageP from '../components/MessageP.vue'
 const routes = [
   {
     path: '/',
@@ -134,6 +135,11 @@ const routes = [
     path: '/VoirPrescription',
     name: 'VoirPrescription',
     component:VoirPrescription
+  },
+  {
+    path: '/MessageP',
+    name: 'MessageP',
+    component:MessageP
   },
 
   

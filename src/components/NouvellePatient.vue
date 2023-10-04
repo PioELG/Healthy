@@ -15,6 +15,7 @@
           
             <div class="w3-row-padding w3-margin-bottom">
               <div class="w3-quarter">
+                <router-link to="/MessageP"  class="link">
                 <div class="w3-container w3-black w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
                   <div class="w3-right">
@@ -23,6 +24,7 @@
                   <div class="w3-clear"></div>
                   <h4>MesMessages</h4>
                 </div>
+              </router-link>
               </div>
               
               <div class="w3-quarter">
@@ -75,17 +77,27 @@
                     <tr v-for="notif in notifs " :key="notif.id">
                       <td><i class="fas fa-exclamation-circle" style="font-size:24px; color: rgb(243, 11, 11)"></i></td>
                       <td >
-                        <div class="contexte" v-if="notif.contexte===rdv">
-                        Votre doctor vient d'ajouter  {{notif.contexte}}
+                        <div class="contexte" >
+                        Votre médecin vient d'ajouter  {{notif.contexte}}
                         </div>
-                        <div class="contexte" v-else>
-                          Votre doctor vient d'ajouter  {{notif.contexte}}
-                        </div>
+                        
                       </td>
                       <td><i class="fas fa-check-circle" style="font-size:24px; color: green;" @click="supprimerNotification(notif.id)"></i></td>
                       
                     </tr>
-                    
+                    <tr v-for="rdv in rdvDemain " :key="rdv.id">
+                      <td><i class="fas fa-exclamation-circle" style="font-size:24px; color: rgb(243, 11, 11)"></i></td>
+                      <td >
+                        <div class="contexte">
+                        Votre rendez-vous avec le médecin est pour est pour demain à <strong>{{ rdv.heure }}</strong>
+
+                        </div>
+                       
+                      </td>
+                      <td><i class="fas fa-check-circle" style="font-size:24px; color: green;" @click="supprimerNotification(notif.id)"></i></td>
+                      
+                    </tr>
+                         
                     
                     
           
@@ -109,6 +121,8 @@
       return {
         // Les données de votre composant vont ici
         notifs:[],
+        rdvs:[],
+        rdvDemain:[]
        
       };
     },
@@ -156,11 +170,37 @@ const config = {
       }
     }
   },
+  async fetchRdv() {
+        const accessToken = keycloak.token;
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        };
+  
+      try {
+        const response = await axios.get('http://192.168.224.1:8080/api/rdv/patient',config);
+        this.rdvs = response.data;
+
+        // Filtrer les rendez-vous pour obtenir ceux du lendemain
+        const demain = new Date();
+        demain.setDate(demain.getDate() + 1);
+
+       
+        this.rdvDemain = this.rdvs.filter(rdv => {
+          const rdvDate = new Date(rdv.date);
+          return rdvDate.toDateString() === demain.toDateString();
+        });
+      } catch (error) {
+        console.error('Erreur lors de la récupération des rendez-vous :', error);
+      }
+    },
       
     },
     mounted() {
       this.fetchNotif();
       console.log(this.notifs);
+      this.fetchRdv();
     }
     
   };

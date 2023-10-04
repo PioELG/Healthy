@@ -70,6 +70,7 @@ const config = {
     // Envoie les données à votre API Backend en utilisant Axios
     try {
        await axios.post('http://192.168.224.1:8080/api/conseils', { contenu: this.nouveauConseil },config);
+       await axios.post('http://192.168.224.1:8080/api/notification/doc', { contexte:"un nouveau conseil de santé",cible:"tous"},config);
 
       // Gérez la réponse de l'API (par exemple, affichez un message de succès)
       console.log('Conseil ajouté avec succès !');

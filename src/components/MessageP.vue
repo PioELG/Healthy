@@ -9,7 +9,7 @@
               
                 
               <p >{{ message.contenu }}</p>
-              <span class="delete-icon" @click="supprimerMessage(message.id)" v-if="message.sender === 'Medecin'" >
+              <span class="delete-icon" @click="supprimerMessage(message.id)" v-if="message.sender === 'Patient'" >
                 <i class="fa fa-trash" style="color: red;" ></i>
               </span>
                 
@@ -55,8 +55,8 @@ const id = this.$route.params.id;
 
     // Envoie les données à votre API Backend en utilisant Axios
     try {
-       await axios.post('http://192.168.224.1:8080/api/message/doc', {contenu:this.msg,patient_id:id},config);
-       await axios.post('http://192.168.224.1:8080/api/notification/doc', { contexte:"un nouveau message",cible:id},config);
+       await axios.post('http://192.168.224.1:8080/api/message/patient', {contenu:this.msg},config);
+       await axios.post('http://192.168.224.1:8080/api/notification/patient', { contexte:"un nouveau message"},config);
 
 
       // Gérez la réponse de l'API (par exemple, affichez un message de succès)
@@ -79,12 +79,13 @@ fetchMessage() {
       'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
     }
   };
-  const id = this.$route.params.id;
 
 
-  axios.get(`http://192.168.224.1:8080/api/message/MedecinMP/${id}`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+
+  axios.get('http://192.168.224.1:8080/api/message/Patient', config) // Utilisez la configuration avec l'en-tête d'autorisation
     .then(response => {
       this.messages = response.data;
+      
     })
     .catch(error => {
       console.error('Erreur lors de la récupération des  du messages :', error);
@@ -116,7 +117,6 @@ const config = {
       }
     }
   }
-
  
 
 
@@ -148,7 +148,8 @@ const config = {
 
 
 
-.doctor {
+
+.patient {
     background-color: #B2E0FF; /* Bleu pour les messages du patient */
     color: #000; /* Texte noir pour les messages du patient */
     text-align: right;
@@ -157,7 +158,7 @@ const config = {
    
   }
   
-  .patient {
+  .doctor {
     background-color: #DCF8C6; /* Vert pour les messages du médecin */
     color: #000; /* Texte noir pour les messages du médecin */
     text-align: left;
