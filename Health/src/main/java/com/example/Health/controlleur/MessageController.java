@@ -89,5 +89,10 @@ public class MessageController {
         message.setSender("Medecin");
         return messageService.Creer(message);
     }
+    @DeleteMapping("/{id}")
+    public String SupprimerM(@PathVariable Long id)
+    {
+        return messageService.Supprimer(id);
+    }
 
 }

@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface NotificationService {
     Notification Creer(Notification notification);
-    List<Notification> LireC(String cible_id);
-
+    List<Notification> LireC(String cible_id,String to);
+    List<Notification> LireCD(String cible_id);
     List<Notification> Lire();
 
     Notification Modifier(Notification notification, Long id);

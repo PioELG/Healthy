@@ -35,7 +35,7 @@ public class NotificationController {
         String id = jwt.getClaimAsString("sub");
 
 
-        return notificationService.LireC(id);
+        return notificationService.LireC(id,"tous");
     }
     @GetMapping("/doc")
     public List<Notification> readD(Authentication authentication)
@@ -46,7 +46,7 @@ public class NotificationController {
         String id = jwt.getClaimAsString("sub");
 
 
-        return notificationService.LireC(id);
+        return notificationService.LireCD(id);
     }
 
 

@@ -8,9 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification,Long> {
-    @Query("SELECT n FROM Notification n WHERE n.cible = ?1")
-    List<Notification> findByCible(String cible_id);
+    @Query("SELECT n FROM Notification n WHERE n.cible = ?1 OR n.cible = ?2 ")
+    List<Notification> findByCible(String cible_id,String to);
 
+    @Query("SELECT n FROM Notification n WHERE n.cible = ?1  ")
+    List<Notification> findByCibleD(String cible_id);
 
 
 

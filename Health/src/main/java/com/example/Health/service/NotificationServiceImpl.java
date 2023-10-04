@@ -18,10 +18,14 @@ public class NotificationServiceImpl implements NotificationService{
     }
 
     @Override
-    public List<Notification> LireC(String cible_id) {
-        return notificationRepository.findByCible(cible_id);
+    public List<Notification> LireC(String cible_id,String to) {
+        return notificationRepository.findByCible(cible_id,to);
     }
 
+    @Override
+    public List<Notification> LireCD(String cible_id) {
+        return notificationRepository.findByCibleD(cible_id);
+    }
 
 
     @Override
