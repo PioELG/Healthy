@@ -1,8 +1,9 @@
 <template>
-    <header class="w3-container" style="padding-top:22px">
+  <div class="container" style="margin-left:300px; margin-top:20px;">
+    <header class="w3-container" style="padding-top:25px">
         <h5><b><i class="fa fa-address-book fa-fw "></i> Mes Rendez-vous</b></h5>
       </header>
-    <div class="w3-main" style="margin-left: 300px; margin-top: 43px;">
+    <div class="w3-main">
       <div class="w3-row-padding w3-margin-bottom">
         <table id="customers">
           <tr>
@@ -30,6 +31,7 @@
       </div>
       <br>
     </div>
+  </div>
   </template>
   
   <script>
@@ -99,6 +101,11 @@
   </script>
   
   <style scoped>
+  .container
+  {
+    height: 100%;
+    min-height: 100vh;
+  }
   #customers {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;

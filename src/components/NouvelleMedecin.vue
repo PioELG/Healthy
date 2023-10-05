@@ -5,15 +5,16 @@
     <title>W3.CSS Template</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     </head>
-    <body>
-        <div class="w3-main" style="margin-left:300px;margin-top:0px;">
+    <body >
+      
+        <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
             <!-- Header -->
             <header class="w3-container" style="padding-top:27px">
-              <h5><b><i class="fa fa-dashboard"></i> Mon Tableau de bord</b></h5>
+              <h4><b><i class="fa fa-dashboard"></i> Mon Tableau de bord</b></h4>
             </header>
           
-            <div class="w3-row-padding w3-margin-bottom">
+            <div class="w3-row-padding w3-margin-bottom bon">
               <div class="w3-quarter">
                 <div class="w3-container w3-black w3-padding-16 w3-container-rounded">
                   <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
@@ -71,7 +72,7 @@
               <div class="w3-row-padding" style="">
                
                 <div class="w3-twothird">
-                  <h5>Notifications</h5>
+                  <b><h4>Notifications</h4></b>
                   <table class="w3-table w3-striped w3-white">
                     <tr v-for="notif in notifs " :key="notif.id">
                       <td><i class="fas fa-exclamation-circle" style="font-size:24px; color: rgb(243, 11, 11)"></i></td>
@@ -103,7 +104,8 @@
                 </div>
               </div>
             </div>
-        </div>    
+        </div>  
+        
      </body>
     </html>
   </template>
@@ -229,51 +231,68 @@ const config = {
   
   <style scoped>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-  .link
-    {
-        text-decoration: none;
-    }
-.w3-container-rounded {
-  border-radius: 10px; /* Vous pouvez ajuster le rayon selon vos préférences */
-}
-.w3-container-rounded:hover {
-  transform: translate(5px, -5px); /* Déplacez la div vers le bas et vers la droite */
-  transition: transform 0.2s ease; /* Ajoutez une transition fluide */
-}
-.w3-container
-{
-    padding-top:22px
-}
-.w3-main
-{
-    background: rgb(235, 235, 238);
-    margin-left:300px;
-    margin-top:43px;
+  .w3-container-rounded {
+    border-radius: 10px; /* Vous pouvez ajuster le rayon selon vos préférences */
+  }
+  .w3-container-rounded:hover {
+    transform: translate(5px, -5px); /* Déplacez la div vers le bas et vers la droite */
+    transition: transform 0.2s ease; /* Ajoutez une transition fluide */
+  }
+  .w3-container
+  {
+      padding-top:22px
+  }
+  .w3-main
+  {
     height: 100%;
-}
-.w3-row-padding
-{
-    margin:0 -16px;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
+  .w3-row-padding
+  {
+      margin-left:20px;
+  
+  }
 
-}
-.w3-container
-{
-    padding: 16 px;
-}
-.w3-table td i {
-  /* Couleur de l'icône */
- margin-right: 10px; /* Marge à droite de l'icône */
-}
+  .w3-container
+  {
+      padding: 16 px;
+  }
+  .link
+      {
+          text-decoration: none;
+      }
+  .w3-table{
+    border-radius: 10px;
+    width: 100%;
+    min-width: 100vh;
+    
 
-/* Ajoutez une animation de transition pour les notifications */
-.w3-table td {
- transition: transform 0.2s ease;
-}
+  }
+      .w3-table td i {
+         /* Couleur de l'icône */
+        margin-right: 10px; /* Marge à droite de l'icône */
+      }
+    
+      /* Ajoutez une animation de transition pour les notifications */
+      .w3-table td {
+        transition: transform 0.2s ease;
+      }
+    
+      /* Lorsque vous survolez une ligne de notification, appliquez une transformation */
+      .w3-table tr:hover td {
+        transform: translateX(10px); /* Déplacez la ligne vers la droite au survol */
+      }
+    
+      /* Style pour le titre "Notifications" */
+      h5 {
+        font-size: 18px; /* Taille de police */
+        margin-bottom: 10px; /* Marge en bas du titre */
+      }
+      .contexte {
+        border-radius: 10px;
+        padding: 10px; 
+      }
 
-/* Lorsque vous survolez une ligne de notification, appliquez une transformation */
-.w3-table tr:hover td {
- transform: translateX(10px); /* Déplacez la ligne vers la droite au survol */
-}
 
   </style>
   

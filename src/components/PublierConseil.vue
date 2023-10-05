@@ -16,20 +16,20 @@
     <div class="w3-main" style="margin-left:300px;margin-top:43px;">
   <!-- Header -->
         <header class="w3-container" style="padding-top:22px">
-          <h5><b><i class="fa fa-heart fa-fw"></i> <router-link to="/MesConseils">Mes Conseils</router-link></b></h5>
+          <h5><b><i class="fa fa-heart fa-fw"></i> <router-link to="/MesConseils" class="link">Mes Conseils</router-link></b></h5>
         </header>
-         <main>
-          <section class="publication-form">
+         
+          <div class="publication-form">
               <h2>Ajouter un nouveau conseil de santé :</h2>
               <form @submit.prevent="submitForm">
       
-                  <label for="conseil">Conseil de santé :</label>
+                 
                   <textarea id="conseil" name="conseil" rows="4" v-model="nouveauConseil" required></textarea>
       
                   <button type="submit">Publier</button>
               </form>
-          </section>
-      </main>
+            </div>
+      
         <!-- End page content -->
       </div>
     </body>
@@ -94,6 +94,9 @@ const config = {
   
   <style scoped>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+  h5{
+    margin-left:50px
+  }
   main {
     max-width: 800px;
     margin: 2rem auto;
@@ -115,6 +118,7 @@ form {
     max-width: 600px;
     margin: 0 auto;
 }
+
 
 label {
     display: block;
@@ -146,6 +150,23 @@ button[type="submit"]:hover {
 .w3-main
 {
     background-color: #e0e5ea;
+    height: 100%;
+    min-height: 100vh;
+}
+.link
+      {
+          text-decoration: none;
+      }
+.publication-form
+{
+  border-radius:20px;
+  
+  max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 

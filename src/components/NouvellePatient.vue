@@ -223,10 +223,8 @@ const config = {
 }
 .w3-main
 {
-    background: rgb(235, 235, 238);
-    margin-left:300px;
-    margin-top:43px;
-    height: 100%;
+  height: 100%;
+  min-height: 100vh;
 }
 .w3-row-padding
 {
@@ -255,6 +253,12 @@ const config = {
     /* Lorsque vous survolez une ligne de notification, appliquez une transformation */
     .w3-table tr:hover td {
       transform: translateX(10px); /* Déplacez la ligne vers la droite au survol */
+    }
+    .w3-table
+    {
+      border-radius: 10px;
+    width: 100%;
+    min-width: 100vh;
     }
   
     /* Style pour le titre "Notifications" */

@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    
     </head>
-    <body class="w3-light-grey">
-    
-    <header class="w3-container" style="padding-top:22px">
+    <body >
+    <div class="container" style="margin-left:300px;margin-top:43px;">
+    <header >
         <h5><b><i class="fa fa-heart fa-fw"></i> Mes Conseils</b></h5>
     </header>
     
-      <div class="w3-row-padding w3-margin-bottom">
+      <div >
         
         <main>
             <section class="conseils">
@@ -46,8 +46,10 @@
               </article>
             </section>
           </main>
+    
         
       </div>
+    </div>
       
     
     </body>

@@ -61,6 +61,7 @@ const id = this.$route.params.id;
 
       // Gérez la réponse de l'API (par exemple, affichez un message de succès)
       console.log('message envoyé avec succès !');
+      this.fetchMessage();
       // Réinitialisez le champ de texte
       this.msg = '';
       

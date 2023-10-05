@@ -1,5 +1,5 @@
 <template>
-    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+    <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
         <!-- Header -->
         <header class="w3-container" style="padding-top:22px">
@@ -190,6 +190,11 @@ const config = {
       .link
     {
         text-decoration: none;
+    }
+
+    .w3-main{
+      height: 100%;
+      min-height: 100vh;
     }
      </style>
      

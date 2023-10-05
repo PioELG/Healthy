@@ -13,7 +13,8 @@
                       <h2>{{ medicament.nom }}</h2>
                       <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"> 
                         {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
-                          <input type="checkbox" class="medication-checkbox" id="paracetamol-evening">
+
+                          <button @click="setStatut(posologie.id)">Check</button>
                       </p>
                       
                   </div>
@@ -42,7 +43,8 @@
          return {
            // Les données de votre composant vont ici
           medicaments:[],
-          posologies:[]
+          posologies:[],
+          statut:""
  
          };
        },
@@ -107,6 +109,37 @@ fetchPosologie() {
 getPosologies(medId) {
     return this.posologies.filter(posologie => posologie.medicament_id === medId);
   },
+
+  
+  setStatut(posologie) {
+  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+        
+  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    }
+  };
+  const id = this.$route.params.id;
+  
+ 
+ 
+
+  axios.put(`http://192.168.224.1:8080/api/posologie/${posologie.id}`, config , {statut:"on"}) // Utilisez la configuration avec l'en-tête d'autorisation
+    .then(response => {
+      
+       
+        console.log("bien modifié");
+      
+      
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des posologies:', error);
+    }).finally(()=> this.loading = false);
+    
+    
+},
+       
  
          
        },

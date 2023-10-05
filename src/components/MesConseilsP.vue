@@ -11,7 +11,7 @@
    
     </head>
     <body class="w3-light-grey">
-    
+    <div lass="container" style="margin-left:300px;margin-top:43px;">
     <header class="w3-container" style="padding-top:22px">
         <h5><b><i class="fa fa-heart fa-fw"></i> Mes Conseils</b></h5>
     </header>
@@ -35,6 +35,7 @@
           </main>
         
       </div>
+    </div>
       
     
     </body>
