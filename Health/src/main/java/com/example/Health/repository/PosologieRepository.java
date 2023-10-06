@@ -10,4 +10,6 @@ import java.util.List;
 public interface PosologieRepository extends JpaRepository<Posologie,Long> {
     @Query("SELECT p FROM Posologie p WHERE p.medicament_id = ?1")
     List<Posologie> findByMedicament(Long medicament_id);
+
+
 }

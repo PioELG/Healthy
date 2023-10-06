@@ -27,7 +27,8 @@ public class Posologie {
     private String unite;
     @Column
     private Long medicament_id;
-
+    @Column
+    private String statut;
 
 
 }

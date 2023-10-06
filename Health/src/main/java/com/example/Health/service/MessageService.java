@@ -12,6 +12,7 @@ public interface MessageService {
 
     String Supprimer(Long  id);
 
+    void Cron();
 
     List<Message> LireParPat(String patient_id);
 

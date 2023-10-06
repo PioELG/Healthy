@@ -3,6 +3,7 @@ package com.example.Health.service;
 import com.example.Health.model.Message;
 import com.example.Health.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,12 @@ public class MessageServiceImpl implements MessageService{
          return "message bien supprimé";
     }
 
+    @Override
 
+    public void Cron() {
+
+        System.out.println("bonjour");
+    }
 
 
     @Override

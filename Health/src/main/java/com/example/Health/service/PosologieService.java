@@ -13,6 +13,8 @@ public interface PosologieService {
     Posologie Modifier(Posologie posologie, Long id);
     String Supprimer(Long id);
 
+
+
     // Vous pouvez également décommenter ces méthodes si nécessaire
     // List<Medecin> LireP(String user_id);
     // Medecin Accepter(Long id);

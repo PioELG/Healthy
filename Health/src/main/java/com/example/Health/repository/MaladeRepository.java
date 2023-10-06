@@ -15,6 +15,9 @@ public interface MaladeRepository extends JpaRepository<Malade,String> {
     @Query("SELECT m FROM Malade m WHERE m.statut = ?1 AND m.traitant= ?2")
     List<Malade> SousT(String status,String doc);
 
+    @Query("SELECT m FROM Malade m WHERE m.statut = ?1 ")
+    List<Malade> SousTMail(String status);
+
 
 
 

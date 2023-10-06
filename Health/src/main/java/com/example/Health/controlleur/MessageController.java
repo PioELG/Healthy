@@ -5,6 +5,7 @@ import com.example.Health.repository.MaladeRepository;
 import com.example.Health.service.MessageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
@@ -94,5 +95,7 @@ public class MessageController {
     {
         return messageService.Supprimer(id);
     }
+
+
 
 }
