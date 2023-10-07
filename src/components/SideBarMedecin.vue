@@ -32,10 +32,10 @@
               </div>
               <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-                <router-link to="/" class="link"> <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-bell fa-fw"></i> Notifications</a></router-link> 
+                <router-link to="/" class="link"> <a href="#"  class="w3-bar-item w3-button w3-padding "><i class="fa fa-bell fa-fw"></i> Notifications</a></router-link> 
                 <router-link class="link" to="/ListePatient"><a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Patients</a></router-link>
             <router-link class="link" to="/rdvMedecin"><a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Rendez-vous</a></router-link>
-                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-heart fa-fw"></i> <router-link to="/PublierConseil" class="link">ConseilsSanté</router-link> </a>
+            <router-link to="/PublierConseil" class="link">  <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-heart fa-fw"></i> ConseilsSanté </a></router-link>
                 <a href="#" class="w3-bar-item w3-button w3-padding" @click="logout"><i class="fa fa-sign-out fa-fw"></i>  Log Out</a><br><br>
               </div>
               

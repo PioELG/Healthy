@@ -1,7 +1,7 @@
 <template>
     <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
-        <!-- Header -->
+        
         <header class="w3-container" style="padding-top:22px">
           <h5><b><i class="fa fa-stethoscope"></i> Mes Prescriptions</b></h5>
         </header>
@@ -21,12 +21,12 @@
               </li>
               
       
-              <!-- Ajoutez d'autres chats ici -->
+             
           </ul>
       </main>
        
       
-        <!-- End page content -->
+       
       </div>
    </template>
      
@@ -37,11 +37,11 @@
    
    
      export default {
-       name: 'VoirPrescription', // Remplacez par le nom de votre composant
+       name: 'VoirPrescription', 
        
        data() {
          return {
-           // Les données de votre composant vont ici
+          
           medicaments:[],
           posologies:[],
           statut:""
@@ -49,14 +49,14 @@
          };
        },
        methods: {
-         // Les méthodes de votre composant vont ici
+         
          fetchMedicaments() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
         
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
   const id = this.$route.params.id;
@@ -64,7 +64,7 @@
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/medicament`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get(`http://192.168.224.1:8080/api/medicament`, config) 
     .then(response => {
       
        
@@ -79,12 +79,12 @@
    
 },
 fetchPosologie() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token;
         
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+ 
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
   const id = this.$route.params.id;
@@ -92,7 +92,7 @@ fetchPosologie() {
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/posologie`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get(`http://192.168.224.1:8080/api/posologie`, config) 
     .then(response => {
       
        
@@ -112,12 +112,12 @@ getPosologies(medId) {
 
   
   setStatut(posologie) {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
         
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
   const id = this.$route.params.id;
@@ -125,7 +125,7 @@ getPosologies(medId) {
  
  
 
-  axios.put(`http://192.168.224.1:8080/api/posologie/${posologie.id}`, config , {statut:"on"}) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.put(`http://192.168.224.1:8080/api/posologie/${posologie.id}`, config , {statut:"on"}) 
     .then(response => {
       
        
@@ -144,20 +144,20 @@ getPosologies(medId) {
          
        },
        mounted(){
-         // Les propriétés calculées de votre composant vont ici
+         
          this.medicaments=[],
           this.posologies= [],
           this.fetchMedicaments();
            this.fetchPosologie();
        
        },
-       // Autres options de composant (comme "props", "watch", etc.) vont ici
+       
      };
      </script>
      
      <style scoped>
      html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-/* Styles de la page de chat */
+
 .chat-list {
     list-style: none;
     padding: 0;
@@ -171,7 +171,7 @@ getPosologies(medId) {
     margin-bottom: 10px;
     border-radius: 5px;
     transition: transform 0.3s, background-color 0.3s;
-    background-color: white; /* Fond blanc */
+    background-color: white; 
 }
 
 .chat-item:hover {

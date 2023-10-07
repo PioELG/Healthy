@@ -26,11 +26,12 @@
                 <td>
                     <router-link :to="'/InfosPatient/' + malade.id">
                         <i class="fa fa-pencil" style="color: blue;"></i>
-                     </router-link><!-- Icône de modification -->&nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-trash" style="color: red;"></i> &nbsp;&nbsp;&nbsp;<!-- Icône de suppression -->
-                   
-                    <router-link :to="'/Message/' + malade.id"><i class="fa fa-envelope"></i></router-link> 
+
+                     </router-link><!-- Icône de modification -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      
+                    <router-link :to="'/Message/' + malade.id"><i class="fa fa-envelope"></i></router-link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                  
+                    <i class="fa fa-check fa-lg" style="color: green;" @click="FinTraitement(malade.id)"></i>  
                 </td>
               
              </tr> 
@@ -85,6 +86,55 @@
     });
     console.log(this.malades);
 },
+
+FinTraitement(idM)
+{
+  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    }
+  };
+
+  axios
+      .put(`http://192.168.224.1:8080/api/malade/Ft/${idM}`, {statut:"Fin traitement"},config)
+      .then(response => {
+        
+        console.log('Réponse du serveur :', response.data);
+
+       
+      })
+      .catch(error => {
+        console.error('Erreur lors de la requête PUT :', error);
+        // Gérez les erreurs ici
+      });
+
+      axios.get('http://192.168.224.1:8080/api/malade/St', config) // Utilisez la configuration avec l'en-tête d'autorisation
+    .then(response => {
+      this.malades = response.data;
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des conseils du jour :', error);
+    });  
+
+
+    axios.delete(`http://192.168.224.1:8080/api/rdv/malade/${idM}`, config);
+
+            console.log('Rendez-vous supprimé avec succès !');
+
+    axios.delete(`http://192.168.224.1:8080/api/constantes/malade/${idM}`, config);
+
+    axios.delete(`http://192.168.224.1:8080/api/notification/malade/${idM}`, config);
+
+    axios.delete(`http://192.168.224.1:8080/api/symptomes/malade/${idM}`, config);
+    
+    axios.delete(`http://192.168.224.1:8080/api/message/malade/${idM}`, config);
+    console.log(' supprimé avec succès !');
+            
+          
+}
  
          
        },
@@ -134,6 +184,15 @@
       height: 100%;
         min-height: 100vh;
     }
+
+    .infos {
+      display: none; /* Masquer les informations au départ */
+    }
+    
+    .fa-pencil:hover .infos {
+      display: block; /* Afficher les informations lorsque survolé */
+    }
+    
     
  </style>
      

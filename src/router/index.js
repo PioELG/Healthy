@@ -21,6 +21,7 @@ import ModifierPosologie from '../components/ModifierPosologie.vue'
 import rdvMedecinPat from '../components/rdvMedecinPat.vue'
 import VoirPrescription from '../components/VoirPrescription.vue'
 import MessageP from '../components/MessageP.vue'
+import Historique from '../components/Historique.vue'
 const routes = [
   {
     path: '/',
@@ -141,6 +142,12 @@ const routes = [
     name: 'MessageP',
     component:MessageP
   },
+  {
+    path: '/Historique/:id',
+    name: 'Historique',
+    component:Historique
+
+  }
 
   
   

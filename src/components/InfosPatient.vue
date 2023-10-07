@@ -1,4 +1,5 @@
 <template>
+  
     <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
         <!-- Header -->
@@ -16,7 +17,7 @@
         </div>
         <div class="constants">
           <h2>Constantes du Patient</h2>
-<p><strong><i class="fa fa-balance-scale" style="color: rgb(0, 255, 140);"></i> Poids :</strong> {{ constante[0].poids}}  kg</p>
+<p><strong><i class="fa fa-balance-scale" style="color: rgb(0, 0, 0);"></i> Poids :</strong> {{ constante[0].poids}}  kg</p>
 <p><strong><i class="fa fa-stethoscope" style="color: green;"></i> Tension Artérielle :</strong> {{ constante[0].pressionArterielle }} mmHg</p>
 <p><strong><i class="fa fa-heartbeat" style="color: red;"></i> Fréquence Cardiaque :</strong> {{ constante[0].freqCar }} bpm</p>
 <p><strong><i class="fa fa-cloud" style="color: rgb(0, 136, 255) ;"></i>  Fréquence Respiratoire :</strong> {{ constante[0].freqRes}} cycles/min</p>
@@ -35,6 +36,7 @@
         </div>
 
         <div class="prescription">
+          <router-link :to="'/Historique/' +$route.params.id">   <i class="fa fa-history fa-lg" style="color: rgb(0, 128, 85); margin-left:500px;"></i> </router-link>
           <table>
             <tr>
               <td>
@@ -45,6 +47,7 @@
                 <router-link :to="'/AjouterPrescription/' +$route.params.id">
                 <i class="fa fa-plus" style="color: green;"></i> 
               </router-link>
+              
               </td>
               
             </tr>
@@ -61,7 +64,7 @@
                     <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"> 
                       {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
 
-                    <router-link :to="'/ModifierPosologie/' +$route.params.id"> <i class="fa fa-pencil" style="color: blue;" ></i> </router-link> &nbsp;&nbsp;&nbsp;
+                    <router-link :to="'/ModifierPosologie/' +posologie.id"> <i class="fa fa-pencil" style="color: blue;" ></i> </router-link> &nbsp;&nbsp;&nbsp;
                      
                     </p>
                     
@@ -100,6 +103,7 @@
         </div>
       </div>
     </div>
+    
     </div>
     
   </template>
@@ -284,16 +288,21 @@ const config = {
     'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
   }
 };
-    if (confirm("Êtes-vous sûr de vouloir supprimer cette prescription ?")) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer ce médicament de la prescription ?")) {
       try {
-        // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
-         await axios.delete(`http://192.168.224.1:8080/api/medicament/${MedicamentId}`,config);
+        
+        /* await axios.delete(`http://192.168.224.1:8080/api/medicament/${MedicamentId}`,config);
 
-        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
+       
         console.log('prescription supprimée avec succès !');
 
-        // Mettez à jour la liste des conseils en supprimant le conseil supprimé
-        this.medicaments = this.medicaments.filter(m => m.id !== MedicamentId);
+        this.medicaments = this.medicaments.filter(m => m.id !== MedicamentId);*/
+
+        await axios.put(`http://192.168.224.1:8080/api/medicament/statut/${MedicamentId}`,{prescription:"Non"},config);
+        this.fetchMedicaments();
+
+
+
       } catch (error) {
         console.error('Erreur lors de la suppression de la prescription :', error);
         // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
@@ -477,8 +486,7 @@ h1 {
 }
 
 .chat-item {
-  display: flex;
-  align-items: center;
+  
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
@@ -498,6 +506,7 @@ h1 {
 .chat-preview {
   flex-grow: 1;
 }
+
   
     </style>
     

@@ -31,7 +31,7 @@
             
         </div> 
     
-      <!-- End page content -->
+      
  </div>
   
 </template>
@@ -43,10 +43,10 @@
 
   export default {
     
-    name: 'AjouterConstantes', // Remplacez par le nom de votre composant
+    name: 'AjouterConstantes', 
     data() {
       return {
-        // Les données de votre composant vont ici
+      
         poids:'',
         pa:'',
         fr:'',
@@ -56,25 +56,25 @@
     },
     methods: {
         async submitForm() {
-            const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+            const accessToken = keycloak.token; 
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
+
 const config = {
   headers: {
-    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    'Authorization': `Bearer ${accessToken}` 
   }
 };
 
 
-    // Envoie les données à votre API Backend en utilisant Axios
+    
     try {
        await axios.post('http://192.168.224.1:8080/api/constantes', { poids: this.poids,freqCar:this.fc,freqRes:this.fr,pressionArterielle:this.pa, temperature:this.temperature},config);
        await axios.post('http://192.168.224.1:8080/api/notification/patient', { contexte:"ses constantes"},config);
 
 
-      // Gérez la réponse de l'API (par exemple, affichez un message de succès)
+      
       console.log('Constantes ajoutées avec succès !');
-      // Réinitialisez le champ de texte
+     
       this.poids = '';
       this.pa = '';
       this.fr = '';
@@ -84,18 +84,18 @@ const config = {
       window.history.back();
     } catch (error) {
       console.error('Erreur lors de l\'ajout du conseil :', error);
-      // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+     
     }
   }
-      // Les méthodes de votre composant vont ici
+     
       
     },
     mounted(){
-        // Les propriétés calculées de votre composant vont ici
+    
         
       
       },
-    // Autres options de composant (comme "props", "watch", etc.) vont ici
+    
   };
   </script>
   

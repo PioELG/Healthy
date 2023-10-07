@@ -89,7 +89,7 @@
                       <td><i class="fas fa-exclamation-circle" style="font-size:24px; color: rgb(243, 11, 11)"></i></td>
                       <td >
                         <div class="contexte">
-                        Votre rendez-vous avec le médecin est pour est pour demain à <strong>{{ rdv.heure }}</strong>
+                        Votre rendez-vous avec le médecin  est pour demain à <strong>{{ rdv.heure }}</strong>
 
                         </div>
                        

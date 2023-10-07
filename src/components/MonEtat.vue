@@ -18,7 +18,7 @@
       <p><strong><i class="fa fa-thermometer" style="color: rgb(236, 141, 6);"></i> Température :</strong>{{ constantes.temperature }}°C</p>
       
                 
-                  <!-- Ajoutez d'autres constantes ici -->
+                  
               </div>
               <div class="symptoms">
                   <table>
@@ -36,7 +36,7 @@
           
           </div>
           
-        <!-- End page content -->
+
       </div>
   
 </template>
@@ -46,28 +46,28 @@
   import axios from 'axios';
 
   export default {
-    name: 'MonEtat', // Remplacez par le nom de votre composant
+    name: 'MonEtat', 
     data() {
       return {
-        // Les données de votre composant vont ici
+        
         constantes:[],
         symptomes:[],
         
       };
     },
     methods: {
-      // Les méthodes de votre composant vont ici
+      
       fetchConstantes() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
 
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
 
-  axios.get('http://192.168.224.1:8080/api/constantes', config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get('http://192.168.224.1:8080/api/constantes', config) 
     .then(response => {
       this.constantes = response.data;
       console.log(response.data);
@@ -77,16 +77,16 @@
     });
 },
 fetchSymptomes() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token;
 
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+ 
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
 
-  axios.get('http://192.168.224.1:8080/api/symptomes', config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get('http://192.168.224.1:8080/api/symptomes', config) 
     .then(response => {
       this.symptomes = response.data;
       console.log(response.data);
@@ -96,40 +96,40 @@ fetchSymptomes() {
     });
 },
 async supprimerSymptome(symptomeId) {
-    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+    const accessToken = keycloak.token; 
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
+
 const config = {
   headers: {
-    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    'Authorization': `Bearer ${accessToken}` 
   }
 };
     if (confirm("Votre symptôme a t'il disparu ?")) {
       try {
-        // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
+        
          await axios.delete(`http://192.168.224.1:8080/api/symptomes/${symptomeId}`,config);
 
-        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
+        
         console.log('Symptôme supprimé avec succès !');
 
-        // Mettez à jour la liste des conseils en supprimant le conseil supprimé
+        
         this.symptomes = this.symptomes.filter(s=> s.id !== symptomeId);
       } catch (error) {
         console.error('Erreur lors de la suppression du symptome :', error);
-        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+       
       }
     }
   }
       
     },
     mounted(){
-        // Les propriétés calculées de votre composant vont ici
+        
         this.fetchConstantes();
         this.fetchSymptomes();
         
       
       },
-    // Autres options de composant (comme "props", "watch", etc.) vont ici
+   
   };
   </script>
   
@@ -202,28 +202,28 @@ const config = {
  
  
  .prescription {
-     position: relative; /* Permet de positionner le texte de l'état du traitement */
+     position: relative; 
  }
  
- /* Style pour le texte avec fond vert */
+
  .etat-traitement {
-     background-color: #047408; /* Vert */
-     color: #fff; /* Texte blanc */
+     background-color: #047408; 
+     color: #fff;
      padding: 10px;
      border-radius: 5px;
-     transition: background-color 0.3s, color 0.3s; /* Transition fluide */
+     transition: background-color 0.3s, color 0.3s;
  }
  
- /* Style pour le texte avec fond rouge */
+
  
  
- /* Style pour la liste des symptômes */
+ 
  .symptoms ul {
      list-style: disc;
      padding-left: 20px;
  }
  
- /* Style pour les éléments de la liste des symptômes */
+ 
  .symptoms ul li {
      margin-bottom: 5px;
  }
@@ -237,17 +237,17 @@ const config = {
      display: flex;
  }
  
- /* Animation au survol */
+
  .medicament:hover {
      background-color: #04AA6D;
      color: white;
  }
  .content {
-     flex-grow: 1; /* Permet au contenu de s'étendre pour occuper l'espace disponible */
+     flex-grow: 1;
  }
  
  .icones {
-     margin-left: auto; /* Pousse les icônes vers la droite (fin) */
+     margin-left: auto; 
  }
   </style>
   

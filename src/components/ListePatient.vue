@@ -131,14 +131,13 @@ const config = {
     axios
       .put(`http://192.168.224.1:8080/api/malade/${this.maladeEnCoursDeMiseAJour.id}`, newData,config)
       .then(response => {
-        // Gérez la réponse du serveur ici (par exemple, mettez à jour votre liste de patients avec la réponse)
+        
         console.log('Réponse du serveur :', response.data);
 
-        // Réinitialisez le formulaire et l'état de mise à jour
-        
+       
       })
       .catch(error => {
-        console.error('Erreur lors de la requête POST :', error);
+        console.error('Erreur lors de la requête PUT :', error);
         // Gérez les erreurs ici
       });
 

@@ -1,7 +1,7 @@
 <template>
   <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
-      <!-- Header -->
+    
      
       <h1>Ajouter une Prescription</h1>
       <div class="container">
@@ -49,7 +49,7 @@
       
      
     
-      <!-- End page content -->
+      
     </div>
     
 </template>
@@ -58,10 +58,10 @@
 import keycloak from '@/main';
 import axios from 'axios';
 export default {
-  name: 'AjoutRdv', // Remplacez par le nom de votre composant
+  name: 'AjoutRdv', 
   data() {
     return {
-      // Les données de votre composant vont ici
+      
      prescription:[],
      medicament:[],
      posologie:[],
@@ -84,12 +84,12 @@ export default {
 
     },
       async submitMedicament() {
-          const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+          const accessToken = keycloak.token; 
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
+
 const config = {
 headers: {
-  'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+  'Authorization': `Bearer ${accessToken}` 
 }
 };
 const id = this.$route.params.id;
@@ -100,35 +100,35 @@ this.forMPoso();
 
 
 
-  // Envoie les données à votre API Backend en utilisant Axios
+
   try {
       
      const response=await axios.post('http://192.168.224.1:8080/api/medicament', {nom:this.nom,patient_id:id},config);
 
-    // Gérez la réponse de l'API (par exemple, affichez un message de succès)
+    
     console.log('medicament ajoutée avec succès !');
     this.medicamentId = response.data.id
     
-    // Réinitialisez le champ de texte
+  
     console.log("salut");
     console.log(this.medicamentId);
    
     
   } catch (error) {
     console.error('Erreur lors de l\'ajout de la presc:', error);
-    // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+   
   };
 
 
  
 },
 async submitPoso() {
-          const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+          const accessToken = keycloak.token; 
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
+
 const config = {
 headers: {
-  'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+  'Authorization': `Bearer ${accessToken}` 
 }
 };
 const id = this.$route.params.id;
@@ -140,16 +140,16 @@ try {
 
       await axios.post('http://192.168.224.1:8080/api/notification/doc', { contexte:"une prescription",cible:id},config);
 
-     // Gérez la réponse de l'API (par exemple, affichez un message de succès)
+     
      console.log('posologie ajouté avec succès !');
-     // Réinitialisez le champ de texte
+     
      this.quantite = '';
      this.unite = '';
      this.heurePrise='';
      
    } catch (error) {
      console.error('Erreur lors de l\'ajout de la posologie:', error);
-     // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+     
    };
 
   
@@ -166,7 +166,7 @@ try {
    console.log(this.$route.params.id);
    this.showPosologie=false;
   },
-  // Autres options de composant (comme "props", "watch", etc.) vont ici
+ 
 };
 </script>
 
@@ -213,18 +213,18 @@ h1 {
 
         .posologie {
     display: flex;
-    justify-content: space-between; /* Alignement horizontal avec espaces entre les éléments */
+    justify-content: space-between; 
     align-items: center;
-    margin-top: 10px; /* Espace supplémentaire au-dessus de la div posologie */
+    margin-top: 10px; 
 }
 
 .posologie label {
-    width: 100%; /* Largeur du label réduite pour laisser plus d'espace au sélecteur */
+    width: 100%; 
     margin-right: 10px;
 }
 
 .posologie select {
-    width: 100%; /* Largeur du sélecteur ajustée */
+    width: 100%; 
 }
 
 .btn {
@@ -233,7 +233,7 @@ h1 {
     background-color: #007BFF;
     color: #fff;
     border: none;
-    border-radius: 10px; /* Augmentation du rayon pour un aspect plus arrondi */
+    border-radius: 10px; 
     cursor: pointer;
 }
 
@@ -242,8 +242,8 @@ h1 {
 }
 
 #ajouterPrescription {
-    margin-top: 20px; /* Espacement entre les boutons */
-    background-color: #009900; /* Couleur pour le bouton "Ajouter Prescription" */
+    margin-top: 20px; 
+    background-color: #009900;
 }
 
 
