@@ -11,6 +11,8 @@ public interface ConstantesService {
     Constante Modifier (Constante constantes,Long id);
     String Supprimer(Long id);
 
+    void SupprimerMalade(String malade_id);
+
   List<Constante> LireP(String user_id);
 
 //    Constantes Accepter (Long id);

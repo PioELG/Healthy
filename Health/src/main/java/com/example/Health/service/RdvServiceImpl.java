@@ -44,9 +44,17 @@ public class RdvServiceImpl implements RdvService {
         }).orElseThrow(()-> new RuntimeException("RendezVous non trouvé"));
     }
 
+
+
     @Override
     public String Supprimer(Long id) {
         rdvRepository.deleteById(id);
         return "Rdv bien supprimé";
+    }
+
+    @Override
+    public void SupprimerMalade(String malade_id) {
+        rdvRepository.deleteByMalade_id(malade_id);
+
     }
 }

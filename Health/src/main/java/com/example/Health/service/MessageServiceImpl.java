@@ -34,10 +34,8 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-
-    public void Cron() {
-
-        System.out.println("bonjour");
+    public void SupprimerMalade(String malade_id) {
+        messageRepository.deleteByMalade_id(malade_id);
     }
 
 

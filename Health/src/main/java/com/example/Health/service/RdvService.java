@@ -12,6 +12,10 @@ public interface RdvService {
     List<Rdv> LireM(String medecin_id);
 
     Rdv Modifier(Rdv rdv, Long id);
+
+
     String Supprimer(Long id);
+
+    void SupprimerMalade(String malade_id);
 
 }

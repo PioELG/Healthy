@@ -28,4 +28,7 @@ public class Medicament {
     @Column
     private  String medecin_id;
 
+    @Column
+    private String Prescription;
+
 }

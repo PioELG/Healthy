@@ -96,6 +96,10 @@ public class MessageController {
         return messageService.Supprimer(id);
     }
 
+    @DeleteMapping("malade/{idM}")
+    public void deleteMalade ( @PathVariable String idM){
+        messageService.SupprimerMalade(idM);
 
+    }
 
 }

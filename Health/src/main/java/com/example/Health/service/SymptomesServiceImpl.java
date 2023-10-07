@@ -42,4 +42,9 @@ public class SymptomesServiceImpl implements SymptomesService{
     public List<Symptomes> LireParPatient(String patient_id) {
         return symptomesRepository.findByPatient_id(patient_id);
     }
+
+    @Override
+    public void SupprimerMalade(String malade_id) {
+        symptomesRepository.deleteByMalade_id(malade_id);
+    }
 }

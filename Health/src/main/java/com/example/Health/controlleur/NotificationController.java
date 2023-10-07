@@ -77,5 +77,10 @@ public class NotificationController {
         return notificationService.Supprimer(id);
 
     }
+    @DeleteMapping("malade/{idM}")
+    public void deleteMalade ( @PathVariable String idM){
+        notificationService.SupprimerMalade(idM);
+
+    }
 
 }

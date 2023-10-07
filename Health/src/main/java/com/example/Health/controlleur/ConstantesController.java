@@ -116,4 +116,9 @@ public class ConstantesController {
         return constantesService.Supprimer(id);
 
     }
+    @DeleteMapping("malade/{idM}")
+    public void deleteMalade ( @PathVariable String idM){
+        constantesService.SupprimerMalade(idM);
+
+    }
 }

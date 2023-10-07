@@ -14,4 +14,5 @@ public interface NotificationService {
     Notification Modifier(Notification notification, Long id);
 
     String Supprimer(Long  id);
+    void SupprimerMalade(String malade_id);
 }

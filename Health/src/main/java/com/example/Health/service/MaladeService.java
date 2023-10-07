@@ -11,6 +11,8 @@ public interface MaladeService {
     List<Malade> Lire();
     Malade Modifier(Malade malade, String id);
 
+    Malade ModifierFT(Malade malade, String id);
+
     String Supprimer(String  id);
     List<Malade> LireNT();
     List<Malade> LireST(String doc);

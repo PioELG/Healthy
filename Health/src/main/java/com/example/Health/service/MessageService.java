@@ -11,8 +11,9 @@ public interface MessageService {
     Message Modifier(Message message, Long id);
 
     String Supprimer(Long  id);
+     void SupprimerMalade(String malade_id);
 
-    void Cron();
+
 
     List<Message> LireParPat(String patient_id);
 

@@ -50,6 +50,11 @@ public class MaladeController {
     {
         return maladeService.Modifier(malade,id);
     }
+    @PutMapping("Ft/{id}")
+    public Malade updateFT(@RequestBody Malade malade, @PathVariable String  id )
+    {
+        return maladeService.ModifierFT(malade,id);
+    }
     @DeleteMapping("/{id}")
     public String delete ( @PathVariable String id){
         return maladeService.Supprimer(id);

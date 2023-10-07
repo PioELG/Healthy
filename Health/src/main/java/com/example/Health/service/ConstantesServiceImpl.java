@@ -43,6 +43,10 @@ public class ConstantesServiceImpl implements ConstantesService{
     }
 
     @Override
+    public void SupprimerMalade(String malade_id) {
+        constantesRepository.deleteByMalade_id(malade_id);    }
+
+    @Override
     public List<Constante> LireP(String user_id) {
         return constantesRepository.findByPatient_id(user_id);
     }

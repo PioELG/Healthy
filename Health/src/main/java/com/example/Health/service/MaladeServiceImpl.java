@@ -36,6 +36,18 @@ public class MaladeServiceImpl implements MaladeService{
     }
 
     @Override
+    public Malade ModifierFT(Malade malade, String id) {
+        return maladeRepository.findById(id).map(m->{
+
+            m.setStatut(malade.getStatut());
+
+
+            return maladeRepository.save(m);
+
+        }).orElseThrow(()-> new RuntimeException("malade non trouvé"));
+    }
+
+    @Override
     public String Supprimer(String id) {
          maladeRepository.deleteById(id);
          return "malade bien supprimé";

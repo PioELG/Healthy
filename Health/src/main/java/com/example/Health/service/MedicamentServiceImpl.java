@@ -23,14 +23,19 @@ public class MedicamentServiceImpl implements MedicamentService{
     }
 
     @Override
-    public List<Medicament> LireParPat(String patient_id) {
-        return medicamentRepository.findByPatient(patient_id);
+    public List<Medicament> LireParPat(String patient_id, String statut) {
+        return medicamentRepository.findByPatient(patient_id,statut);
     }
 
     @Override
-    public List<Medicament> LireParMed(String medecin_id,String patient_id) {
+    public List<Medicament> LireParMed(String medecin_id,String patient_id,String statut) {
 
-        return medicamentRepository.findByMedecin(medecin_id,patient_id);
+        return medicamentRepository.findByMedecin(medecin_id,patient_id,statut);
+    }
+
+    @Override
+    public List<Medicament> LirePat(String patient_id) {
+        return medicamentRepository.findByPatientId(patient_id);
     }
 
 
@@ -38,6 +43,16 @@ public class MedicamentServiceImpl implements MedicamentService{
     public Medicament Modifier(Medicament medicament, Long id) {
         return medicamentRepository.findById(id).map(m->{
             m.setNom(medicament.getNom());
+
+            return medicamentRepository.save(m);
+
+        }).orElseThrow(()-> new RuntimeException("medicament non trouvé"));
+    }
+
+    @Override
+    public Medicament ModifierStatut(Medicament medicament, Long id) {
+        return medicamentRepository.findById(id).map(m->{
+            m.setPrescription(medicament.getPrescription());
 
             return medicamentRepository.save(m);
 

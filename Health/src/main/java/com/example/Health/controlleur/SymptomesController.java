@@ -29,17 +29,6 @@ public class SymptomesController {
     @Autowired
     private  final SymptomesService symptomesService;
 
-    @Autowired
-    private final EmailService emailService;
-
-    @Autowired
-    private final MaladeRepository maladeRepository;
-
-    @Autowired
-    private  final PosologieRepository posologieRepository;
-
-    @Autowired
-    private PosologieService posologieService;
 
     @Autowired
     private  final MedicamentRepository medicamentRepository;
@@ -81,23 +70,12 @@ public class SymptomesController {
         return symptomesService.Supprimer(id);
 
     }
-
-    @Scheduled(cron="0 */10 * * * *")
-    public void CronTest()  throws jakarta.mail.MessagingException
-    {
-        int i;
-
-        for(i=0; i<maladeRepository.SousTMail("Sous traitement").size();i++)
-        {
-
-
-            Malade malade= new Malade();
-            malade =maladeRepository.SousTMail("Sous traitement").get(i);
-
-            medicamentRepository.findByPatient(malade.getId());
-            emailService.sendEmail(malade.getNom(),malade.getPrenom(),malade.getEmail(),medicamentRepository.findByPatient(malade.getId()),  posologieService.Lire());
-
-        }
+    @DeleteMapping("malade/{idM}")
+    public void deleteMalade ( @PathVariable String idM){
+         symptomesService.SupprimerMalade(idM);
 
     }
+
+
+
 }

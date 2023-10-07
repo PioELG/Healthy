@@ -43,4 +43,9 @@ public class NotificationServiceImpl implements NotificationService{
         notificationRepository.deleteById(id);
         return "Bien supprimé";
     }
+
+    @Override
+    public void SupprimerMalade(String malade_id) {
+        notificationRepository.deleteByMalade_id(malade_id);
+    }
 }
