@@ -1,6 +1,6 @@
 <template>
-    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
+    <div class="w3-main" style="margin-left:300px;margin-top:20px;">
+        <br>
         <div class="container">
       
               <div class="constants">
@@ -249,5 +249,11 @@ const config = {
  .icones {
      margin-left: auto; 
  }
+ .w3-main
+  {
+    height: 100%;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
+  
   </style>
   

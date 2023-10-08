@@ -1,10 +1,11 @@
 <template>
-    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+    <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
         <!-- Header -->
        
       
         <main>
+            <br>
             <div class="chat" v-for="message in messages" :key="message.id" v-bind:class="{'patient':(message.sender==='Patient'), 'doctor':(message.sender === 'Medecin')}">
               
                 
@@ -191,6 +192,12 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+.w3-main
+  {
+    height: 100%;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
+  
    
      </style>
      

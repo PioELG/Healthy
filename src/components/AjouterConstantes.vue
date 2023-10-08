@@ -1,6 +1,8 @@
 <template>
-    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+    <div class="w3-main" style="margin-left:300px;margin-top:20px;">
+      <br>
     <div class="container">
+      
         <h2>Mettez à jour vos constantes</h2>
         <form @submit.prevent="submitForm">
             <div class="form-group">

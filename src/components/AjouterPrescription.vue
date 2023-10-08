@@ -1,10 +1,10 @@
 <template>
-  <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+  <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
     
-     
-      <h1>Ajouter une Prescription</h1>
-      <div class="container">
+     <br>
+      <h3 style="margin-left:350px" >Ajouter un nouveau médicament</h3>
+      <div class="container" style="margin:50px;">
           <div class="form-group" v-if="!showPosologie">
               <label for="medicament">Médicament :</label>
               <input type="text" id="medicament" name="medicament"  v-model="nom"  pattern=".*\S+.*" title="Ce champ ne peut pas être vide.">
@@ -40,7 +40,7 @@
 
               
           </div>
-          <button v-if="showPosologie" type="button" id="ajouterPrescription" class="btn"  @click="goback">Ajouter Prescription</button>
+          <button v-if="showPosologie" type="button" id="ajouterPrescription" class="btn"  @click="goback" style="margin-left:50px;">Valider</button>
           
           
       </div>
@@ -140,6 +140,8 @@ try {
 
       await axios.post('http://192.168.224.1:8080/api/notification/doc', { contexte:"une prescription",cible:id},config);
 
+      
+
      
      console.log('posologie ajouté avec succès !');
      
@@ -179,7 +181,7 @@ h1 {
         }
 
         .container {
-            max-width: 800px;
+            min-width: 500px;
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
@@ -264,5 +266,10 @@ h1 {
                 width: 45%;
             }
         }
+        .w3-main
+  {
+    height: 100%;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
 
 </style>

@@ -1,9 +1,9 @@
 <template>
   
-    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+    <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
         <!-- Header -->
-      
+      <br> <br>
       
       <div class="container" v-if="patient.length !== 0 && constante.length !== 0 ">
         <div class="patient-info">
@@ -64,6 +64,11 @@
                     <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"> 
                       {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
 
+                      
+                      
+                   
+                   
+                   
                     <router-link :to="'/ModifierPosologie/' +posologie.id"> <i class="fa fa-pencil" style="color: blue;" ></i> </router-link> &nbsp;&nbsp;&nbsp;
                      
                     </p>
@@ -72,13 +77,9 @@
             </li>
             
     
-            <!-- Ajoutez d'autres chats ici -->
         </ul>
         
-            <br>
-            <p ><!-- Ajoutez la classe 'vert' ou 'rouge' en fonction de l'état -->
-                Le patient est <strong class="etat-traitement">à jour</strong> dans son traitement.
-            </p>
+            
         </div>
         <div class="rdv">
           <table>
@@ -261,7 +262,7 @@ fetchPosologie() {
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/posologie`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get(`http://192.168.224.1:8080/api/posologie`, config) 
     .then(response => {
       
        
@@ -498,7 +499,7 @@ h1 {
 .chat-item:hover {
   transform: scale(1.02);
   cursor: pointer;
-  background-color: rgb(88, 103, 97);
+  background-color: rgb(38, 212, 143);
   color: rgb(0, 0, 0);
 }
 
@@ -506,6 +507,12 @@ h1 {
 .chat-preview {
   flex-grow: 1;
 }
+.w3-main
+  {
+    height: 100%;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
+  
 
   
     </style>

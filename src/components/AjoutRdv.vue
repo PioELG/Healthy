@@ -10,13 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    
     </head>
-    <body class="w3-light-grey">
+    <body >
     
-        <header class="w3-container" style="padding-top:22px">
-            <h5><b><i class="fa fa-address-book fa-fw "></i> Mes Rendez-vous</b></h5>
-          </header>
+      
     
-      <div class="w3-row-padding w3-margin-bottom">
+      <div class="w3-main" style="margin-left:300px;margin-top:20px;margin-right:50px;">
+        <br>
         
         <div class="container">
         <h2>Ajouter Rendez-vous</h2>
@@ -170,6 +169,12 @@ input[type="time"] {
     border-radius: 5px;
     background-color: #f4f4f4;
 }
+.w3-main
+  {
+    height: 100%;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
+  
 
 
 

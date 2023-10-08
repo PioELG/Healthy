@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     </head>
     <body>
-        <div class="w3-main" style="margin-left:300px;margin-top:0px;">
+        <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
             <!-- Header -->
             <header class="w3-container" style="padding-top:27px">
@@ -210,65 +210,66 @@ const config = {
   
   <style scoped>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-.w3-container-rounded {
-  border-radius: 10px; /* Vous pouvez ajuster le rayon selon vos préférences */
-}
-.w3-container-rounded:hover {
-  transform: translate(5px, -5px); /* Déplacez la div vers le bas et vers la droite */
-  transition: transform 0.2s ease; /* Ajoutez une transition fluide */
-}
-.w3-container
-{
-    padding-top:22px
-}
-.w3-main
-{
-  height: 100%;
-  min-height: 100vh;
-}
-.w3-row-padding
-{
-    margin:0 -16px;
-
-}
-.w3-container
-{
-    padding: 16 px;
-}
-.link
-    {
-        text-decoration: none;
-    }
-
-    .w3-table td i {
-       /* Couleur de l'icône */
-      margin-right: 10px; /* Marge à droite de l'icône */
-    }
+  .w3-container-rounded {
+    border-radius: 10px; 
+  }
+  .w3-container-rounded:hover {
+    transform: translate(5px, -5px); 
+    transition: transform 0.2s ease; 
+  }
+  .w3-container
+  {
+      padding-top:22px
+  }
+  .w3-main
+  {
+    height: 100%;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
+  .w3-row-padding
+  {
+      margin-left:20px;
   
-    /* Ajoutez une animation de transition pour les notifications */
-    .w3-table td {
-      transition: transform 0.2s ease;
-    }
-  
-    /* Lorsque vous survolez une ligne de notification, appliquez une transformation */
-    .w3-table tr:hover td {
-      transform: translateX(10px); /* Déplacez la ligne vers la droite au survol */
-    }
-    .w3-table
-    {
-      border-radius: 10px;
+  }
+
+  .w3-container
+  {
+      padding: 16 px;
+  }
+  .link
+      {
+          text-decoration: none;
+      }
+  .w3-table{
+    border-radius: 10px;
     width: 100%;
     min-width: 100vh;
-    }
-  
-    /* Style pour le titre "Notifications" */
-    h5 {
-      font-size: 18px; /* Taille de police */
-      margin-bottom: 10px; /* Marge en bas du titre */
-    }
-    .contexte {
-      border-radius: 10px;
-      padding: 10px; /* Ajoutez un peu d'espace intérieur pour le contenu */
-    }
+    
+
+  }
+      .w3-table td i {
+        
+        margin-right: 10px; 
+      }
+    
+     
+      .w3-table td {
+        transition: transform 0.2s ease;
+      }
+    
+      
+      .w3-table tr:hover td {
+        transform: translateX(10px); 
+      }
+    
+     
+      h5 {
+        font-size: 18px; 
+        margin-bottom: 10px; 
+      }
+      .contexte {
+        border-radius: 10px;
+        padding: 10px; 
+      }
   </style>
   

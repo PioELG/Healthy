@@ -1,5 +1,7 @@
 <template>
-    <div class="posologie" >
+<div class="w3-main" style="margin-left:300px;margin-top:20px;">
+    <br> <br>
+    <div class="posologie" style="margin-left:50px;margin-right:50px;padding:70px;">
         
       
     <div class="form-group">
@@ -29,6 +31,7 @@
 
         
     </div>
+</div>
 </template>
   
   <script>
@@ -133,9 +136,11 @@ h1 {
 
         .posologie {
     display: flex;
-    justify-content: space-between; /* Alignement horizontal avec espaces entre les éléments */
+    justify-content: space-between; 
     align-items: center;
-    margin-bottom:  px; /* Espace supplémentaire au-dessus de la div posologie */
+    background-color:white;
+    border-radius:5px;
+    
 }
 
 .posologie label {
@@ -181,7 +186,12 @@ h1 {
         }
 
 
-
+        .w3-main
+        {
+          height: 100%;
+          min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+        }
+        
 
   </style>
   

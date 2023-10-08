@@ -1,30 +1,29 @@
 <template>
-    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
+<div class="w3-main" style="margin-left:300px;margin-top:20px;">
+        <br><br>
+    <div class="historique">
         
-      <h2>Voici l'historique de tous les médicaments déja prescrits au patient</h2>
+      <h4>Voici l'historique de tous les médicaments déja prescrits au patient</h4>
 
 
-      <ul class="chat-list" >
-        <li class="chat-item" v-for="medicament in medicaments" :key="medicament.id">
-            <div class="chat-preview" >
-              <p>
-                <h2>{{ medicament.nom }}</h2>
+        <ul class="chat-list" >
+             <li class="chat-item" v-for="medicament in medicaments" :key="medicament.id">
+                    <div class="chat-preview" >
+                        <p>
+                            <h2>{{ medicament.nom }}</h2>
                 
 
-                <i class="fa fa-plus" style="color: green;" v-if="medicament.prescription!=='Oui'"></i> 
+                            <i class="fa fa-plus" style="color: green;" v-if="medicament.prescription!=='Oui'" @click="AjouterMedicament(medicament.id)"></i> 
 
-              </p>
+                        </p>
                
-            </div>
-        </li>
+                     </div>
+             </li>
         
-
-        <!-- Ajoutez d'autres chats ici -->
-    </ul>
-      
+         </ul>
+    </div>
        
-      </div>
+</div>
    </template>
      
      <script>
@@ -75,6 +74,36 @@
     
    
 },
+async AjouterMedicament(MedicamentId) {
+    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+// Définissez l'en-tête d'autorisation avec le jeton d'accès
+const config = {
+  headers: {
+    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+  }
+};
+    if (confirm("Êtes-vous sûr de vouloir ajouter ce médicament à la prescription ?")) {
+      try {
+        
+        /* await axios.delete(`http://192.168.224.1:8080/api/medicament/${MedicamentId}`,config);
+
+       
+        console.log('prescription supprimée avec succès !');
+
+        this.medicaments = this.medicaments.filter(m => m.id !== MedicamentId);*/
+
+        await axios.put(`http://192.168.224.1:8080/api/medicament/statut/${MedicamentId}`,{prescription:"Oui"},config);
+        this.fetchMedicaments();
+
+
+
+      } catch (error) {
+        console.error('Erreur lors de la suppression de la prescription :', error);
+        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+      }
+    }
+  },
 
        
  
@@ -121,6 +150,15 @@
       .chat-preview {
         flex-grow: 1;
       }
+      .w3-main
+  {
+    height: 100%;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
+  .historique
+  {
+    margin:20px;
+  }
       
 
 

@@ -1,12 +1,12 @@
 <template>
-    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+    <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
         
         <header class="w3-container" style="padding-top:22px">
           <h5><b><i class="fa fa-stethoscope"></i> Mes Prescriptions</b></h5>
         </header>
        
-        <main>
+        <main style="margin-left:30px;margin-right:30px;" >
           <ul class="chat-list" v-for="medicament in medicaments" :key="medicament.id">
               <li class="chat-item">
                   <div class="chat-preview" >
@@ -14,7 +14,7 @@
                       <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"> 
                         {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
 
-                          <button @click="setStatut(posologie.id)">Check</button>
+                          
                       </p>
                       
                   </div>
@@ -111,34 +111,7 @@ getPosologies(medId) {
   },
 
   
-  setStatut(posologie) {
-  const accessToken = keycloak.token; 
-        
   
-  const config = {
-    headers: {
-      'Authorization': `Bearer ${accessToken}` 
-    }
-  };
-  const id = this.$route.params.id;
-  
- 
- 
-
-  axios.put(`http://192.168.224.1:8080/api/posologie/${posologie.id}`, config , {statut:"on"}) 
-    .then(response => {
-      
-       
-        console.log("bien modifié");
-      
-      
-    })
-    .catch(error => {
-      console.error('Erreur lors de la récupération des posologies:', error);
-    }).finally(()=> this.loading = false);
-    
-    
-},
        
  
          
@@ -174,16 +147,17 @@ getPosologies(medId) {
     background-color: white; 
 }
 
-.chat-item:hover {
-    transform: scale(1.02);
-    cursor: pointer;
-    background-color: rgb(88, 103, 97);
-    color: rgb(0, 0, 0);
-}
+
 
 
 .chat-preview {
     flex-grow: 1;
 }
+.w3-main
+  {
+    height: 100%;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
+  
      </style>
      

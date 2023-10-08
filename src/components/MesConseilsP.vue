@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    
     </head>
-    <body class="w3-light-grey">
-    <div lass="container" style="margin-left:300px;margin-top:43px;">
-    <header class="w3-container" style="padding-top:22px">
+    <body>
+    <div class="container" style="margin-left:300px;margin-top:60px;margin-bottom:150px;">
+    <header style="margin-left:20px">
         <h5><b><i class="fa fa-heart fa-fw"></i> Mes Conseils</b></h5>
     </header>
     
-      <div class="w3-row-padding w3-margin-bottom">
+      <div >
         
         <main>
             <section class="conseils">
@@ -84,68 +84,73 @@
   
   <style scoped>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
- #customers {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-      
-      }
-      
-      #customers td, #customers th {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
-      
-      #customers tr:nth-child(even){background-color: #f2f2f2;}
-      
-      #customers tr:hover {background-color: #ddd;}
-      
-      #customers th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #04AA6D;
-        color: white;
-      }
-      .table
-      {
-        margin-bottom: 80px;
-      }
-      main {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  #customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  
+  }
+  
+  #customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #customers tr:hover {background-color: #ddd;}
+  
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+  .table
+  {
+    margin-bottom: 80px;
+  }
+  main {
+max-width: 800px;
+margin: 2rem auto;
+padding: 2rem;
+background-color: #fff;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .conseils {
-    display: flex;
-    flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 
 .conseil {
-    border: none;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background-color: #f5f5f5e2;
+border: none;
+padding: 1rem;
+margin-bottom: 1rem;
+background-color: #f5f5f5e2;
 }
 
 .conseil h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+font-size: 1.5rem;
+margin-bottom: 0.5rem;
 }
 button {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    
+background-color: #007BFF;
+color: #fff;
+padding: 0.5rem 1rem;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+
 
 }
+.modif
+{
+display: flex;
+}
+
 
 
 

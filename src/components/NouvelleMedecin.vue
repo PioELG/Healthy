@@ -78,7 +78,7 @@
                       <td><i class="fas fa-exclamation-circle" style="font-size:24px; color: rgb(243, 11, 11)"></i></td>
                       <td >
                         <div class="contexte">
-                        Le patient {{ getNomPrenom(notif.initiateur).nom }} {{ getNomPrenom(notif.initiateur).prenom }} vient de mettre à jour {{notif.contexte}}
+                        Le patient <strong>{{ getNomPrenom(notif.initiateur).nom }} {{ getNomPrenom(notif.initiateur).prenom }}</strong>  vient d'envoyer {{notif.contexte}}
 
                         </div>
                        

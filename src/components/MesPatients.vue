@@ -1,5 +1,5 @@
 <template>
-    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+    <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
         <!-- Header -->
        
@@ -153,7 +153,7 @@ FinTraitement(idM)
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-  
+    margin-top:50px
   }
   
   #customers td, #customers th {
@@ -192,7 +192,12 @@ FinTraitement(idM)
     .fa-pencil:hover .infos {
       display: block; /* Afficher les informations lorsque survolé */
     }
-    
+    .w3-main
+  {
+    height: 100%;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
+ 
     
  </style>
      
