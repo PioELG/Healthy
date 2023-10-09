@@ -16,24 +16,38 @@
     <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
       
       <span class="w3-bar-item w3-right" style="font-family: 'Pacifico', cursive;">Healthy</span>
-    
+      <a href="#" class=" w3-hide-large w3-large" >
+        <i class="fa fa-bars" style="margin:10px" @click="toggleSidebar"></i>
+      </a>
+      <SidebarMedecin v-if="isSidebarOpen" />
     </div>
     </body>
     </html>
 </template>
   
   <script>
+  import SideBarMedecin from './SideBarMedecin.vue';
+   import SideBarPatient from './SideBarPatient.vue';
   export default {
-    name: 'Header', // Remplacez par le nom de votre composant
+    name: 'Header',
+    components:
+      {
+        SideBarMedecin,
+        SideBarPatient
+      }, 
     data() {
       return {
-        // Les données de votre composant vont ici
+        
         mySidebar: null,
       overlayBg: null,
+      isSidebarOpen: false,
       };
     },
     methods: {
       // Les méthodes de votre composant vont ici
+      toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  },
       
     },
     computed: {

@@ -59,15 +59,11 @@
                 <div class="chat-preview" >
                   <p>
                     <h2>{{ medicament.nom }}</h2>
-                    <i class="fa fa-trash" style="color: red;" @click="supprimerMedicament(medicament.id)"></i> &nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-trash" style="color: red; " @click="supprimerMedicament(medicament.id)"  ></i> &nbsp;&nbsp;&nbsp;
                   </p>
                     <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"> 
                       {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
 
-                      
-                      
-                   
-                   
                    
                     <router-link :to="'/ModifierPosologie/' +posologie.id"> <i class="fa fa-pencil" style="color: blue;" ></i> </router-link> &nbsp;&nbsp;&nbsp;
                      
@@ -513,7 +509,7 @@ h1 {
     min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
   }
   
-
+  
   
     </style>
     

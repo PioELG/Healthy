@@ -99,7 +99,7 @@ FinTraitement(idM)
   };
 
   axios
-      .put(`http://192.168.224.1:8080/api/malade/Ft/${idM}`, {statut:"Fin traitement"},config)
+      .put(`http://192.168.224.1:8080/api/malade/Ft/${idM}`, {statut:"FinTraitement"},config)
       .then(response => {
         
         console.log('Réponse du serveur :', response.data);

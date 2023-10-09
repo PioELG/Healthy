@@ -214,7 +214,11 @@ button {
 {
     display: flex;
 }
-
+.w3-main
+  {
+    height: 100%;
+    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  }
 
 
   </style>

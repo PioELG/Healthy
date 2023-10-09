@@ -29,11 +29,10 @@
               </div>
               <hr>
               <div class="w3-container">
-                <h5>Dashboard</h5>
+                <h5 style="margin-left:7px;"><strong>Dashboard</strong></h5>
               </div>
               <div class="w3-bar-block">
                 
-                <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
                 <router-link to="/" class="link"> <a href="#"  class="w3-bar-item w3-button w3-padding "><i class="fa fa-bell fa-fw"></i> Notifications</a></router-link> 
                 <router-link class="link" to="/ListePatient"><a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Patients</a></router-link>
             <router-link class="link" to="/rdvMedecin"><a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Rendez-vous</a></router-link>

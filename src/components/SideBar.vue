@@ -11,7 +11,7 @@
   import jwtDecode from 'jwt-decode';
   
     export default {
-      name: 'SideBar', // Remplacez par le nom de votre composant
+      name: 'SideBar', 
       components:
       {
         SideBarMedecin,
@@ -19,7 +19,7 @@
       },
       data() {
         return {
-          // Les données de votre composant vont ici
+         
           doc:'',
           decodedToken:{},
           roles:{}
@@ -27,12 +27,12 @@
         };
       },
       methods: {
-        // Les méthodes de votre composant vont ici
+        
 
         
       },
       mounted(){
-        // Les propriétés calculées de votre composant vont ici
+        
         
         if (keycloak.token) {
      this.decodedToken = jwtDecode(keycloak.token);
@@ -53,7 +53,7 @@
        
    }
       },
-      // Autres options de composant (comme "props", "watch", etc.) vont ici
+      
     };
     </script>
     

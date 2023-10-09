@@ -6,11 +6,13 @@
       
         <main>
             <br>
-            <div class="chat" v-for="message in messages" :key="message.id" v-bind:class="{'patient':(message.sender==='Patient'), 'doctor':(message.sender === 'Medecin')}">
+            <div class="chat" v-for="message in messages" :key="message.id" v-bind:class="{'patient':(message.sender==='Patient'), 'doctor':(message.sender === 'Medecin')}"
+            @mouseover="showDeleteIcon(message.id)" @mouseleave="hideDeleteIcon(message.id)"
+            >
               
                 
               <p >{{ message.contenu }}</p>
-              <span class="delete-icon" @click="supprimerMessage(message.id)" v-if="message.sender === 'Patient'" >
+              <span class="delete-icon" @click="supprimerMessage(message.id)" v-if="message.sender === 'Patient'  && message.showDeleteIcon" >
                 <i class="fa fa-trash" style="color: red;" ></i>
               </span>
                 
@@ -43,6 +45,18 @@
          };
        },
        methods: {
+        showDeleteIcon(messageId) {
+        const message = this.messages.find(message => message.id === messageId);
+        if (message && message.sender === 'Patient') {
+            message.showDeleteIcon = true;
+        }
+    },
+    hideDeleteIcon(messageId) {
+        const message = this.messages.find(message => message.id === messageId);
+        if (message && message.sender === 'Patient') {
+            message.showDeleteIcon = false;
+        }
+    },
         async submitMessage() {
             const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
 
