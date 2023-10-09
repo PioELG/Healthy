@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 @RestController
 @RequestMapping(path="/api/medicament")
@@ -46,6 +47,15 @@ public class MedicamentController {
 
         return medicamentService.LireParPat(id,"Oui");
     }
+    @GetMapping("/medecin")
+    public List<Medicament> readMede(Authentication authentication)
+    {
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+
+        String id = jwt.getClaimAsString("sub");
+
+        return medicamentService.LireMed(id);
+    }
     @GetMapping("/all/{id}")
     public List<Medicament> readAll(@PathVariable String id)
     {
@@ -68,6 +78,7 @@ public class MedicamentController {
         String id = jwt.getClaimAsString("sub");
         medicament.setMedecin_id(id);
         medicament.setPrescription("Oui");
+        medicament.setDatePresc(LocalDate.now());
         return medicamentService.Creer(medicament);
     }
     @PutMapping("/{id}")

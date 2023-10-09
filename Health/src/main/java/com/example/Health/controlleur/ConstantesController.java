@@ -47,14 +47,14 @@ public class ConstantesController {
         if (realmAccessClaim instanceof Map) {
             Map<String, Object> realmAccess = (Map<String, Object>) realmAccessClaim;
 
-            // Vérifier si la clé "roles" existe dans realmAccess
+
             if (realmAccess.containsKey("roles")) {
                 Object rolesClaim = realmAccess.get("roles");
 
                 if (rolesClaim instanceof List) {
                     roles = (List<String>) rolesClaim;
 
-                    // Maintenant, la liste 'roles' contient les rôles associés à l'utilisateur
+
                     for (String role : roles) {
                         System.out.println("Rôle : " + role);
                     }
@@ -64,7 +64,7 @@ public class ConstantesController {
         if (roles.contains("patient")) {
 
 
-            if(!maladeRepository.Status(id).contains(id))
+            if(!maladeRepository.Status(id).contains(id) )
             {   malade.setId(id);
                 malade.setEmail(email);
                 malade.setNom(nom);
@@ -74,7 +74,7 @@ public class ConstantesController {
 
                 System.out.println(maladeRepository.Status(id));
                 maladeService.Creer(malade);
-
+    
             }
 //            else {
 //                malade.setStatut("Non traité");

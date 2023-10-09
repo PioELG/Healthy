@@ -38,6 +38,11 @@ public class MedicamentServiceImpl implements MedicamentService{
         return medicamentRepository.findByPatientId(patient_id);
     }
 
+    @Override
+    public List<Medicament> LireMed(String medecin_id) {
+        return medicamentRepository.findByMedecinId(medecin_id);
+    }
+
 
     @Override
     public Medicament Modifier(Medicament medicament, Long id) {

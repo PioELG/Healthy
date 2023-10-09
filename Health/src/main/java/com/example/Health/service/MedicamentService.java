@@ -12,6 +12,7 @@ public interface MedicamentService {
     List<Medicament> LireParMed(String medecin_id,String patient_id, String Statut);
 
     List<Medicament> LirePat(String patient_id);
+    List<Medicament> LireMed(String medecin_id);
 
     Medicament Modifier(Medicament medicament, Long id);
     Medicament ModifierStatut(Medicament medicament, Long id);

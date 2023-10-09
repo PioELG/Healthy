@@ -25,6 +25,12 @@ public class MaladeController {
 
        return maladeService.LireParPat(id);
    }
+   @GetMapping
+   public List<Malade> readAll()
+    {
+        return  maladeService.Lire();
+    }
+
     @GetMapping("/Nt")
     public List<Malade> readNt()
     {
