@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
+    
    
     </head>
     <body class="w3-light-grey">
@@ -21,7 +22,7 @@
                 <div class="w3-col s4">
                   <img src="https://cdn-icons-png.flaticon.com/128/552/552721.png" class="w3-circle w3-margin-right" style="width:46px">
                 </div>
-                <div class="w3-col s8 w3-bar">
+                <div class="w3-col s8 w3-bar" style="margin-top:15px">
                   <span>Bienvenue, <strong>{{ decodedToken.given_name }} </strong></span><br>
                   
                 </div>
@@ -31,6 +32,7 @@
                 <h5>Dashboard</h5>
               </div>
               <div class="w3-bar-block">
+                
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
                 <router-link to="/" class="link"> <a href="#"  class="w3-bar-item w3-button w3-padding "><i class="fa fa-bell fa-fw"></i> Notifications</a></router-link> 
                 <router-link class="link" to="/ListePatient"><a href="#" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>  Patients</a></router-link>

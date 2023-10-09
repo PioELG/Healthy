@@ -20,7 +20,7 @@
                 <div class="w3-col s4">
                   <img src="https://cdn-icons-png.flaticon.com/128/552/552721.png" class="w3-circle w3-margin-right" style="width:46px">
                 </div>
-                <div class="w3-col s8 w3-bar">
+                <div class="w3-col s8 w3-bar" style="margin-top:15px">
                   <span>Bienvenue, <strong>{{ decodedToken.given_name }} </strong></span><br>
                   
                 </div>

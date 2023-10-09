@@ -15,15 +15,18 @@
             </header>
           
             <div class="w3-row-padding w3-margin-bottom bon">
+              
               <div class="w3-quarter">
+                <router-link to="/MonHistorique" class="link">
                 <div class="w3-container w3-black w3-padding-16 w3-container-rounded">
-                  <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                  <div class="w3-left"><i class="fa fa-history w3-xxxlarge"></i></div>
                   <div class="w3-right">
                     
                   </div>
                   <div class="w3-clear"></div>
-                  <h4>MesMessages</h4>
+                  <h4>MonHistorique</h4>
                 </div>
+              </router-link>
               </div>
               
               <div class="w3-quarter">
