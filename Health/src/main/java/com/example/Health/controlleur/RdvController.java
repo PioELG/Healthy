@@ -77,7 +77,7 @@ public class RdvController {
 
 
 
-        // emailServiceRdv.sendEmail(malade.getNom(),malade.getPrenom(),malade.getEmail(), rdv.getDate(), rdv.getHeure());
+        emailServiceRdv.sendEmail(malade.getNom(),malade.getPrenom(),malade.getEmail(), rdv.getDate(), rdv.getHeure());
 
         return  rdv;
     }

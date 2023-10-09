@@ -64,7 +64,7 @@ public class ConstantesController {
         if (roles.contains("patient")) {
 
 
-            if(!maladeRepository.Status(id).contains(id) )
+            if(!maladeRepository.Status(id).contains(id) || maladeRepository.Stat("FinTraitement").contains(id) )
             {   malade.setId(id);
                 malade.setEmail(email);
                 malade.setNom(nom);
@@ -76,6 +76,7 @@ public class ConstantesController {
                 maladeService.Creer(malade);
     
             }
+          //  System.out.println(maladeRepository.Stat("FinTraitement"));
 //            else {
 //                malade.setStatut("Non traité");
 //                maladeService.ModifierS(malade,id);

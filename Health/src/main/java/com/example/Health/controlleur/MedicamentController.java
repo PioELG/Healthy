@@ -96,7 +96,7 @@ public class MedicamentController {
         return medicamentService.Supprimer(id);
 
     }
- //   @Scheduled(cron="0 */30 * * * *")
+  //  @Scheduled(cron="0 */2 * * * *")
    /* public void CronTest()  throws jakarta.mail.MessagingException
     {
         int i;
