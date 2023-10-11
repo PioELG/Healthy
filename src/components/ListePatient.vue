@@ -34,7 +34,10 @@
                 <td colspan="6">
                   <form @submit.prevent="soumettreFormulaire">
                     <label for="nouvellePathologie">Nouvelle Pathologie:</label>
-                    <input type="text" id="nouvellePathologie" v-model="nouvellePathologie" required>
+                    <select id="pathologie" name="pathologie" v-model="nom">
+                      <option value="" disabled selected>Sélectionnez une pathologie</option>
+                      <option v-for="pathologie in pathologies" :value="pathologie.nom" :key="pathologie.id">{{ pathologie.nom }}</option>
+                    </select>
                     <button type="submit">Enregistrer</button>
                    
                   </form>
@@ -70,7 +73,9 @@
            malades:[],
            maladeEnCoursDeMiseAJour: null,
            nouvellePathologie: '',
-           idDoc:''
+           idDoc:'',
+           pathologies:[],
+           nom:'',  
  
          };
        },
@@ -96,9 +101,12 @@
 },
 ouvrirFormulaire(malade) {
       // Ouvre le formulaire de mise à jour pour un malade spécifique
+      
       this.maladeEnCoursDeMiseAJour = malade;
       this.nouvellePathologie = malade.pathologie;
       this.idDoc=jwtDecode(keycloak.token).sub
+
+
       
     },
    soumettreFormulaire() {
@@ -123,7 +131,7 @@ const config = {
         console.log("Bonjour")
         console.log(this.maladeEnCoursDeMiseAJour.traitant)
         const newData = {
-      pathologie: this.nouvellePathologie,
+      pathologie: this.nom,
       statut: this.maladeEnCoursDeMiseAJour.statut,
       traitant: this.maladeEnCoursDeMiseAJour.traitant
     };
@@ -144,11 +152,30 @@ const config = {
         
       }
     },
+    fetchPathologie() {
+  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    }
+  };
+
+  axios.get('http://192.168.224.1:8080/api/pathologie', config) // Utilisez la configuration avec l'en-tête d'autorisation
+    .then(response => {
+      this.pathologies = response.data;
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des pathologies :', error);
+    });
+},
          
        },
        mounted(){
          // Les propriétés calculées de votre composant vont ici
          this.fetchMalade();
+         this.fetchPathologie();
          
         
          
@@ -195,5 +222,29 @@ const config = {
       height: 100%;
       min-height: 100vh;
     }
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+
+  select {
+      appearance: none;
+  }
+  button
+  {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 10px; 
+    cursor: pointer;
+  }
+
+  
+
      </style>
      

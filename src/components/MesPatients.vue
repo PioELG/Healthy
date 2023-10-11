@@ -55,29 +55,28 @@
   import axios from 'axios';
    
      export default {
-       name: 'MesPatients', // Remplacez par le nom de votre composant
+       name: 'MesPatients', 
        
        data() {
          return {
-           // Les données de votre composant vont ici
+          
            malades:[],
  
          };
        },
        methods: {
-         // Les méthodes de votre composant vont ici
-         // Les méthodes de votre composant vont ici
+         
          fetchMalade() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
 
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
 
-  axios.get('http://192.168.224.1:8080/api/malade/St', config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get('http://192.168.224.1:8080/api/malade/St', config) 
     .then(response => {
       this.malades = response.data;
     })
@@ -89,12 +88,12 @@
 
 FinTraitement(idM)
 {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
 
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
 
@@ -108,15 +107,15 @@ FinTraitement(idM)
       })
       .catch(error => {
         console.error('Erreur lors de la requête PUT :', error);
-        // Gérez les erreurs ici
+        
       });
 
-      axios.get('http://192.168.224.1:8080/api/malade/St', config) // Utilisez la configuration avec l'en-tête d'autorisation
+      axios.get('http://192.168.224.1:8080/api/malade/St', config) 
     .then(response => {
       this.malades = response.data;
     })
     .catch(error => {
-      console.error('Erreur lors de la récupération des conseils du jour :', error);
+      console.error('Erreur lors de la récupération :', error);
     });  
 
 
@@ -124,7 +123,7 @@ FinTraitement(idM)
 
             console.log('Rendez-vous supprimé avec succès !');
 
-    axios.delete(`http://192.168.224.1:8080/api/constantes/malade/${idM}`, config);
+    
 
     axios.delete(`http://192.168.224.1:8080/api/notification/malade/${idM}`, config);
 
@@ -139,12 +138,12 @@ FinTraitement(idM)
          
        },
        mounted(){
-         // Les propriétés calculées de votre composant vont ici
+         
          this.fetchMalade();
          
          
        },
-       // Autres options de composant (comme "props", "watch", etc.) vont ici
+       
      };
  </script>
      

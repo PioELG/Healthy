@@ -2,15 +2,22 @@
   <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
     
-     <br>
-      <h3 style="margin-left:350px" >Ajouter un nouveau médicament</h3>
+     
+      <h3 style="text-align:center" >Ajouter un nouveau médicament</h3> <br>
+
+      <p style="text-align:center">{{this.nom}}</p>
       <div class="container" style="margin:50px;">
           <div class="form-group" v-if="!showPosologie">
               <label for="medicament">Médicament :</label>
-
               
 
              <!-- <input type="text" id="medicament" name="medicament"  v-model="nom"  pattern=".*\S+.*" title="Ce champ ne peut pas être vide."> -->
+            
+             <select id="medicament" name="medicament" v-model="nom">
+              <option value="" disabled selected>Sélectionnez un médicament</option>
+              <option v-for="modeleMedicament in modeles" :value="modeleMedicament.nom" :key="modeleMedicament.id">{{ modeleMedicament.nom }}</option>
+            </select>
+
 
               <div class="posologie">
               <div class="form-group">
@@ -36,7 +43,7 @@
 
        
           <div class="posologie" v-if="showPosologie">
-              <div>{{ this.nom }}</div>
+              
             
           <div class="form-group">
               <label for="quantite">Quantité :</label>
@@ -98,7 +105,11 @@ export default {
      medicamentId:'',
      nb1:'',
      nb2:'',
-     nb:''
+     nb:'',
+     filter: '',
+    
+     modeles:[],
+     
     };
   },
   methods: {
@@ -181,30 +192,44 @@ try {
    } catch (error) {
      console.error('Erreur lors de l\'ajout de la posologie:', error);
      
-   };
+   }; 
+ 
+},
 
+fetchMedocs() {
+  const accessToken = keycloak.token;
+        
+ 
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}` 
+    }
+  };
   
  
-  
  
-}
 
-  
+  axios.get(`http://192.168.224.1:8080/api/modele`, config) 
+    .then(response => {
+      
+       
+        this.modeles=response.data;
+      
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des modeles de médicament:', error);
+    });
+    
+    
+},
 
     
 },
-  mounted() {
-   
-   this.showPosologie=false;
-   console.log('this.nb1'+'this.nb2')
+mounted() {
+      this.fetchMedocs();
+      console.log(this.modeles);
+    },
 
-  },
-  computed: {
-                filteredOptions() {
-                    const filter = this.filterLetter.toLowerCase();
-                    return this.options.filter(option => option.toLowerCase().startsWith(filter));
-                }
-            }
  
 };
 </script>

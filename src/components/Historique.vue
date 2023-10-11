@@ -10,7 +10,7 @@
              <li class="chat-item" v-for="medicament in medicaments" :key="medicament.id">
                     <div class="chat-preview" >
                         <p>
-                            <h2>{{ medicament.nom }}</h2>
+                            <h4>{{ medicament.nom }}</h4>
                 
 
                             <i class="fa fa-plus" style="color: green;" v-if="medicament.prescription!=='Oui'" @click="AjouterMedicament(medicament.id)"></i> 

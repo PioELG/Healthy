@@ -15,6 +15,7 @@
             <p><strong>Statut :</strong> {{ patient[0].statut}}</p>
             
         </div>
+        
         <div class="constants">
           <h2>Constantes du Patient</h2>
 <p><strong><i class="fa fa-balance-scale" style="color: rgb(0, 0, 0);"></i> Poids :</strong> {{ constante[0].poids}}  kg</p>
@@ -22,18 +23,37 @@
 <p><strong><i class="fa fa-heartbeat" style="color: red;"></i> Fréquence Cardiaque :</strong> {{ constante[0].freqCar }} bpm</p>
 <p><strong><i class="fa fa-cloud" style="color: rgb(0, 136, 255) ;"></i>  Fréquence Respiratoire :</strong> {{ constante[0].freqRes}} cycles/min</p>
 <p><strong><i class="fa fa-thermometer" style="color: rgb(236, 141, 6);"></i> Température :</strong> {{constante[0].temperature}}°C</p>
+        
 
-          
-            <!-- Ajoutez d'autres constantes ici -->
+  </div>
+        
+
+        <div class="prescription">
+          <table>
+            <tr>
+              <td>
+                <h2>Antécédents médicaux</h2>   
+              </td>
+              <td></td>
+              <td>
+                <router-link :to="'/AjouterPrescription/' +$route.params.id">
+                <i class="fa fa-plus" style="color: green;"></i> 
+              </router-link>
+              
+              </td>
+              
+            </tr>
+          </table>
         </div>
+
         <div class="symptoms">
-            <h2>Symptômes post-consultation</h2>
-            <ul v-for="symptome in symptomes" :key="symptome.id">
-                <li>{{symptome.nom}}</li>
-                
-                <!-- Ajoutez d'autres symptômes ici -->
-            </ul>
-        </div>
+          <h2>Symptomes  </h2>
+          <ul v-for="symptome in symptomes" :key="symptome.id">
+              <li>{{symptome.nom}}</li>
+              
+              <!-- Ajoutez d'autres symptômes ici -->
+          </ul>
+      </div>
 
         <div class="prescription">
           <router-link :to="'/Historique/' +$route.params.id">   <i class="fa fa-history fa-lg" style="color: rgb(0, 128, 85); margin-left:500px;"></i> </router-link>
@@ -57,11 +77,11 @@
             <li class="chat-item">
                 <div class="chat-preview" >
                   <p>
-                    <h2>{{ medicament.nom }} pendant {{ medicament.duree }} </h2> 
+                    <h4> <strong>{{ medicament.nom }}</strong> pendant {{ medicament.duree }} </h4> 
 
                     <i class="fa fa-trash" style="color: red; " @click="supprimerMedicament(medicament.id)"  ></i> &nbsp;&nbsp;&nbsp;   
                     <router-link :to="'/AjouterPosologie/' +medicament.id">  <i class="fa fa-plus" style="color: green;"></i> </router-link>  &nbsp;&nbsp;&nbsp; 
-                    <i class="fa fa-pencil" style="color: blue;" ></i>
+                    <i class="fa fa-eye" @click="toggle"></i>
                   </p>
                     <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"  > 
                       {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
@@ -73,7 +93,7 @@
                             <i class="fa fa-trash" style="color: red; " @click="supprimerPosologie(posologie.id)"  ></i> &nbsp;&nbsp;&nbsp;   
                             </p>
                         </transition>
-                        <i class="fa fa-check-circle" @click="toggle"></i> 
+                        
                       </div>
 
 

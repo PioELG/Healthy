@@ -24,6 +24,7 @@ import MessageP from '../components/MessageP.vue'
 import Historique from '../components/Historique.vue'
 import MonHistorique from '../components/MonHistorique.vue'
 import AjouterPosologie from '../components/AjouterPosologie.vue'
+import AjouterModelM from '../components/AjouterModelM.vue'
 const routes = [
   {
     path: '/',
@@ -160,7 +161,11 @@ const routes = [
     name: 'AjouterPosologie',
     component:AjouterPosologie
   },
-  
+  {
+    path: '/AjouterModelM',
+    name: 'AjouterModelM',
+    component:AjouterModelM
+  },
   
 ]
 
