@@ -18,7 +18,7 @@ public class ModeleServiceImpl implements ModeleMedicamentService{
 
     @Override
     public List<ModeleMedicament> Lire() {
-        return modeleMedicamentRepository.findAll();
+        return modeleMedicamentRepository.OrderB();
     }
 
 
