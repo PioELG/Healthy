@@ -14,7 +14,7 @@
     <body>
     <div class="container" style="margin-left:300px;margin-top:60px;margin-bottom:500px;">
     <header style="margin-left:20px">
-        <h5><b><i class="fa fa-history fa-fw"></i> MonHistorique</b></h5>
+        <h5><b><i class="fa fa-history fa-fw"></i> MonHistorique</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <i class="fa fa-plus fa-fw"></i></h5>  
     </header>
     
       <div v-for="medicament in medicaments" :key="medicament.id" style="margin-left:45px; margin-top:20px;margin-right:45px; " class="medoc">

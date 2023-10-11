@@ -98,7 +98,7 @@
                         </div>
                        
                       </td>
-                      <td><i class="fas fa-check-circle" style="font-size:24px; color: green;" @click="supprimerNotification(notif.id)"></i></td>
+                      <td><i class="fas fa-check-circle" style="font-size:24px; color: green;"></i></td>
                       
                     </tr>
                          

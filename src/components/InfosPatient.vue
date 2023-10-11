@@ -11,7 +11,7 @@
             <p><strong>Nom : </strong> {{ patient[0].nom}}</p>
             <p><strong>Prénom : </strong> {{ patient[0].prenom}}</p>
             <p><strong>Âge :</strong> 35 ans</p>
-            <p><strong>Pathologie :</strong>{{ patient[0].pathologie}}</p>
+            <p><strong>Diagnostic :</strong>{{ patient[0].pathologie}}</p>
             <p><strong>Statut :</strong> {{ patient[0].statut}}</p>
             
         </div>
@@ -52,20 +52,32 @@
               
             </tr>
           </table>
-        
            
           <ul class="chat-list" v-for="medicament in medicaments" :key="medicament.id">
             <li class="chat-item">
                 <div class="chat-preview" >
                   <p>
-                    <h2>{{ medicament.nom }}</h2>
-                    <i class="fa fa-trash" style="color: red; " @click="supprimerMedicament(medicament.id)"  ></i> &nbsp;&nbsp;&nbsp;
-                  </p>
-                    <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"> 
-                      {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
+                    <h2>{{ medicament.nom }} pendant {{ medicament.duree }} </h2> 
 
-                   
-                    <router-link :to="'/ModifierPosologie/' +posologie.id"> <i class="fa fa-pencil" style="color: blue;" ></i> </router-link> &nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-trash" style="color: red; " @click="supprimerMedicament(medicament.id)"  ></i> &nbsp;&nbsp;&nbsp;   
+                    <router-link :to="'/AjouterPosologie/' +medicament.id">  <i class="fa fa-plus" style="color: green;"></i> </router-link>  &nbsp;&nbsp;&nbsp; 
+                    <i class="fa fa-pencil" style="color: blue;" ></i>
+                  </p>
+                    <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"  > 
+                      {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
+        
+                      <div>
+                        <transition name="fade" mode="out-in">
+                          <p v-if="show">
+                            <router-link :to="'/ModifierPosologie/' +posologie.id"> <i class="fa fa-pencil" style="color: blue;" ></i> </router-link> &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-trash" style="color: red; " @click="supprimerPosologie(posologie.id)"  ></i> &nbsp;&nbsp;&nbsp;   
+                            </p>
+                        </transition>
+                        <i class="fa fa-check-circle" @click="toggle"></i> 
+                      </div>
+
+
+                    
                      
                     </p>
                     
@@ -124,15 +136,20 @@
           idP:'',
           medicaments:[],
           posologies:[],
-          rdvs:[]
+          rdvs:[],
+          show: false
         };
       },
       methods: {
-        // Les méthodes de votre composant vont ici
+        toggle() {
+      this.show = !this.show;
+    },
+       
+       
         fetchMalade() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
         
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  
   const config = {
     headers: {
       'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
@@ -324,6 +341,31 @@ const config = {
           console.error('Erreur lors de la récupération du doctor', error);
         }
       },
+      async supprimerPosologie(posologieId) {
+    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+
+// Définissez l'en-tête d'autorisation avec le jeton d'accès
+const config = {
+  headers: {
+    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+  }
+};
+    if (confirm("Êtes-vous sûr de vouloir supprimer  ?")) {
+      try {
+        // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
+         await axios.delete(`http://192.168.224.1:8080/api/posologie/${posologieId}`,config);
+
+        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
+        console.log('posologie supprimé avec succès !');
+
+        // Mettez à jour la liste des conseils en supprimant le conseil supprimé
+        this.posologies = this.posologies.filter(p => p.id !== posologieId);
+      } catch (error) {
+        console.error('Erreur lors de la suppression  :', error);
+        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+      }
+    }
+  }
       
     },
         
@@ -508,7 +550,12 @@ h1 {
     height: 100%;
     min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
   }
-  
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
   
   
     </style>

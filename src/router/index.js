@@ -23,6 +23,7 @@ import VoirPrescription from '../components/VoirPrescription.vue'
 import MessageP from '../components/MessageP.vue'
 import Historique from '../components/Historique.vue'
 import MonHistorique from '../components/MonHistorique.vue'
+import AjouterPosologie from '../components/AjouterPosologie.vue'
 const routes = [
   {
     path: '/',
@@ -154,7 +155,11 @@ const routes = [
     name: 'MonHistorique',
     component:MonHistorique
   },
-
+  {
+    path: '/AjouterPosologie/:id',
+    name: 'AjouterPosologie',
+    component:AjouterPosologie
+  },
   
   
 ]

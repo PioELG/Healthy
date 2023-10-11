@@ -7,9 +7,34 @@
       <div class="container" style="margin:50px;">
           <div class="form-group" v-if="!showPosologie">
               <label for="medicament">Médicament :</label>
-              <input type="text" id="medicament" name="medicament"  v-model="nom"  pattern=".*\S+.*" title="Ce champ ne peut pas être vide.">
+
+              
+
+             <!-- <input type="text" id="medicament" name="medicament"  v-model="nom"  pattern=".*\S+.*" title="Ce champ ne peut pas être vide."> -->
+
+              <div class="posologie">
+              <div class="form-group">
+                <label for="jours"> A prendre pendant</label>
+                <input type="number" id="quantite" name="quantite" required v-model="nb1">  
+                {{ nb1 }} {{ nb2 }}
+             </div>
+        
+            <div class="form-group" style="margin-right:500px; margin-top:27px ; min-width:50px;">
+               
+                <select id="duree" name="duree" v-model="nb2">
+                    <option value="jours">jours</option>
+                    <option value="semaine(s)">semaine(s)</option>
+                    <option value="mois">mois</option>
+                </select>
+            </div>
+          </div>
+
+
+
               <button type="button" id="ajouterPrescription" class="btn"  @click="submitMedicament">Ajouter Médicament</button>
           </div>
+
+       
           <div class="posologie" v-if="showPosologie">
               <div>{{ this.nom }}</div>
             
@@ -70,7 +95,10 @@ export default {
      heurePrise:'',
      unite:'',
      showPosologie:false,
-     medicamentId:''
+     medicamentId:'',
+     nb1:'',
+     nb2:'',
+     nb:''
     };
   },
   methods: {
@@ -102,8 +130,9 @@ this.forMPoso();
 
 
   try {
+    this.nb= this.nb1 + this.nb2;
       
-     const response=await axios.post('http://192.168.224.1:8080/api/medicament', {nom:this.nom,patient_id:id},config);
+     const response=await axios.post('http://192.168.224.1:8080/api/medicament', {nom:this.nom,patient_id:id, duree: this.nb},config);
 
     
     console.log('medicament ajoutée avec succès !');
@@ -165,9 +194,17 @@ try {
     
 },
   mounted() {
-   console.log(this.$route.params.id);
+   
    this.showPosologie=false;
+   console.log('this.nb1'+'this.nb2')
+
   },
+  computed: {
+                filteredOptions() {
+                    const filter = this.filterLetter.toLowerCase();
+                    return this.options.filter(option => option.toLowerCase().startsWith(filter));
+                }
+            }
  
 };
 </script>

@@ -10,7 +10,7 @@
           <ul class="chat-list" v-for="medicament in medicaments" :key="medicament.id">
               <li class="chat-item">
                   <div class="chat-preview" >
-                      <h2>{{ medicament.nom }}</h2>
+                      <h2>{{ medicament.nom }} pendant {{medicament.duree}}</h2>
                       <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"> 
                         {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
 

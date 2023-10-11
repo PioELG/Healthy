@@ -25,7 +25,7 @@
                 <td>{{malade.statut}}</td>
                 <td>
                     <router-link :to="'/InfosPatient/' + malade.id">
-                        <i class="fa fa-pencil" style="color: blue;"></i>
+                        <i class="fa fa-eye" style="color: blue;"></i>
 
                      </router-link><!-- Icône de modification -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       
