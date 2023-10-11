@@ -18,6 +18,8 @@ public interface MedicamentService {
     Medicament ModifierStatut(Medicament medicament, Long id);
     String Supprimer(Long id);
 
+    Medicament Unique (Long id);
+
     // Vous pouvez également décommenter ces méthodes si nécessaire
     // List<Medecin> LireP(String user_id);
     // Medecin Accepter(Long id);

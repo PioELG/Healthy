@@ -62,6 +62,12 @@ public class MedicamentController {
 
         return medicamentService.LirePat(id);
     }
+    @GetMapping("/unique/{id}")
+    public Medicament readUnique(@PathVariable Long id)
+    {
+
+        return medicamentService.Unique(id);
+    }
     @GetMapping("/{idP}")
     public List<Medicament> readP(@PathVariable String idP,Authentication authentication)
     {

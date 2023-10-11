@@ -21,4 +21,7 @@ public interface MedicamentRepository extends JpaRepository<Medicament,Long> {
     @Query("SELECT m FROM Medicament m WHERE m.medecin_id = ?1 ")
     List<Medicament> findByMedecinId(String medecin_id);
 
+    @Query("SELECT m FROM Medicament m WHERE m.id = ?1 ")
+    Medicament findByUnique(Long id);
+
 }

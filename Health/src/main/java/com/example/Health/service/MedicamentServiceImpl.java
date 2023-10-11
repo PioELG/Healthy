@@ -47,8 +47,14 @@ public class MedicamentServiceImpl implements MedicamentService{
     @Override
     public Medicament Modifier(Medicament medicament, Long id) {
         return medicamentRepository.findById(id).map(m->{
-            m.setNom(medicament.getNom());
-
+            if(medicament.getNom()!=null)
+            {
+                m.setNom(medicament.getNom());
+            }
+            if(medicament.getDuree()!=null)
+            {
+                m.setDuree(medicament.getDuree());
+            }
             return medicamentRepository.save(m);
 
         }).orElseThrow(()-> new RuntimeException("medicament non trouvé"));
@@ -68,5 +74,10 @@ public class MedicamentServiceImpl implements MedicamentService{
     public String Supprimer(Long id) {
         medicamentRepository.deleteById(id);
         return "medicament supprimé avec succès";
+    }
+
+    @Override
+    public Medicament Unique(Long id) {
+        return medicamentRepository.findByUnique(id);
     }
 }

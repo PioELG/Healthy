@@ -35,4 +35,7 @@ public class Medicament {
     @Column
     private LocalDate datePresc;
 
+    @Column
+    private String Duree;
+
 }
