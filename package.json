@@ -11,6 +11,7 @@
     "core-js": "^3.8.3",
     "jwt-decode": "^3.1.2",
     "keycloak-js": "^22.0.3",
+    "v-select2-component": "^0.4.7",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },

@@ -23,6 +23,7 @@
           <label for="temps">Temps de Prise :</label>
           <select id="temps" name="temps" required v-model="heurePrise">
               <option value="le matin">Matin</option>
+              <option value="à midi">Midi</option>
               <option value="le soir">Soir</option>
               <option value="Toutes les 2h">Toutes les 2 heures</option>
           </select>

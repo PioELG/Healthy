@@ -36,12 +36,17 @@
               </td>
               <td></td>
               <td>
-                <router-link :to="'/AjouterPrescription/' +$route.params.id">
+                <router-link :to="'/AjouterAntecedents/' +$route.params.id">
                 <i class="fa fa-plus" style="color: green;"></i> 
               </router-link>
               
               </td>
-              
+
+            </tr>
+            <tr>
+              <div v-for="antecedent in antecedents" :key="antecedent.id">
+                <p>{{antecedent.nom}}</p>  
+            </div>
             </tr>
           </table>
         </div>
@@ -51,7 +56,7 @@
           <ul v-for="symptome in symptomes" :key="symptome.id">
               <li>{{symptome.nom}}</li>
               
-              <!-- Ajoutez d'autres symptômes ici -->
+             
           </ul>
       </div>
 
@@ -157,6 +162,7 @@
           medicaments:[],
           posologies:[],
           rdvs:[],
+          antecedents:[],
           show: false
         };
       },
@@ -385,7 +391,35 @@ const config = {
         // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
       }
     }
-  }
+  },
+  fetchAntecedent() {
+  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+        
+  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    }
+  };
+  const id = this.$route.params.id;
+  
+ 
+ 
+
+  axios.get(`http://192.168.224.1:8080/api/antecedent/${id}`, config) 
+    .then(response => {
+      
+       
+        this.antecedents=response.data;
+      
+      
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des antecedents:', error);
+    }).finally(()=> this.loading = false);
+    
+   
+},
       
     },
         
@@ -404,7 +438,10 @@ const config = {
            this.fetchMedicaments();
            this.fetchPosologie();
            this.fetchRdv();
-          
+           this.fetchAntecedent();
+
+
+           console.log(this.antecedents);
         },
       // Autres options de composant (comme "props", "watch", etc.) vont ici
     };

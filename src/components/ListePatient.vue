@@ -30,6 +30,7 @@
                  
                 </td>
               </tr>
+              <tr></tr>
               <tr v-if="maladeEnCoursDeMiseAJour">
                 <td colspan="6">
                   <form @submit.prevent="soumettreFormulaire">
