@@ -61,8 +61,8 @@ public class SecurityConfig
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 
-        // Configurer les origines autorisées, les méthodes, les en-têtes, etc.
-        config.addAllowedOrigin("*"); // Autoriser toutes les origines (peut être risqué en production)
+
+        config.addAllowedOrigin("*"); // Autoriser toutes les origines
         config.addAllowedMethod("*"); // Autoriser toutes les méthodes HTTP (GET, POST, PUT, DELETE, etc.)
         config.addAllowedHeader("*"); // Autoriser tous les en-têtes
         config.setAllowCredentials(false); // Ne pas autoriser les cookies dans les requêtes CORS

@@ -20,4 +20,7 @@ public class Antecedent {
     @Column
     private String nom;
 
+    @Column
+    private String patient_id;
+
 }

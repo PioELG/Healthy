@@ -17,7 +17,7 @@ public class AntecedentServiceImpl implements AntecedentService{
     }
 
     @Override
-    public List<Antecedent> Lire() {
-        return antecedentRepository.OrderB();
+    public List<Antecedent> Lire(String patient_id) {
+        return antecedentRepository.findByPatient(patient_id);
     }
 }

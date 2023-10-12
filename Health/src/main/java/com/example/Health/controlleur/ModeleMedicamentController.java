@@ -26,4 +26,10 @@ public class ModeleMedicamentController {
     {
         return modeleMedicamentService.Lire();
     }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id)
+    {
+        return modeleMedicamentService.Supprimer(id);
+    }
 }

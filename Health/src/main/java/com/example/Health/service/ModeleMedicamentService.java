@@ -8,5 +8,7 @@ public interface ModeleMedicamentService {
     ModeleMedicament Creer(ModeleMedicament modeleMedicament);
     List<ModeleMedicament> Lire();
 
+    String Supprimer(Long id);
+
 
 }

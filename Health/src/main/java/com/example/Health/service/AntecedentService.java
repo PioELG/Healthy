@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AntecedentService {
     Antecedent Creer(Antecedent antecedent);
-    List<Antecedent> Lire();
+    List<Antecedent> Lire(String patient_id);
 }

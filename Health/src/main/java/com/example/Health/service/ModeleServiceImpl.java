@@ -21,5 +21,11 @@ public class ModeleServiceImpl implements ModeleMedicamentService{
         return modeleMedicamentRepository.OrderB();
     }
 
+    @Override
+    public String Supprimer(Long id) {
+         modeleMedicamentRepository.deleteById(id);
+         return "Modele bien supprimé";
+    }
+
 
 }

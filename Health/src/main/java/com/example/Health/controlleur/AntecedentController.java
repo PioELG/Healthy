@@ -25,9 +25,9 @@ public class AntecedentController {
         return  antecedentService.Creer(antecedent);
 
     }
-    @GetMapping
-    public List<Antecedent> read()
+    @GetMapping("/{id}")
+    public List<Antecedent> read(@PathVariable String id)
     {
-        return antecedentService.Lire();
+        return antecedentService.Lire(id);
     }
 }

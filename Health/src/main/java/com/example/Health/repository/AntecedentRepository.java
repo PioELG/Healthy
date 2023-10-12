@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AntecedentRepository extends JpaRepository<Antecedent,Long> {
-    @Query("SELECT a FROM Antecedent a ORDER BY a.nom ASC")
-    List<Antecedent> OrderB();
+    @Query("SELECT a FROM Antecedent a WHERE a.patient_id=?1")
+    List<Antecedent> findByPatient(String patient_id);
 }
