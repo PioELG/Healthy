@@ -29,4 +29,9 @@ public class PathologieController {
     {
         return pathologieService.Lire();
     }
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id)
+    {
+        return pathologieService.Supprimer(id);
+    }
 }

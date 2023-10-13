@@ -19,4 +19,10 @@ public class PathologieServiceImpl implements PathologieService{
     public List<Pathologie> Lire() {
         return pathologieRepository.OrderB();
     }
+
+    @Override
+    public String Supprimer(Long id) {
+        pathologieRepository.deleteById(id);
+        return "Pathologie bien supprimée";
+    }
 }
