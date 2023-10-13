@@ -33,7 +33,7 @@
 
             <!-- <input type="text" id="medicament" name="medicament"  v-model="nom"  pattern=".*\S+.*" title="Ce champ ne peut pas être vide."> -->
 
-            <v-select id="pathologie" name="pathologie" v-model="nom">
+            <select id="pathologie" name="pathologie" v-model="nom">
               <option value="" disabled selected>
                 Sélectionnez une pathologie
               </option>
@@ -44,7 +44,7 @@
               >
                 {{ pathologie.nom }}
               </option>
-            </v-select>
+            </select>
             <button
               type="button"
               id="ajouterAntecedent"
