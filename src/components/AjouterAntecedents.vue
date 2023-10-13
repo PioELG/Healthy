@@ -31,20 +31,28 @@
           <div class="form-group">
             <label for="medicament">Antecedents :</label>
 
-            <!-- <input type="text" id="medicament" name="medicament"  v-model="nom"  pattern=".*\S+.*" title="Ce champ ne peut pas être vide."> -->
+            <input
+              type="text"
+              v-model="searchInput"
+              @input="filterOptions"
+              placeholder="Filtrer Pathologie"
+            />
 
             <select id="pathologie" name="pathologie" v-model="nom">
               <option value="" disabled selected>
                 Sélectionnez une pathologie
               </option>
               <option
-                v-for="pathologie in pathologies"
+                v-for="pathologie in searchInput
+                  ? filteredPathologies
+                  : pathologies"
                 :value="pathologie.nom"
                 :key="pathologie.id"
               >
                 {{ pathologie.nom }}
               </option>
             </select>
+
             <button
               type="button"
               id="ajouterAntecedent"
@@ -65,15 +73,22 @@ import keycloak from "@/main";
 import axios from "axios";
 
 export default {
-  name: "AjoutRdv",
+  name: "AjoutAntecedents",
 
   data() {
     return {
       nom: "",
       pathologies: [],
+      searchInput: "",
+      filteredPathologies: [],
     };
   },
   methods: {
+    filterOptions() {
+      this.filteredPathologies = this.pathologies.filter((pathologie) =>
+        pathologie.nom.toLowerCase().includes(this.searchInput.toLowerCase())
+      );
+    },
     async submit() {
       const accessToken = keycloak.token;
 

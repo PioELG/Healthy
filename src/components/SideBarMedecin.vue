@@ -73,13 +73,13 @@
                 ><i class="fa fa-bug fa-fw"></i> Pathologies</a
               ></router-link
             >
+            <br />
             <a href="#" class="w3-bar-item w3-button w3-padding" @click="logout"
-              >  Log Out</a
+              >  <strong>Log Out</strong></a
             ><br /><br />
           </div>
         </nav>
 
-        <!-- Overlay effect when opening sidebar on small screens -->
         <div
           class="w3-overlay w3-hide-large w3-animate-opacity"
           style="cursor: pointer"

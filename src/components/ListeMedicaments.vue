@@ -33,13 +33,14 @@
       </table>
     </header>
     <div class="popup" v-if="showPopup">
-      <!-- Contenu du pop-up -->
       <div class="popup-content">
-        <!-- Formulaire pour ajouter un nouveau médicament -->
-        <!-- Assurez-vous de créer les champs nécessaires (nom, etc.) -->
-        <input placeholder="Nom du médicament" v-model="nom" />
+        <input
+          placeholder="Nom du médicament"
+          v-model="nom"
+          style="min-width: 400px; max-width: 600px"
+        />
         &nbsp;&nbsp;&nbsp;
-        <!-- Autres champs... -->
+
         <button @click="submitForm">Enregistrer</button> &nbsp;&nbsp;&nbsp;
         <button @click="fermerPopup">Annuler</button>
       </div>
@@ -220,24 +221,20 @@ export default {
 .link {
   text-decoration: none;
 }
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
 
 .popup {
-  background: white;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
   z-index: 1000;
+}
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px; /* Augmentation du rayon pour un aspect plus arrondi */
+  cursor: pointer;
 }
 </style>

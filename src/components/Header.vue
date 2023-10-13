@@ -18,41 +18,41 @@
     <body class="w3-light-grey">
       <!-- Top container -->
       <div class="w3-bar w3-top w3-black w3-large" style="z-index: 4">
-        <span
-          class="w3-bar-item w3-right"
-          style="font-family: 'Pacifico', cursive"
-          >Healthy</span
-        >
+        <aside :class="{ active: active }">
+          <span
+            class="w3-bar-item w3-right"
+            style="font-family: 'Pacifico', cursive"
+            >Healthy</span
+          >
+        </aside>
         <a href="#" class="w3-hide-large w3-large">
-          <i class="fa fa-bars" style="margin: 10px" ></i>
+          <i class="fa fa-bars" style="margin: 10px" @click="toggleSidebar"></i>
         </a>
-        
       </div>
+      <SideBarMedecin v-if="active" />
     </body>
   </html>
 </template>
 
 <script>
 import SideBarMedecin from "./SideBarMedecin.vue";
-import SideBarPatient from "./SideBarPatient.vue";
 export default {
   name: "Header",
   components: {
     SideBarMedecin,
-    SideBarPatient,
   },
+
   data() {
     return {
-      
+      active: false,
     };
   },
   methods: {
-    // Les méthodes de votre composant vont ici
-   
+    toggleSidebar() {
+      this.active = !this.active;
+    },
   },
-  mounted() {
-    this.isSidebarOpen = false;
-  },
+  mounted() {},
 };
 </script>
 

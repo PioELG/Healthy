@@ -24,7 +24,7 @@
                 placeholder="Rechercher "
                 v-model="recherche"
                 @input="filtrerPathologies"
-                style="min-width: 80px"
+                style="min-width: 150px"
               />
               &nbsp;&nbsp;
               <i class="fa fa-search"></i>
@@ -38,7 +38,11 @@
       <div class="popup-content">
         <!-- Formulaire pour ajouter un nouveau médicament -->
         <!-- Assurez-vous de créer les champs nécessaires (nom, etc.) -->
-        <input placeholder="Nom de la pathologie" v-model="nom" />
+        <input
+          placeholder="Nom de la pathologie"
+          v-model="nom"
+          style="min-width: 300px; max-width: 600px"
+        />
         &nbsp;&nbsp;&nbsp;
         <!-- Autres champs... -->
         <button @click="submitForm">Enregistrer</button> &nbsp;&nbsp;&nbsp;
@@ -238,5 +242,14 @@ export default {
 }
 .header-search {
   border-radius: 5px;
+}
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px; /* Augmentation du rayon pour un aspect plus arrondi */
+  cursor: pointer;
 }
 </style>

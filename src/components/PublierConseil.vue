@@ -30,14 +30,17 @@
           </h5>
         </header>
 
-        <div class="publication-form">
-          <h2>Ajouter un nouveau conseil de santé :</h2>
+        <div class="publication-form" style="margin-left: 60px">
+          <h2 style="margin-left: 150px">
+            Ajouter un nouveau conseil de santé :
+          </h2>
           <form @submit.prevent="submitForm">
             <textarea
               id="conseil"
               name="conseil"
               rows="4"
               v-model="nouveauConseil"
+              required
             ></textarea>
 
             <button type="submit">Publier</button>
@@ -72,13 +75,6 @@ export default {
         },
       };
 
-      // Vérifiez si le champ "nouveauConseil" est vide
-      if (!this.nouveauConseil) {
-        alert("Veuillez entrer un conseil de santé.");
-        return;
-      }
-
-      // Envoie les données à votre API Backend en utilisant Axios
       try {
         await axios.post(
           "http://192.168.224.1:8080/api/conseils",

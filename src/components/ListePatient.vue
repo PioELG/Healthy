@@ -49,30 +49,48 @@
             <i
               class="fa fa-plus"
               style="color: green"
-              @click="ouvrirFormulaire(malade)"
+              @click="ouvrirFormulaire(malade, malade.id)"
               v-if="malade.statut === 'Non traité'"
             ></i>
             &nbsp;&nbsp;&nbsp;<!-- Icône de modification -->
           </td>
         </tr>
         <tr></tr>
-        <tr v-if="maladeEnCoursDeMiseAJour">
+        <tr v-if="maladeEnCoursDeMiseAJour !== null">
           <td colspan="6">
-            <form @submit.prevent="soumettreFormulaire">
-              <label for="nouvellePathologie">Nouvelle Pathologie:</label>
+            <form @submit.prevent="soumettreFormulaire" style="padding: 20px">
+              <label for="medicament" style="margin-bottom: 200px"
+                >Nouveau Diagnostic
+                <strong
+                  >{{ maladeSingle.nom }} {{ maladeSingle.prenom }} </strong
+                >:</label
+              >
+              <br />
+
+              <input
+                type="text"
+                v-model="searchInput"
+                @input="filterOptions"
+                placeholder="Filtrer Pathologie"
+              />
+
               <select id="pathologie" name="pathologie" v-model="nom">
                 <option value="" disabled selected>
                   Sélectionnez une pathologie
                 </option>
                 <option
-                  v-for="pathologie in pathologies"
+                  v-for="pathologie in searchInput
+                    ? filteredPathologies
+                    : pathologies"
                   :value="pathologie.nom"
                   :key="pathologie.id"
                 >
                   {{ pathologie.nom }}
                 </option>
               </select>
-              <button type="submit">Enregistrer</button>
+
+              <button type="submit">Enregistrer</button> &nbsp;&nbsp;&nbsp;
+              <button @click="fermer">Annuler</button>
             </form>
           </td>
         </tr>
@@ -94,46 +112,74 @@ export default {
 
   data() {
     return {
-      // Les données de votre composant vont ici
       malades: [],
+      maladeSingle: [],
+
       maladeEnCoursDeMiseAJour: null,
       nouvellePathologie: "",
       idDoc: "",
       pathologies: [],
       nom: "",
       statutFiltre: "",
+      showError: "",
+      searchInput: "",
+      filteredPathologies: [],
     };
   },
   methods: {
-    // Les méthodes de votre composant vont ici
+    filterOptions() {
+      this.filteredPathologies = this.pathologies.filter((pathologie) =>
+        pathologie.nom.toLowerCase().includes(this.searchInput.toLowerCase())
+      );
+    },
     fetchMalade() {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token;
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`,
         },
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/malade", config) // Utilisez la configuration avec l'en-tête d'autorisation
+        .get("http://192.168.224.1:8080/api/malade", config)
         .then((response) => {
           this.malades = response.data;
         })
         .catch((error) => {
           console.error(
-            "Erreur lors de la récupération des conseils du jour :",
+            "Erreur lors de la récupération des malades du jour :",
             error
           );
         });
     },
-    ouvrirFormulaire(malade) {
-      // Ouvre le formulaire de mise à jour pour un malade spécifique
-
+    ouvrirFormulaire(malade, IdSingle) {
       this.maladeEnCoursDeMiseAJour = malade;
       this.nouvellePathologie = malade.pathologie;
       this.idDoc = jwtDecode(keycloak.token).sub;
+
+      const accessToken = keycloak.token;
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      axios
+        .get(`http://192.168.224.1:8080/api/malade/single/${IdSingle}`, config)
+        .then((response) => {
+          this.maladeSingle = response.data;
+        })
+        .catch((error) => {
+          console.error(
+            "Erreur lors de la récupération des malades du jour :",
+            error
+          );
+        });
+    },
+    fermer() {
+      this.maladeEnCoursDeMiseAJour = null;
     },
     soumettreFormulaire() {
       if (this.maladeEnCoursDeMiseAJour) {
@@ -148,42 +194,44 @@ export default {
         this.maladeEnCoursDeMiseAJour.statut = "Sous traitement";
         this.maladeEnCoursDeMiseAJour.traitant = jwtDecode(keycloak.token).sub;
 
-        console.log(jwtDecode(keycloak.token).sub);
-        console.log("Bonjour");
-        console.log(this.maladeEnCoursDeMiseAJour.traitant);
         const newData = {
           pathologie: this.nom,
           statut: this.maladeEnCoursDeMiseAJour.statut,
           traitant: this.maladeEnCoursDeMiseAJour.traitant,
         };
 
-        axios
-          .put(
-            `http://192.168.224.1:8080/api/malade/${this.maladeEnCoursDeMiseAJour.id}`,
-            newData,
-            config
-          )
-          .then((response) => {
-            console.log("Réponse du serveur :", response.data);
-          })
-          .catch((error) => {
-            console.error("Erreur lors de la requête PUT :", error);
-            // Gérez les erreurs ici
-          });
+        if (this.nom.trim() === "") {
+          this.showError = false;
+          alert(
+            "Veuillez remplir le champ correspondant à la pathologie du patient!"
+          );
+        } else {
+          axios
+            .put(
+              `http://192.168.224.1:8080/api/malade/${this.maladeEnCoursDeMiseAJour.id}`,
+              newData,
+              config
+            )
+            .then((response) => {
+              console.log("Réponse du serveur :", response.data);
+            })
+            .catch((error) => {
+              console.error("Erreur lors de la requête PUT :", error);
+            });
+        }
       }
     },
     fetchPathologie() {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token;
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`,
         },
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/pathologie", config) // Utilisez la configuration avec l'en-tête d'autorisation
+        .get("http://192.168.224.1:8080/api/pathologie", config)
         .then((response) => {
           this.pathologies = response.data;
         })
@@ -196,20 +244,17 @@ export default {
     },
     filtrerParStatut(statut) {
       if (this.statutFiltre === "Tous") {
-        return true; // Retourne toujours true si le statut sélectionné est 'Tous'
+        return true;
       } else {
         return statut === this.statutFiltre;
       }
     },
   },
   mounted() {
-    // Les propriétés calculées de votre composant vont ici
     this.fetchMalade();
     this.fetchPathologie();
     this.statutFiltre = "Tous";
   },
-
-  // Autres options de composant (comme "props", "watch", etc.) vont ici
 };
 </script>
 
@@ -271,5 +316,12 @@ button {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 </style>

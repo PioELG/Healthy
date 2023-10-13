@@ -24,7 +24,6 @@ import MessageP from "../components/MessageP.vue";
 import Historique from "../components/Historique.vue";
 import MonHistorique from "../components/MonHistorique.vue";
 import AjouterPosologie from "../components/AjouterPosologie.vue";
-import AjouterModelM from "../components/AjouterModelM.vue";
 import AjouterAntecedents from "../components/AjouterAntecedents.vue";
 import ListeMedicaments from "../components/ListeMedicaments.vue";
 import ListePathologies from "../components/ListePathologies.vue";
@@ -158,11 +157,7 @@ const routes = [
     name: "AjouterPosologie",
     component: AjouterPosologie,
   },
-  {
-    path: "/AjouterModelM",
-    name: "AjouterModelM",
-    component: AjouterModelM,
-  },
+
   {
     path: "/AjouterAntecedents/:id",
     name: "AjouterAntecedents",

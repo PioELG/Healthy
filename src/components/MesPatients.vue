@@ -106,14 +106,7 @@ export default {
           console.error("Erreur lors de la requête PUT :", error);
         });
 
-      axios
-        .get("http://192.168.224.1:8080/api/malade/St", config)
-        .then((response) => {
-          this.malades = response.data;
-        })
-        .catch((error) => {
-          console.error("Erreur lors de la récupération :", error);
-        });
+      this.fetchMalade();
 
       axios.delete(`http://192.168.224.1:8080/api/rdv/malade/${idM}`, config);
 
@@ -147,7 +140,7 @@ export default {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 #customers td,

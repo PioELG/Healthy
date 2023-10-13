@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import Keycloak from "keycloak-js";
+import "vue-search-select/dist/VueSearchSelect.css";
 
 let initOptions = {
   url: "http://localhost:8180",

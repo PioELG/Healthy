@@ -9,11 +9,17 @@
         <label for="medicament">Médicament :</label>
 
         <!-- <input type="text" id="medicament" name="medicament"  v-model="nom"  pattern=".*\S+.*" title="Ce champ ne peut pas être vide."> -->
+        <input
+          type="text"
+          v-model="searchInput"
+          @input="filterOptions"
+          placeholder="Filtrer Médicament"
+        />
 
         <select id="medicament" name="medicament" v-model="nom">
           <option value="" disabled selected>Sélectionnez un médicament</option>
           <option
-            v-for="modeleMedicament in modeles"
+            v-for="modeleMedicament in searchInput ? filteredMed : modeles"
             :value="modeleMedicament.nom"
             :key="modeleMedicament.id"
           >
@@ -122,7 +128,6 @@ export default {
       medicament: [],
       posologie: [],
       nom: "",
-
       showError: false,
       quantite: "",
       heurePrise: "",
@@ -133,11 +138,21 @@ export default {
       nb2: "",
       nb: "",
       filter: "",
-
+      showErrorPoso: false,
+      showPosologie2: false,
+      searchInput: "",
+      filteredMed: [],
       modeles: [],
     };
   },
   methods: {
+    filterOptions() {
+      this.filteredMed = this.modeles.filter((modeleMedicament) =>
+        modeleMedicament.nom
+          .toLowerCase()
+          .includes(this.searchInput.toLowerCase())
+      );
+    },
     forMPoso() {
       this.showPosologie = !this.showPosologie;
     },
@@ -167,7 +182,7 @@ export default {
             { nom: this.nom, patient_id: id, duree: this.nb },
             config
           );
-
+          alert("Médicament ajouté à la prescription avec succès");
           console.log("medicament ajoutée avec succès !");
           this.medicamentId = response.data.id;
 
@@ -191,31 +206,37 @@ export default {
       };
       const id = this.$route.params.id;
 
-      try {
-        await axios.post(
-          "http://192.168.224.1:8080/api/posologie",
-          {
-            quantite: this.quantite,
-            unite: this.unite,
-            heurePrise: this.heurePrise,
-            medicament_id: this.medicamentId,
-          },
-          config
-        );
+      if (this.quantite === "" || this.unite === "" || this.heurePrise === "") {
+        this.showErrorPoso2 = false;
+        alert("Veuillez remplir tous les champs !");
+      } else {
+        try {
+          await axios.post(
+            "http://192.168.224.1:8080/api/posologie",
+            {
+              quantite: this.quantite,
+              unite: this.unite,
+              heurePrise: this.heurePrise,
+              medicament_id: this.medicamentId,
+            },
+            config
+          );
 
-        await axios.post(
-          "http://192.168.224.1:8080/api/notification/doc",
-          { contexte: "une prescription", cible: id },
-          config
-        );
+          await axios.post(
+            "http://192.168.224.1:8080/api/notification/doc",
+            { contexte: "une prescription", cible: id },
+            config
+          );
+          alert("Ajouté avec succès");
 
-        console.log("posologie ajouté avec succès !");
+          console.log("posologie ajouté avec succès !");
 
-        this.quantite = "";
-        this.unite = "";
-        this.heurePrise = "";
-      } catch (error) {
-        console.error("Erreur lors de l'ajout de la posologie:", error);
+          this.quantite = "";
+          this.unite = "";
+          this.heurePrise = "";
+        } catch (error) {
+          console.error("Erreur lors de l'ajout de la posologie:", error);
+        }
       }
     },
 
