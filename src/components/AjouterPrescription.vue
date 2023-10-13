@@ -1,5 +1,5 @@
 <template>
-  <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
+  <div class="w3-main" style="margin-left: 300px; margin-top: 0px">
     <h3 style="text-align: center">Ajouter un nouveau médicament</h3>
     <br />
 

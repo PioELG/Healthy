@@ -16,7 +16,7 @@
       />
     </head>
     <body class="w3-light-grey">
-      <div>
+      <div style="margin-top: 40px">
         <nav
           class="w3-sidebar w3-collapse w3-white w3-animate-left"
           style="z-index: 3; width: 300px"
@@ -65,12 +65,12 @@
             >
             <router-link to="/ListeMedicaments" class="link">
               <a href="#" class="w3-bar-item w3-button w3-padding"
-                ><i class="fa fa-medkit fa-fw"></i>Médicaments</a
+                ><i class="fa fa-medkit fa-fw"></i> Médicaments</a
               ></router-link
             >
-            <router-link to="/" class="link">
+            <router-link to="/ListePathologies" class="link">
               <a href="#" class="w3-bar-item w3-button w3-padding"
-                ><i class="fa fa-bug fa-fw"></i>Pathologies</a
+                ><i class="fa fa-bug fa-fw"></i> Pathologies</a
               ></router-link
             >
             <a href="#" class="w3-bar-item w3-button w3-padding" @click="logout"

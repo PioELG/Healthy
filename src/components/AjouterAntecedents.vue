@@ -9,6 +9,15 @@
         type="text/css"
         href="https://unpkg.com/select2@4.0.3/dist/css/select2.min.css"
       />
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css"
+      />
+
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css"
+      />
     </head>
     <body>
       <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
@@ -24,7 +33,7 @@
 
             <!-- <input type="text" id="medicament" name="medicament"  v-model="nom"  pattern=".*\S+.*" title="Ce champ ne peut pas être vide."> -->
 
-            <select id="pathologie" name="pathologie" v-model="nom">
+            <v-select id="pathologie" name="pathologie" v-model="nom">
               <option value="" disabled selected>
                 Sélectionnez une pathologie
               </option>
@@ -35,7 +44,7 @@
               >
                 {{ pathologie.nom }}
               </option>
-            </select>
+            </v-select>
             <button
               type="button"
               id="ajouterAntecedent"

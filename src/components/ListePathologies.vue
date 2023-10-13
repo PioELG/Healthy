@@ -5,7 +5,7 @@
         <tr>
           <td>
             <h5>
-              <b><i class="fa fa-medkit fa-fw"></i>Médicaments</b>
+              <b><i class="fa fa-bug fa-fw"></i> Pathologies</b>
               &nbsp;&nbsp;&nbsp;
               <i
                 class="fa fa-plus fa-fw"
@@ -14,21 +14,22 @@
               ></i>
             </h5>
           </td>
-          <div
-            class="header-search"
-            style="margin-top: 0px; margin-left: 500px"
-          >
-            <input
-              type="text"
-              placeholder="Rechercher "
-              v-model="recherche"
-              @input="filtrerMedicaments"
-              style="min-width: 80px"
-            />
-            &nbsp;&nbsp;
-            <i class="fa fa-search"></i>
-          </div>
-          <td></td>
+          <td>
+            <div
+              class="header-search"
+              style="margin-top: 0px; margin-left: 500px"
+            >
+              <input
+                type="text"
+                placeholder="Rechercher "
+                v-model="recherche"
+                @input="filtrerPathologies"
+                style="min-width: 80px"
+              />
+              &nbsp;&nbsp;
+              <i class="fa fa-search"></i>
+            </div>
+          </td>
         </tr>
       </table>
     </header>
@@ -37,7 +38,7 @@
       <div class="popup-content">
         <!-- Formulaire pour ajouter un nouveau médicament -->
         <!-- Assurez-vous de créer les champs nécessaires (nom, etc.) -->
-        <input placeholder="Nom du médicament" v-model="nom" />
+        <input placeholder="Nom de la pathologie" v-model="nom" />
         &nbsp;&nbsp;&nbsp;
         <!-- Autres champs... -->
         <button @click="submitForm">Enregistrer</button> &nbsp;&nbsp;&nbsp;
@@ -48,20 +49,17 @@
       <div class="w3-row-padding w3-margin-bottom">
         <table id="customers">
           <tr>
-            <th>NomMédicament</th>
+            <th>Nom Pathologie</th>
 
             <th>Actions</th>
           </tr>
-          <tr
-            v-for="modeleMedicament in modeleMedicaments"
-            :key="modeleMedicament.id"
-          >
-            <td>{{ modeleMedicament.nom }}</td>
+          <tr v-for="pathologie in pathologies" :key="pathologie.id">
+            <td>{{ pathologie.nom }}</td>
             <td>
               <i
                 class="fa fa-trash"
                 style="color: red"
-                @click="supprimer(modeleMedicament.id)"
+                @click="supprimer(pathologie.id)"
               ></i>
             </td>
           </tr>
@@ -77,35 +75,34 @@ import keycloak from "@/main";
 import axios from "axios";
 
 export default {
-  name: "rdvMedecin",
+  name: "ListePathologies",
   data() {
     return {
-      modeleMedicaments: [],
+      pathologies: [],
       showPopup: false,
       nom: "",
       recherche: "",
     };
   },
   methods: {
-    filtrerMedicaments() {
+    filtrerPathologies() {
       const recherche = this.recherche.toLowerCase();
       if (recherche === "") {
-        this.fetchMedocs(); // Rechargez toutes les pathologies si la recherche est vide
+        this.fetchPathologie(); // Rechargez toutes les pathologies si la recherche est vide
       } else {
-        this.modeleMedicaments = this.modeleMedicaments.filter(
-          (modeleMedicament) => {
-            return modeleMedicament.nom.toLowerCase().includes(recherche);
-          }
-        );
+        this.pathologies = this.pathologies.filter((pathologie) => {
+          return pathologie.nom.toLowerCase().includes(recherche);
+        });
       }
     },
+
     ouvrirPopup() {
       this.showPopup = true;
     },
     fermerPopup() {
       this.showPopup = false;
     },
-    fetchMedocs() {
+    fetchPathologie() {
       const accessToken = keycloak.token;
 
       const config = {
@@ -115,19 +112,19 @@ export default {
       };
 
       axios
-        .get(`http://192.168.224.1:8080/api/modele`, config)
+        .get(`http://192.168.224.1:8080/api/pathologie`, config)
         .then((response) => {
-          this.modeleMedicaments = response.data;
+          this.pathologies = response.data;
         })
         .catch((error) => {
           console.error(
-            "Erreur lors de la récupération des modeles de médicament:",
+            "Erreur lors de la récupération des pathologies:",
             error
           );
         });
     },
     async supprimer(Id) {
-      if (confirm("Êtes-vous sûr de vouloir supprimer ce médicament ?")) {
+      if (confirm("Êtes-vous sûr de vouloir supprimer cette pathologie ?")) {
         const accessToken = keycloak.token;
         const config = {
           headers: {
@@ -136,15 +133,16 @@ export default {
         };
         try {
           await axios.delete(
-            `http://192.168.224.1:8080/api/modele/${Id}`,
+            `http://192.168.224.1:8080/api/pathologie/${Id}`,
             config
           );
-          console.log("Medicament supprimé avec succès !");
-          this.modeleMedicaments = this.modeleMedicaments.filter(
-            (m) => m.id !== Id
-          );
+          console.log("Pathologie supprimé avec succès !");
+          this.pathologies = this.pathologies.filter((p) => p.id !== Id);
         } catch (error) {
-          console.error("Erreur lors de la suppression du medicament:", error);
+          console.error(
+            "Erreur lors de la suppression de la pathologie:",
+            error
+          );
         }
       }
     },
@@ -161,23 +159,23 @@ export default {
 
       try {
         await axios.post(
-          "http://192.168.224.1:8080/api/modele",
+          "http://192.168.224.1:8080/api/pathologie",
           { nom: this.nom },
           config
         );
 
         // Gérez la réponse de l'API (par exemple, affichez un message de succès)
-        console.log("Modele ajouté avec succès !");
+        console.log("pathologie ajoutée avec succès !");
         // Réinitialisez le champ de texte
         this.nom = "";
-        this.fetchMedocs();
+        this.fetchPathologie();
       } catch (error) {
-        console.error("Erreur lors de l'ajout du Model de medicament :", error);
+        console.error("Erreur lors de l'ajout de la pathologie :", error);
       }
     },
   },
   mounted() {
-    this.fetchMedocs();
+    this.fetchPathologie();
   },
 };
 </script>
@@ -234,10 +232,11 @@ export default {
 }
 
 .popup {
-  background: white;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
   z-index: 1000;
+}
+.header-search {
+  border-radius: 5px;
 }
 </style>
