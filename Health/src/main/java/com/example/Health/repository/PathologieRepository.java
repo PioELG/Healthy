@@ -11,4 +11,6 @@ import java.util.List;
 public interface PathologieRepository extends JpaRepository<Pathologie,Long> {
     @Query("SELECT p FROM Pathologie p ORDER BY p.nom ASC")
     List<Pathologie> OrderB();
+
+
 }

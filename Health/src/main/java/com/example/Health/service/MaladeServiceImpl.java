@@ -48,6 +48,11 @@ public class MaladeServiceImpl implements MaladeService{
     }
 
     @Override
+    public Malade LireSingle(String patient_id) {
+        return maladeRepository.Single(patient_id);
+    }
+
+    @Override
     public String Supprimer(String id) {
          maladeRepository.deleteById(id);
          return "malade bien supprimé";

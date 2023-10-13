@@ -30,6 +30,11 @@ public class MaladeController {
     {
         return  maladeService.Lire();
     }
+    @GetMapping("/single/{id}")
+    public Malade readSingle(@PathVariable String id)
+    {
+        return  maladeService.LireSingle(id);
+    }
 
     @GetMapping("/Nt")
     public List<Malade> readNt()

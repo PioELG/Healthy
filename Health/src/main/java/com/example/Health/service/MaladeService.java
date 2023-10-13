@@ -13,6 +13,8 @@ public interface MaladeService {
 
     Malade ModifierFT(Malade malade, String id);
 
+    Malade LireSingle(String patient_id);
+
     String Supprimer(String  id);
     List<Malade> LireNT();
     List<Malade> LireST(String doc);
