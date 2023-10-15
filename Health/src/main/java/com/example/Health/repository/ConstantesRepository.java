@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ConstantesRepository extends JpaRepository<Constante,Long> {
-    @Query("SELECT c FROM Constante c WHERE c.patient_id = ?1")
+    @Query("SELECT c FROM Constante c WHERE c.patient_id = ?1 ORDER BY c.id DESC")
     List<Constante> findByPatient_id(String patient_id);
 
     @Transactional

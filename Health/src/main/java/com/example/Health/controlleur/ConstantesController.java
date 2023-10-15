@@ -87,7 +87,8 @@ public class ConstantesController {
 
         }
 
-        return constantesService.LireP(id).get(constantesService.LireP(id).size() - 1);
+
+        return constantesService.LireP(id).get(0);
     }
 
   @GetMapping("/{id}")

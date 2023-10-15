@@ -5,10 +5,7 @@ import com.example.Health.model.Medicament;
 import com.example.Health.repository.MaladeRepository;
 import com.example.Health.repository.MedicamentRepository;
 import com.example.Health.repository.PosologieRepository;
-import com.example.Health.service.ConstantesService;
-import com.example.Health.service.EmailService;
-import com.example.Health.service.MedicamentService;
-import com.example.Health.service.PosologieService;
+import com.example.Health.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -27,6 +24,9 @@ public class MedicamentController {
     private  final MedicamentService medicamentService;
     @Autowired
     private final EmailService emailService;
+
+    @Autowired
+    private final EmailPrescription emailPrescription;
 
     @Autowired
     private final MaladeRepository maladeRepository;
@@ -87,6 +87,15 @@ public class MedicamentController {
         medicament.setDatePresc(LocalDate.now());
         return medicamentService.Creer(medicament);
     }
+
+        @PostMapping("/prescription/{id}")
+        public void sendMail(@PathVariable String id, Authentication authentication) throws jakarta.mail.MessagingException
+        {
+            Malade malade= new Malade();
+            malade= maladeRepository.Single(id);
+            emailPrescription.sendEmail(malade.getNom(),malade.getPrenom(),malade.getEmail());
+
+        }
     @PutMapping("/{id}")
     public Medicament update(@RequestBody Medicament medicament, @PathVariable Long id )
     {

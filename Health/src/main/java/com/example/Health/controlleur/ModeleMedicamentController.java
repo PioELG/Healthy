@@ -4,6 +4,9 @@ import com.example.Health.model.ModeleMedicament;
 import com.example.Health.service.ModeleMedicamentService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,11 +25,18 @@ public class ModeleMedicamentController {
 
     }
     @GetMapping
-    public List<ModeleMedicament> read()
+    public Page<ModeleMedicament> read(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size)
     {
-        return modeleMedicamentService.Lire();
-    }
+        Pageable pageable = PageRequest.of(page, size);
+        return modeleMedicamentService.Lire(pageable);
 
+
+    }
+    @GetMapping("/all")
+    public List<ModeleMedicament> LireAll()
+    {
+        return modeleMedicamentService.LireAll();
+    }
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id)
     {

@@ -3,6 +3,8 @@ package com.example.Health.service;
 import com.example.Health.model.Pathologie;
 import com.example.Health.repository.PathologieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +18,13 @@ public class PathologieServiceImpl implements PathologieService{
     }
 
     @Override
-    public List<Pathologie> Lire() {
-        return pathologieRepository.OrderB();
+    public Page<Pathologie> Lire(Pageable pageable){
+        return pathologieRepository.OrderB(pageable);
+    }
+
+    @Override
+    public List<Pathologie> LireAll() {
+        return pathologieRepository.findAll();
     }
 
     @Override
