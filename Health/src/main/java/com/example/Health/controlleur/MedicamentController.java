@@ -88,8 +88,8 @@ public class MedicamentController {
         return medicamentService.Creer(medicament);
     }
 
-        @PostMapping("/prescription/{id}")
-        public void sendMail(@PathVariable String id, Authentication authentication) throws jakarta.mail.MessagingException
+        @GetMapping("/prescription/{id}")
+        public void sendMail(@PathVariable String id) throws jakarta.mail.MessagingException
         {
             Malade malade= new Malade();
             malade= maladeRepository.Single(id);
