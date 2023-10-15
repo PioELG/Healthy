@@ -8,7 +8,6 @@
       <div class="form-group" v-if="!showPosologie">
         <label for="medicament">Médicament :</label>
 
-        <!-- <input type="text" id="medicament" name="medicament"  v-model="nom"  pattern=".*\S+.*" title="Ce champ ne peut pas être vide."> -->
         <input
           type="text"
           v-model="searchInput"

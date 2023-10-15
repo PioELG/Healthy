@@ -1,6 +1,5 @@
 <template>
   <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
-    <!-- Header -->
 
     <main>
       <br />
@@ -24,7 +23,6 @@
           <i class="fa fa-trash" style="color: red"></i>
         </span>
 
-        <!-- Ajoutez d'autres messages ici -->
       </div>
       <div class="message-input">
         <input
@@ -36,7 +34,6 @@
       </div>
     </main>
 
-    <!-- End page content -->
   </div>
 </template>
 
@@ -45,10 +42,9 @@ import axios from "axios";
 import keycloak from "../main.js";
 
 export default {
-  name: "Message", // Remplacez par le nom de votre composant
+  name: "Message", 
   data() {
     return {
-      // Les données de votre composant vont ici
       messages: [],
       msg: "",
     };
@@ -68,17 +64,15 @@ export default {
     },
 
     async submitMessage() {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token; 
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`, 
         },
       };
       const id = this.$route.params.id;
 
-      // Envoie les données à votre API Backend en utilisant Axios
       try {
         await axios.post(
           "http://192.168.224.1:8080/api/message/doc",
@@ -91,29 +85,25 @@ export default {
           config
         );
 
-        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
         console.log("message envoyé avec succès !");
         this.fetchMessage();
-        // Réinitialisez le champ de texte
         this.msg = "";
       } catch (error) {
         console.error("Erreur lors de l'ajout du message :", error);
-        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
       }
     },
     fetchMessage() {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token; 
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`, 
         },
       };
       const id = this.$route.params.id;
 
       axios
-        .get(`http://192.168.224.1:8080/api/message/MedecinMP/${id}`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+        .get(`http://192.168.224.1:8080/api/message/MedecinMP/${id}`, config) 
         .then((response) => {
           this.messages = response.data;
         })
@@ -125,39 +115,32 @@ export default {
         });
     },
     async supprimerMessage(MessageId) {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token; 
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`, 
         },
       };
       if (confirm("Êtes-vous sûr de vouloir supprimer ce Message ?")) {
         try {
-          // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
           await axios.delete(
             `http://192.168.224.1:8080/api/message/${MessageId}`,
             config
           );
 
-          // Gérez la réponse de l'API (par exemple, affichez un message de succès)
           console.log("Message supprimé avec succès !");
 
-          // Mettez à jour la liste des conseils en supprimant le conseil supprimé
           this.messages = this.messages.filter((m) => m.id !== MessageId);
         } catch (error) {
           console.error("Erreur lors de la suppression du message :", error);
-          // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
         }
       }
     },
   },
   mounted() {
-    // Les propriétés calculées de votre composant vont ici
     this.fetchMessage();
   },
-  // Autres options de composant (comme "props", "watch", etc.) vont ici
 };
 </script>
 
@@ -171,7 +154,6 @@ h4,
 h5 {
   font-family: "Raleway", sans-serif;
 }
-/* Styles de la page de chat */
 .chat {
   border: none;
 
@@ -186,7 +168,7 @@ h5 {
   background-color: #b2e0ff; /* Bleu pour les messages du patient */
   color: #000; /* Texte noir pour les messages du patient */
   text-align: right;
-  /* Ajuste la div à la taille du texte */
+  
 }
 
 .patient {

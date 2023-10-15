@@ -87,7 +87,6 @@
           ref="overlayBg"
         ></div>
       </div>
-      <!-- Overlay effect when opening sidebar on small screens -->
     </body>
   </html>
 </template>
@@ -97,7 +96,7 @@ import keycloak from "../main.js";
 import jwtDecode from "jwt-decode";
 
 export default {
-  name: "SideBarMedecin", // Remplacez par le nom de votre composant
+  name: "SideBarMedecin",
   data() {
     return {
       decodedToken: {},
@@ -130,14 +129,14 @@ h5 {
   font-family: "Raleway", sans-serif;
 }
 .w3-container-rounded {
-  border-radius: 10px; /* Vous pouvez ajuster le rayon selon vos préférences */
+  border-radius: 10px; 
 }
 .w3-container-rounded:hover {
   transform: translate(
     5px,
     -5px
-  ); /* Déplacez la div vers le bas et vers la droite */
-  transition: transform 0.2s ease; /* Ajoutez une transition fluide */
+  );
+  transition: transform 0.2s ease; 
 }
 .link {
   text-decoration: none;

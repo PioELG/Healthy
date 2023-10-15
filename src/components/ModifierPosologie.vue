@@ -54,7 +54,7 @@
 import keycloak from "@/main";
 import axios from "axios";
 export default {
-  name: "ModifierPosologie", // Remplacez par le nom de votre composant
+  name: "ModifierPosologie", 
   data() {
     return {
       quantite: "",
@@ -65,12 +65,11 @@ export default {
   },
   methods: {
     async submitForm() {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token;
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`, 
         },
       };
       const id = this.$route.params.id;
@@ -98,13 +97,11 @@ export default {
           window.history.back();
         } catch (error) {
           console.error("Erreur lors de la modif de la posologie:", error);
-          // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
         }
       }
     },
   },
   mounted() {},
-  // Autres options de composant (comme "props", "watch", etc.) vont ici
 };
 </script>
 
@@ -166,12 +163,12 @@ select {
 }
 
 .posologie label {
-  width: 100%; /* Largeur du label réduite pour laisser plus d'espace au sélecteur */
+  width: 100%; 
   margin-right: 70 px;
 }
 
 .posologie select {
-  width: 100%; /* Largeur du sélecteur ajustée */
+  width: 100%; 
 }
 
 .btn {
@@ -180,7 +177,7 @@ select {
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 10px; /* Augmentation du rayon pour un aspect plus arrondi */
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -189,8 +186,8 @@ select {
 }
 
 #ajouterPrescription {
-  margin-top: 20px; /* Espacement entre les boutons */
-  background-color: #009900; /* Couleur pour le bouton "Ajouter Prescription" */
+  margin-top: 20px; 
+  background-color: #009900; 
 }
 
 @media (max-width: 768px) {

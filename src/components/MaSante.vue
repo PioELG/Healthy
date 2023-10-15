@@ -24,22 +24,19 @@
   <script>
 
   export default {
-    name: 'MaSante', // Remplacez par le nom de votre composant
+    name: 'MaSante', 
     data() {
       return {
-        // Les données de votre composant vont ici
+      
 
       };
     },
     methods: {
-      // Les méthodes de votre composant vont ici
     },
     mounted(){
-      // Les propriétés calculées de votre composant vont ici
      
  }
     ,
-    // Autres options de composant (comme "props", "watch", etc.) vont ici
   };
   </script>
   

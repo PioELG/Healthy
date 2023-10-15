@@ -52,7 +52,7 @@
               @click="ouvrirFormulaire(malade, malade.id)"
               v-if="malade.statut === 'Non traité'"
             ></i>
-            &nbsp;&nbsp;&nbsp;<!-- Icône de modification -->
+            &nbsp;&nbsp;&nbsp;
           </td>
         </tr>
         <tr></tr>
@@ -98,7 +98,6 @@
     </div>
     <br />
 
-    <!-- End page content -->
   </div>
 </template>
 
@@ -108,7 +107,7 @@ import jwtDecode from "jwt-decode";
 import axios from "axios";
 
 export default {
-  name: "ListePatient", // Remplacez par le nom de votre composant
+  name: "ListePatient", 
 
   data() {
     return {

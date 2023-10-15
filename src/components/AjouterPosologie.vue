@@ -55,7 +55,7 @@
 import keycloak from "@/main";
 import axios from "axios";
 export default {
-  name: "AjouterPosologie", // Remplacez par le nom de votre composant
+  name: "AjouterPosologie", 
   data() {
     return {
       quantite: "",
@@ -118,13 +118,13 @@ export default {
 
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`, 
         },
       };
       const id = this.$route.params.id;
 
       axios
-        .get(`http://192.168.224.1:8080/api/medicament/unique/${id}`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+        .get(`http://192.168.224.1:8080/api/medicament/unique/${id}`, config) 
         .then((response) => {
           this.medicament = response.data;
         })
@@ -140,7 +140,7 @@ export default {
     this.fetchMedicament();
     console.log(this.medicament);
   },
-  // Autres options de composant (comme "props", "watch", etc.) vont ici
+  
 };
 </script>
 
@@ -202,12 +202,12 @@ select {
 }
 
 .posologie label {
-  width: 100%; /* Largeur du label réduite pour laisser plus d'espace au sélecteur */
+  width: 100%; 
   margin-right: 70 px;
 }
 
 .posologie select {
-  width: 100%; /* Largeur du sélecteur ajustée */
+  width: 100%; 
 }
 
 .btn {
@@ -216,7 +216,7 @@ select {
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 10px; /* Augmentation du rayon pour un aspect plus arrondi */
+  border-radius: 10px; 
   cursor: pointer;
 }
 
@@ -225,8 +225,8 @@ select {
 }
 
 #ajouterPrescription {
-  margin-top: 20px; /* Espacement entre les boutons */
-  background-color: #009900; /* Couleur pour le bouton "Ajouter Prescription" */
+  margin-top: 20px; 
+  background-color: #009900; 
 }
 
 @media (max-width: 768px) {
@@ -245,6 +245,6 @@ select {
 
 .w3-main {
   height: 100%;
-  min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  min-height: 100vh; 
 }
 </style>

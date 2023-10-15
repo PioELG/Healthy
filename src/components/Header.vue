@@ -16,7 +16,6 @@
       />
     </head>
     <body class="w3-light-grey">
-      <!-- Top container -->
       <div class="w3-bar w3-top w3-black w3-large" style="z-index: 4">
         <aside :class="{ active: active }">
           <span
@@ -67,14 +66,14 @@ h5 {
   font-family: "Raleway", sans-serif;
 }
 .w3-container-rounded {
-  border-radius: 10px; /* Vous pouvez ajuster le rayon selon vos préférences */
+  border-radius: 10px; 
 }
 .w3-container-rounded:hover {
   transform: translate(
     5px,
     -5px
-  ); /* Déplacez la div vers le bas et vers la droite */
-  transition: transform 0.2s ease; /* Ajoutez une transition fluide */
+  ); 
+  transition: transform 0.2s ease; 
 }
 .w3-bar w3-top w3-black w3-large {
   z-index: 4;

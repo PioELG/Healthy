@@ -68,37 +68,32 @@ const config = {
 };
 const id = this.$route.params.id;
 
-    // Envoie les données à votre API Backend en utilisant Axios
     try {
        await axios.post('http://192.168.224.1:8080/api/message/patient', {contenu:this.msg},config);
        await axios.post('http://192.168.224.1:8080/api/notification/patient', { contexte:"un nouveau message"},config);
 
 
-      // Gérez la réponse de l'API (par exemple, affichez un message de succès)
       console.log('message envoyé avec succès !');
       this.fetchMessage();
-      // Réinitialisez le champ de texte
       this.msg = '';
       
       
     } catch (error) {
       console.error('Erreur lors de l\'ajout du message :', error);
-      // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
     }
 },  
 fetchMessage() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
 
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
 
 
 
-  axios.get('http://192.168.224.1:8080/api/message/Patient', config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get('http://192.168.224.1:8080/api/message/Patient', config) 
     .then(response => {
       this.messages = response.data;
       
@@ -109,27 +104,22 @@ fetchMessage() {
     
 },
 async supprimerMessage(MessageId) {
-    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+    const accessToken = keycloak.token; 
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
 const config = {
   headers: {
-    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    'Authorization': `Bearer ${accessToken}` 
   }
 };
     if (confirm("Êtes-vous sûr de vouloir supprimer ce Message ?")) {
       try {
-        // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
          await axios.delete(`http://192.168.224.1:8080/api/message/${MessageId}`,config);
 
-        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
         console.log('Message supprimé avec succès !');
 
-        // Mettez à jour la liste des conseils en supprimant le conseil supprimé
         this.messages = this.messages.filter(m => m.id !== MessageId);
       } catch (error) {
         console.error('Erreur lors de la suppression du message :', error);
-        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
       }
     }
   }
@@ -139,17 +129,14 @@ const config = {
         
        },
        mounted(){
-         // Les propriétés calculées de votre composant vont ici
          this.fetchMessage();
        
        },
-       // Autres options de composant (comme "props", "watch", etc.) vont ici
      };
      </script>
      
      <style scoped>
      html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-/* Styles de la page de chat */
 .chat {
     border: none;
     

@@ -11,7 +11,6 @@
     name:"NouvellePatient",
     data() {
       return {
-        // Les données de votre composant vont ici
         notifs:[],
         loading: false ,
        

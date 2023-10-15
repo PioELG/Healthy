@@ -96,14 +96,13 @@ import keycloak from "../main.js";
 import jwtDecode from "jwt-decode";
 
 export default {
-  name: "SideBarPatient", // Remplacez par le nom de votre composant
+  name: "SideBarPatient", 
   data() {
     return {
       decodedToken: {},
     };
   },
   mounted() {
-    // Initialiser les variables avec les éléments DOM
 
     if (keycloak.token) {
       this.decodedToken = jwtDecode(keycloak.token);
@@ -111,9 +110,7 @@ export default {
       this.$router.push("/");
     }
   },
-  created() {
-    // Initialiser les variables avec les éléments DOM
-  },
+  
   methods: {
     logout() {
       this.$router.push("/");
@@ -135,14 +132,14 @@ h5 {
   font-family: "Raleway", sans-serif;
 }
 .w3-container-rounded {
-  border-radius: 10px; /* Vous pouvez ajuster le rayon selon vos préférences */
+  border-radius: 10px; 
 }
 .w3-container-rounded:hover {
   transform: translate(
     5px,
     -5px
-  ); /* Déplacez la div vers le bas et vers la droite */
-  transition: transform 0.2s ease; /* Ajoutez une transition fluide */
+  ); 
+  transition: transform 0.2s ease; 
 }
 .link {
   text-decoration: none;

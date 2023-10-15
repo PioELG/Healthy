@@ -11,7 +11,7 @@ import keycloak from '../main.js';
   import jwtDecode from 'jwt-decode';
 
   export default {
-    name: 'Nouvelle', // Remplacez par le nom de votre composant
+    name: 'Nouvelle', 
     components:
     {
         NouvelleMedecin,
@@ -19,18 +19,15 @@ import keycloak from '../main.js';
     },
     data() {
       return {
-        // Les données de votre composant vont ici
         doc:'',
           decodedToken:{},
           roles:{}
       };
     },
     methods: {
-      // Les méthodes de votre composant vont ici
       
     },
     mounted(){
-        // Les propriétés calculées de votre composant vont ici
         
         if (keycloak.token) {
      this.decodedToken = jwtDecode(keycloak.token);
@@ -51,7 +48,6 @@ import keycloak from '../main.js';
        
    }
       },
-    // Autres options de composant (comme "props", "watch", etc.) vont ici
   };
   </script>
   

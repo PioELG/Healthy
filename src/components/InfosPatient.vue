@@ -410,30 +410,31 @@ const config = {
    
 },
 
-/*sendMail()
-{
-  const accessToken = keycloak.token; 
+async sendMail() {
+      const accessToken = keycloak.token;
 
-const config = {
-  headers: {
-    Authorization: `Bearer ${accessToken}`, 
-  },
-};
-const id = this.$route.params.id;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      const id = this.$route.params.id;
 
-try {
-   axios.post(
-    `http://192.168.224.1:8080/api/medicament/prescription/${id}`,
-    config
-  );
+       
+        
+        try {
 
-  console.log("Mail send !");
- 
-} catch (error) {
-  console.error("Erreur lors de l'envoi du mail :", error);
-}
+           await axios.get(
+            `http://192.168.224.1:8080/api/medicament/prescription/${id}`,
+            config
+          );
+          
+        } catch (error) {
+          console.error("Erreur lors de l'ajout de la presc:", error);
+        }
 
-},*/
+        
+    },
       
     },
         

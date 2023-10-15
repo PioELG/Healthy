@@ -26,7 +26,7 @@
           <td>
             <router-link :to="'/InfosPatient/' + malade.id">
               <i class="fa fa-eye" style="color: blue"></i> </router-link
-            ><!-- Icône de modification -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <router-link :to="'/Message/' + malade.id"
               ><i class="fa fa-envelope"></i
@@ -44,7 +44,6 @@
     </div>
     <br />
 
-    <!-- End page content -->
   </div>
 </template>
 
@@ -198,11 +197,11 @@ export default {
 }
 
 .infos {
-  display: none; /* Masquer les informations au départ */
+  display: none; 
 }
 
 .fa-pencil:hover .infos {
-  display: block; /* Afficher les informations lorsque survolé */
+  display: block; 
 }
 .w3-main {
   height: 100%;

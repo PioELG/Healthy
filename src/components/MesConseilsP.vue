@@ -46,25 +46,23 @@
   import keycloak from '@/main';
   import axios from 'axios';
   export default {
-    name: 'MesConseils', // Remplacez par le nom de votre composant
+    name: 'MesConseils', 
     data() {
       return {
-        // Les données de votre composant vont ici
        conseils:[]
       };
     },
     methods: {
         fetchConseilsDuJour() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
 
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
 
-  axios.get('http://192.168.224.1:8080/api/conseils/doc', config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get('http://192.168.224.1:8080/api/conseils/doc', config) 
     .then(response => {
       this.conseils = response.data;
     })
@@ -78,7 +76,6 @@
     mounted() {
      this.fetchConseilsDuJour();
     },
-    // Autres options de composant (comme "props", "watch", etc.) vont ici
   };
   </script>
   

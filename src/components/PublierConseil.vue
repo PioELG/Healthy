@@ -16,9 +16,7 @@
       />
     </head>
     <body class="w3-light-grey">
-      <!-- Top container -->
       <div class="w3-main" style="margin-left: 300px; margin-top: 43px">
-        <!-- Header -->
         <header class="w3-container" style="padding-top: 22px">
           <h5>
             <b
@@ -47,7 +45,6 @@
           </form>
         </div>
 
-        <!-- End page content -->
       </div>
     </body>
   </html>
@@ -57,21 +54,19 @@
 import keycloak from "@/main";
 import axios from "axios";
 export default {
-  name: "PublierConseil", // Remplacez par le nom de votre composant
+  name: "PublierConseil",
   data() {
     return {
-      // Les données de votre composant vont ici
       nouveauConseil: "",
     };
   },
   methods: {
     async submitForm() {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token; 
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`, 
         },
       };
 
@@ -87,21 +82,14 @@ export default {
           config
         );
 
-        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
         console.log("Conseil ajouté avec succès !");
-        // Réinitialisez le champ de texte
         this.nouveauConseil = "";
       } catch (error) {
         console.error("Erreur lors de l'ajout du conseil :", error);
-        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
       }
     },
-    // Les méthodes de votre composant vont ici
   },
-  computed: {
-    // Les propriétés calculées de votre composant vont ici
-  },
-  // Autres options de composant (comme "props", "watch", etc.) vont ici
+ 
 };
 </script>
 

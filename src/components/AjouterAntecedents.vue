@@ -121,17 +121,16 @@ export default {
     }
   },
     fetchPathologie() {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token; 
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`, 
         },
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/pathologie/all", config) // Utilisez la configuration avec l'en-tête d'autorisation
+        .get("http://192.168.224.1:8080/api/pathologie/all", config) 
         .then((response) => {
           this.pathologies = response.data;
         })

@@ -12,9 +12,7 @@
     </head>
     <body class="w3-light-grey">
     
-    <!-- Top container -->
     <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-  <!-- Header -->
         <header class="w3-container" style="padding-top:22px">
           <h5><b><i class="fa fa-heart fa-fw"></i> <router-link to="/MesConseils">Mes Conseils</router-link></b></h5>
         </header>
@@ -30,7 +28,6 @@
               </form>
           </section>
       </main>
-        <!-- End page content -->
       </div>
     </body>
     </html>
@@ -40,10 +37,9 @@
   import keycloak from '@/main';
   import axios from 'axios';
   export default {
-    name: 'ModifierConseil', // Remplacez par le nom de votre composant
+    name: 'ModifierConseil', 
     data() {
       return {
-        // Les données de votre composant vont ici
         nouveauConseil:'',
      
       };
@@ -51,43 +47,33 @@
     methods: {
 
         async submitForm() {
-            const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+            const accessToken = keycloak.token; 
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
 const config = {
   headers: {
-    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    'Authorization': `Bearer ${accessToken}` 
   }
 };
 
 
-    // Vérifiez si le champ "nouveauConseil" est vide
     if (!this.nouveauConseil) {
       alert('Veuillez entrer un conseil de santé.');
       return;
     }
 
-    // Envoie les données à votre API Backend en utilisant Axios
     try {
        await axios.post('http://192.168.224.1:8080/api/conseils', { contenu: this.nouveauConseil },config);
 
-      // Gérez la réponse de l'API (par exemple, affichez un message de succès)
       console.log('Conseil ajouté avec succès !');
-      // Réinitialisez le champ de texte
       this.nouveauConseil = '';
     } catch (error) {
       console.error('Erreur lors de l\'ajout du conseil :', error);
-      // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
     }
   }
-      // Les méthodes de votre composant vont ici
       
       
     },
-    computed: {
-      // Les propriétés calculées de votre composant vont ici
-    },
-    // Autres options de composant (comme "props", "watch", etc.) vont ici
+  
   };
   </script>
   

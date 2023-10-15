@@ -56,7 +56,6 @@
                         style="color: red"
                         @click="supprimerConseil(conseil.id)"
                       ></i>
-                      <!-- Icône de suppression -->
                     </td>
                   </tr>
                 </table>
@@ -68,7 +67,6 @@
                     required
                   ></textarea>
                   &nbsp;&nbsp;&nbsp;
-                  <!-- Bouton Enregistrer en mode édition -->
                   <button
                     v-if="conseil.editMode"
                     @click="enregistrerConseil(conseil)"
@@ -90,26 +88,24 @@
 import keycloak from "@/main";
 import axios from "axios";
 export default {
-  name: "MesConseils", // Remplacez par le nom de votre composant
+  name: "MesConseils",
   data() {
     return {
-      // Les données de votre composant vont ici
       conseils: [],
     };
   },
   methods: {
     fetchConseilsDuJour() {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token; 
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`, 
         },
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/conseils", config) // Utilisez la configuration avec l'en-tête d'autorisation
+        .get("http://192.168.224.1:8080/api/conseils", config) 
         .then((response) => {
           this.conseils = response.data;
         })
@@ -152,30 +148,25 @@ export default {
         });
     },
     async supprimerConseil(conseilId) {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token; 
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`,
         },
       };
       if (confirm("Êtes-vous sûr de vouloir supprimer ce conseil ?")) {
         try {
-          // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
           await axios.delete(
             `http://192.168.224.1:8080/api/conseils/${conseilId}`,
             config
           );
 
-          // Gérez la réponse de l'API (par exemple, affichez un message de succès)
           console.log("Conseil supprimé avec succès !");
 
-          // Mettez à jour la liste des conseils en supprimant le conseil supprimé
           this.conseils = this.conseils.filter((c) => c.id !== conseilId);
         } catch (error) {
           console.error("Erreur lors de la suppression du conseil :", error);
-          // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
         }
       }
     },
@@ -183,7 +174,6 @@ export default {
   mounted() {
     this.fetchConseilsDuJour();
   },
-  // Autres options de composant (comme "props", "watch", etc.) vont ici
 };
 </script>
 

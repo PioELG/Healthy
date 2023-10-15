@@ -75,23 +75,17 @@
    
 },
 async AjouterMedicament(MedicamentId) {
-    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+    const accessToken = keycloak.token;
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
 const config = {
   headers: {
-    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    'Authorization': `Bearer ${accessToken}` 
   }
 };
     if (confirm("Êtes-vous sûr de vouloir ajouter ce médicament à la prescription ?")) {
       try {
         
-        /* await axios.delete(`http://192.168.224.1:8080/api/medicament/${MedicamentId}`,config);
-
-       
-        console.log('prescription supprimée avec succès !');
-
-        this.medicaments = this.medicaments.filter(m => m.id !== MedicamentId);*/
+        
 
         await axios.put(`http://192.168.224.1:8080/api/medicament/statut/${MedicamentId}`,{prescription:"Oui"},config);
         this.fetchMedicaments();
@@ -100,7 +94,6 @@ const config = {
 
       } catch (error) {
         console.error('Erreur lors de la suppression de la prescription :', error);
-        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
       }
     }
   },

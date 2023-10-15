@@ -42,7 +42,8 @@
         />
         &nbsp;&nbsp;&nbsp;
         <!-- Autres champs... -->
-        <button @click="submitForm" class="path">Enregistrer</button> &nbsp;&nbsp;&nbsp;
+        <button @click="submitForm" class="path">Enregistrer</button>
+        &nbsp;&nbsp;&nbsp;
         <button @click="fermerPopup" class="path">Annuler</button>
       </div>
     </div>
@@ -54,7 +55,7 @@
 
             <th>Actions</th>
           </tr>
-          <tr v-for="pathologie in pathologies" :key="pathologie.id">
+          <tr v-for="pathologie in paginatedPathologies" :key="pathologie.id">
             <td>{{ pathologie.nom }}</td>
             <td>
               <i
@@ -68,7 +69,12 @@
       </div>
       <br />
       <div class="pagination">
-        <button @click="previousPage" :disabled="currentPage === 0" class="page">
+        <button
+          @click="previousPage"
+          :disabled="currentPage === 0"
+          class="page"
+          style="margin-left: 10px"
+        >
           Précédent</button
         >&nbsp;&nbsp;&nbsp;
         <span style="margin-left: 100px">Page {{ currentPage + 1 }}</span>
@@ -76,7 +82,8 @@
           @click="nextPage"
           :disabled="currentPage === totalPages - 1"
           style="margin-left: 200px"
-          class="page">
+          class="page"
+        >
           Suivant
         </button>
       </div>
@@ -93,6 +100,8 @@ export default {
   data() {
     return {
       pathologies: [],
+      pathologiesAll: [],
+      paginatedPathologies: [],
       showPopup: false,
       showError: false,
       nom: "",
@@ -117,9 +126,9 @@ export default {
     filtrerPathologies() {
       const recherche = this.recherche.toLowerCase();
       if (recherche === "") {
-        this.fetchPathologie();
+        this.paginatedPathologies = this.pathologies;
       } else {
-        this.pathologies = this.pathologies.filter((pathologie) => {
+        this.paginatedPathologies = this.pathologiesAll.filter((pathologie) => {
           return pathologie.nom.toLowerCase().includes(recherche);
         });
       }
@@ -148,10 +157,32 @@ export default {
         .then((response) => {
           this.pathologies = response.data.content;
           this.totalPages = response.data.totalPages;
+          this.paginatedPathologies = response.data.content;
         })
         .catch((error) => {
           console.error(
             "Erreur lors de la récupération des pathologies:",
+            error
+          );
+        });
+    },
+    fetchAll() {
+      const accessToken = keycloak.token;
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      axios
+        .get(`http://192.168.224.1:8080/api/pathologie/all`, config)
+        .then((response) => {
+          this.pathologiesAll = response.data;
+        })
+        .catch((error) => {
+          console.error(
+            "Erreur lors de la récupération des pathologies all:",
             error
           );
         });
@@ -211,6 +242,8 @@ export default {
   },
   mounted() {
     this.fetchPathologie();
+    this.fetchAll();
+    console.log(this.pathologiesAll);
   },
 };
 </script>
@@ -283,8 +316,7 @@ export default {
   border-radius: 10px;
   cursor: pointer;
 }
-.page
-{
+.page {
   display: inline-block;
   padding: 10px 20px;
   background-color: #0d8215;
@@ -292,6 +324,5 @@ export default {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-
 }
 </style>

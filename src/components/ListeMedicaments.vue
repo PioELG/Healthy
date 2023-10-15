@@ -55,7 +55,7 @@
             <th>Actions</th>
           </tr>
           <tr
-            v-for="modeleMedicament in modeleMedicaments"
+            v-for="modeleMedicament in paginatedMed"
             :key="modeleMedicament.id"
           >
             <td>{{ modeleMedicament.nom }}</td>
@@ -72,7 +72,12 @@
       <br />
     </div>
     <div class="pagination">
-      <button @click="previousPage" :disabled="currentPage === 0" class="page">
+      <button
+        @click="previousPage"
+        :disabled="currentPage === 0"
+        class="page"
+        style="margin-left: 10px"
+      >
         Précédent
       </button>
       <span style="margin-left: 100px">Page {{ currentPage + 1 }}</span>
@@ -98,6 +103,7 @@ export default {
     return {
       modeleMedicaments: [],
       allModel: [],
+      paginatedMed: [],
       showPopup: false,
       showError: false,
       nom: "",
@@ -122,13 +128,11 @@ export default {
     filtrerMedicaments() {
       const recherche = this.recherche.toLowerCase();
       if (recherche === "") {
-        this.fetchMedocs();
+        this.paginatedMed = this.modeleMedicaments;
       } else {
-        this.modeleMedicaments = this.modeleMedicaments.filter(
-          (modeleMedicament) => {
-            return modeleMedicament.nom.toLowerCase().includes(recherche);
-          }
-        );
+        this.paginatedMed = this.allModel.filter((modeleMedicament) => {
+          return modeleMedicament.nom.toLowerCase().includes(recherche);
+        });
       }
     },
     ouvrirPopup() {
@@ -154,6 +158,7 @@ export default {
         .then((response) => {
           this.modeleMedicaments = response.data.content;
           this.totalPages = response.data.totalPages;
+          this.paginatedMed = response.data.content;
         })
         .catch((error) => {
           console.error(
@@ -239,6 +244,7 @@ export default {
   },
   mounted() {
     this.fetchMedocs();
+    this.fetchAll();
   },
 };
 </script>

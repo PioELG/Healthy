@@ -47,43 +47,37 @@
   import keycloak from '@/main';
   import axios from 'axios';
   export default {
-    name: 'ModifierRdv', // Remplacez par le nom de votre composant
+    name: 'ModifierRdv', 
     data() {
       return {
-        // Les données de votre composant vont ici
        date:'',
        heure:''
       };
     },
     methods: {
         async submitForm() {
-            const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+            const accessToken = keycloak.token; 
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
 const config = {
   headers: {
-    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    'Authorization': `Bearer ${accessToken}` 
   }
 };
 const id = this.$route.params.id;
 
 
 
-    // Envoie les données à votre API Backend en utilisant Axios
     try {
         
        await axios.put(`http://192.168.224.1:8080/api/rdv/${id}`, { date:this.date,heure:this.heure,malade_id:id},config);
 
-      // Gérez la réponse de l'API (par exemple, affichez un message de succès)
       console.log('rdv ajouté avec succès !');
-      // Réinitialisez le champ de texte
       this.date = '';
       this.heure = '';
       window.history.back();
       
     } catch (error) {
       console.error('Erreur lors de la modif du rdv :', error);
-      // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
     }
   }
     
@@ -93,7 +87,6 @@ const id = this.$route.params.id;
     mounted() {
     
     },
-    // Autres options de composant (comme "props", "watch", etc.) vont ici
   };
   </script>
   

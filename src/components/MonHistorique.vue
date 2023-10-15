@@ -50,7 +50,7 @@
 import keycloak from "@/main";
 import axios from "axios";
 export default {
-  name: "MesConseils", // Remplacez par le nom de votre composant
+  name: "MesConseils", 
   data() {
     return {
       medicaments: [],
@@ -84,7 +84,7 @@ export default {
         this.medicaments = response.data;
 
         axios
-          .get("http://192.168.224.1:8080/api/malade", config) // Utilisez la configuration avec l'en-tête d'autorisation
+          .get("http://192.168.224.1:8080/api/malade", config) 
 
           .then((response) => {
             this.malades = response.data;
@@ -105,7 +105,6 @@ export default {
   mounted() {
     this.fetchMedicaments();
   },
-  // Autres options de composant (comme "props", "watch", etc.) vont ici
 };
 </script>
 
