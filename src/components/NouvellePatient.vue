@@ -119,7 +119,7 @@
     name:"NouvellePatient",
     data() {
       return {
-        // Les données de votre composant vont ici
+        
         notifs:[],
         rdvs:[],
         rdvDemain:[]
@@ -128,16 +128,16 @@
     },
     methods: {
       fetchNotif() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
 
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
 
-  axios.get('http://192.168.224.1:8080/api/notification/patient', config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get('http://192.168.224.1:8080/api/notification/patient', config) 
     .then(response => {
       this.notifs = response.data;
     })
@@ -146,27 +146,23 @@
     });
 },
 async supprimerNotification(NotifId) {
-    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+    const accessToken = keycloak.token; 
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
+
 const config = {
   headers: {
-    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    'Authorization': `Bearer ${accessToken}` 
   }
 };
     if (confirm("Êtes-vous sûr de vouloir supprimer cette notification ?")) {
       try {
-        // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
          await axios.delete(`http://192.168.224.1:8080/api/notification/${NotifId}`,config);
 
-        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
         console.log('prescription supprimée avec succès !');
 
-        // Mettez à jour la liste des conseils en supprimant le conseil supprimé
         this.notifs = this.notifs.filter(n => n.id !== NotifId);
       } catch (error) {
         console.error('Erreur lors de la suppression de la notification :', error);
-        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
       }
     }
   },
@@ -182,7 +178,6 @@ const config = {
         const response = await axios.get('http://192.168.224.1:8080/api/rdv/patient',config);
         this.rdvs = response.data;
 
-        // Filtrer les rendez-vous pour obtenir ceux du lendemain
         const demain = new Date();
         demain.setDate(demain.getDate() + 1);
 
@@ -224,7 +219,7 @@ const config = {
   .w3-main
   {
     height: 100%;
-    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+    min-height: 100vh; 
   }
   .w3-row-padding
   {

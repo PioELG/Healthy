@@ -1,7 +1,7 @@
 <template>
-  <div class="w3-main" style="margin-left: 300px; margin-top: 0px">
-    <h3 style="text-align: center">Ajouter un nouveau médicament</h3>
+  <div class="w3-main" style="margin-left: 300px">
     <br />
+    <h3 style="text-align: center">Ajouter un nouveau médicament</h3>
 
     <p style="text-align: center">{{ this.nom }}</p>
     <div class="container" style="margin: 50px">
@@ -250,7 +250,7 @@ export default {
       };
 
       axios
-        .get(`http://192.168.224.1:8080/api/modele`, config)
+        .get(`http://192.168.224.1:8080/api/modele/all`, config)
         .then((response) => {
           this.modeles = response.data;
         })

@@ -39,7 +39,7 @@
           </div>
           <hr />
           <div class="w3-container">
-            <h5>Dashboard</h5>
+            <h5 style="margin-left: 7px"><strong>Dashboard</strong></h5>
           </div>
           <div class="w3-bar-block">
             <a
@@ -70,8 +70,12 @@
               </a></router-link
             >
             <br />
-            <a href="#" class="w3-bar-item w3-button w3-padding" @click="logout"
-              ><i class="fa fa-sign-out fa-fw"></i>  Log Out</a
+            <a
+              href="#"
+              class="w3-bar-item w3-button w3-padding"
+              @click="logout"
+            >
+              &nbsp;<strong> Log Out </strong> </a
             ><br /><br />
           </div>
         </nav>
@@ -104,6 +108,7 @@ export default {
     if (keycloak.token) {
       this.decodedToken = jwtDecode(keycloak.token);
       console.log(this.decodedToken.given_name);
+      this.$router.push("/");
     }
   },
   created() {
@@ -111,6 +116,8 @@ export default {
   },
   methods: {
     logout() {
+      this.$router.push("/");
+
       keycloak.logout();
     },
   },

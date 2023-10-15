@@ -2,7 +2,7 @@
   
     <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
-        <!-- Header -->
+        
       <br> <br>
       
       <div class="container" v-if="patient.length !== 0 && constante.length !== 0 ">
@@ -72,7 +72,11 @@
                 <router-link :to="'/AjouterPrescription/' +$route.params.id">
                 <i class="fa fa-plus" style="color: green;"></i> 
               </router-link>
+              </td> 
+              &nbsp;&nbsp;&nbsp;
               
+              <td>
+                <i class="fa fa-paper-plane" style="color: rgb(0, 0, 0);" @click="sendMail"></i>
               </td>
               
             </tr>
@@ -149,11 +153,10 @@
     import axios from 'axios';
   
     export default {
-      name: 'InfosPatient', // Remplacez par le nom de votre composant
+      name: 'InfosPatient', 
       
       data() {
         return {
-          // Les données de votre composant vont ici
           patient:[],
           loading: false ,
           constante:[],
@@ -178,7 +181,7 @@
   
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
   const id = this.$route.params.id;
@@ -186,7 +189,7 @@
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/malade/${id}`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get(`http://192.168.224.1:8080/api/malade/${id}`, config) 
     .then(response => {
       
        
@@ -201,12 +204,11 @@
    
 },
 fetchConstante() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
         
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
   const id = this.$route.params.id;
@@ -216,7 +218,7 @@ fetchConstante() {
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/constantes/${id}`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get(`http://192.168.224.1:8080/api/constantes/${id}`, config) 
     .then(response => {
       
        
@@ -231,12 +233,12 @@ fetchConstante() {
    
 },
 fetchSymptomes() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
         
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+ 
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
   const id = this.$route.params.id;
@@ -245,7 +247,7 @@ fetchSymptomes() {
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/symptomes/${id}`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get(`http://192.168.224.1:8080/api/symptomes/${id}`, config) 
     .then(response => {
       
        
@@ -260,12 +262,12 @@ fetchSymptomes() {
    
 },
 fetchMedicaments() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
         
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
+  
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
   const id = this.$route.params.id;
@@ -273,7 +275,7 @@ fetchMedicaments() {
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/medicament/${id}`, config) // Utilisez la configuration avec l'en-tête d'autorisation
+  axios.get(`http://192.168.224.1:8080/api/medicament/${id}`, config) 
     .then(response => {
       
        
@@ -288,12 +290,11 @@ fetchMedicaments() {
    
 },
 fetchPosologie() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
         
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
   const id = this.$route.params.id;
@@ -320,23 +321,17 @@ getPosologies(medId) {
   },
 
   async supprimerMedicament(MedicamentId) {
-    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+    const accessToken = keycloak.token; 
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
 const config = {
   headers: {
-    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    'Authorization': `Bearer ${accessToken}` 
   }
 };
     if (confirm("Êtes-vous sûr de vouloir supprimer ce médicament de la prescription ?")) {
       try {
         
-        /* await axios.delete(`http://192.168.224.1:8080/api/medicament/${MedicamentId}`,config);
-
-       
-        console.log('prescription supprimée avec succès !');
-
-        this.medicaments = this.medicaments.filter(m => m.id !== MedicamentId);*/
+        
 
         await axios.put(`http://192.168.224.1:8080/api/medicament/statut/${MedicamentId}`,{prescription:"Non"},config);
         this.fetchMedicaments();
@@ -345,7 +340,7 @@ const config = {
 
       } catch (error) {
         console.error('Erreur lors de la suppression de la prescription :', error);
-        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
+        
       }
     }
   },
@@ -368,37 +363,31 @@ const config = {
         }
       },
       async supprimerPosologie(posologieId) {
-    const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+    const accessToken = keycloak.token; 
 
-// Définissez l'en-tête d'autorisation avec le jeton d'accès
 const config = {
   headers: {
-    'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+    'Authorization': `Bearer ${accessToken}` 
   }
 };
     if (confirm("Êtes-vous sûr de vouloir supprimer  ?")) {
       try {
-        // Envoyez une requête de suppression à votre API Backend en utilisant l'ID du conseil
          await axios.delete(`http://192.168.224.1:8080/api/posologie/${posologieId}`,config);
 
-        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
         console.log('posologie supprimé avec succès !');
 
-        // Mettez à jour la liste des conseils en supprimant le conseil supprimé
         this.posologies = this.posologies.filter(p => p.id !== posologieId);
       } catch (error) {
         console.error('Erreur lors de la suppression  :', error);
-        // Gérez les erreurs de l'API (par exemple, affichez un message d'erreur)
       }
     }
   },
   fetchAntecedent() {
-  const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+  const accessToken = keycloak.token; 
         
-  // Définissez l'en-tête d'autorisation avec le jeton d'accès
   const config = {
     headers: {
-      'Authorization': `Bearer ${accessToken}` // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+      'Authorization': `Bearer ${accessToken}` 
     }
   };
   const id = this.$route.params.id;
@@ -420,12 +409,36 @@ const config = {
     
    
 },
+
+/*sendMail()
+{
+  const accessToken = keycloak.token; 
+
+const config = {
+  headers: {
+    Authorization: `Bearer ${accessToken}`, 
+  },
+};
+const id = this.$route.params.id;
+
+try {
+   axios.post(
+    `http://192.168.224.1:8080/api/medicament/prescription/${id}`,
+    config
+  );
+
+  console.log("Mail send !");
+ 
+} catch (error) {
+  console.error("Erreur lors de l'envoi du mail :", error);
+}
+
+},*/
       
     },
         
     
       mounted(){
-          // Les propriétés calculées de votre composant vont ici
           this.patient = [],
           this.loading = true,
           this.constante=[],
@@ -443,7 +456,6 @@ const config = {
 
            console.log(this.antecedents);
         },
-      // Autres options de composant (comme "props", "watch", etc.) vont ici
     };
     </script>
     
@@ -516,28 +528,24 @@ h1 {
 
 
 .prescription {
-    position: relative; /* Permet de positionner le texte de l'état du traitement */
+    position: relative; 
 }
 
-/* Style pour le texte avec fond vert */
 .etat-traitement {
-    background-color: #047408; /* Vert */
-    color: #fff; /* Texte blanc */
+    background-color: #047408; 
+    color: #fff;
     padding: 10px;
     border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s; /* Transition fluide */
+    transition: background-color 0.3s, color 0.3s; 
 }
 
-/* Style pour le texte avec fond rouge */
 
 
-/* Style pour la liste des symptômes */
 .symptoms ul {
     list-style: disc;
     padding-left: 20px;
 }
 
-/* Style pour les éléments de la liste des symptômes */
 .symptoms ul li {
     margin-bottom: 5px;
 }
@@ -551,17 +559,16 @@ h1 {
     display: flex;
 }
 
-/* Animation au survol */
 .medicament:hover {
     background-color: #04AA6D;
     color: white;
 }
 .content {
-    flex-grow: 1; /* Permet au contenu de s'étendre pour occuper l'espace disponible */
+    flex-grow: 1; 
 }
 
 .icones {
-    margin-left: auto; /* Pousse les icônes vers la droite (fin) */
+    margin-left: auto; 
 }
 .btn {
     display: inline-block;
@@ -569,7 +576,7 @@ h1 {
     background-color: #007BFF;
     color: #fff;
     border: none;
-    border-radius: 10px; /* Augmentation du rayon pour un aspect plus arrondi */
+    border-radius: 10px; 
     cursor: pointer;
 }
 
@@ -588,7 +595,7 @@ h1 {
   margin-bottom: 10px;
   border-radius: 5px;
   transition: transform 0.3s, background-color 0.3s;
-  background-color: white; /* Fond blanc */
+  background-color: white; 
 }
 
 .chat-item:hover {
@@ -605,7 +612,7 @@ h1 {
 .w3-main
   {
     height: 100%;
-    min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+    min-height: 100vh; 
   }
   .fade-enter-active, .fade-leave-active {
     transition: opacity 0.5s;

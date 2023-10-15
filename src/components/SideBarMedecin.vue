@@ -101,22 +101,19 @@ export default {
   data() {
     return {
       decodedToken: {},
+      deconnect: false,
     };
   },
   mounted() {
-    // Initialiser les variables avec les éléments DOM
-
     if (keycloak.token) {
       this.decodedToken = jwtDecode(keycloak.token);
-      console.log(this.decodedToken.given_name);
     }
   },
-  created() {
-    // Initialiser les variables avec les éléments DOM
-  },
+
   methods: {
     logout() {
       keycloak.logout();
+      this.$router.push("/");
     },
   },
 };

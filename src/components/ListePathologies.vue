@@ -34,10 +34,7 @@
       </table>
     </header>
     <div class="popup" v-if="showPopup">
-      <!-- Contenu du pop-up -->
       <div class="popup-content">
-        <!-- Formulaire pour ajouter un nouveau médicament -->
-        <!-- Assurez-vous de créer les champs nécessaires (nom, etc.) -->
         <input
           placeholder="Nom de la pathologie"
           v-model="nom"
@@ -45,8 +42,8 @@
         />
         &nbsp;&nbsp;&nbsp;
         <!-- Autres champs... -->
-        <button @click="submitForm">Enregistrer</button> &nbsp;&nbsp;&nbsp;
-        <button @click="fermerPopup">Annuler</button>
+        <button @click="submitForm" class="path">Enregistrer</button> &nbsp;&nbsp;&nbsp;
+        <button @click="fermerPopup" class="path">Annuler</button>
       </div>
     </div>
     <div class="w3-main">
@@ -70,6 +67,19 @@
         </table>
       </div>
       <br />
+      <div class="pagination">
+        <button @click="previousPage" :disabled="currentPage === 0" class="page">
+          Précédent</button
+        >&nbsp;&nbsp;&nbsp;
+        <span style="margin-left: 100px">Page {{ currentPage + 1 }}</span>
+        <button
+          @click="nextPage"
+          :disabled="currentPage === totalPages - 1"
+          style="margin-left: 200px"
+          class="page">
+          Suivant
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -84,15 +94,30 @@ export default {
     return {
       pathologies: [],
       showPopup: false,
+      showError: false,
       nom: "",
       recherche: "",
+      currentPage: 0,
+      totalPages: 1,
     };
   },
   methods: {
+    nextPage() {
+      if (this.currentPage < this.totalPages - 1) {
+        this.currentPage++;
+        this.fetchPathologie();
+      }
+    },
+    previousPage() {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+        this.fetchPathologie();
+      }
+    },
     filtrerPathologies() {
       const recherche = this.recherche.toLowerCase();
       if (recherche === "") {
-        this.fetchPathologie(); // Rechargez toutes les pathologies si la recherche est vide
+        this.fetchPathologie();
       } else {
         this.pathologies = this.pathologies.filter((pathologie) => {
           return pathologie.nom.toLowerCase().includes(recherche);
@@ -116,9 +141,13 @@ export default {
       };
 
       axios
-        .get(`http://192.168.224.1:8080/api/pathologie`, config)
+        .get(
+          `http://192.168.224.1:8080/api/pathologie?page=${this.currentPage}`,
+          config
+        )
         .then((response) => {
-          this.pathologies = response.data;
+          this.pathologies = response.data.content;
+          this.totalPages = response.data.totalPages;
         })
         .catch((error) => {
           console.error(
@@ -152,29 +181,31 @@ export default {
     },
 
     async submitForm() {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token;
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`,
         },
       };
+      if (this.nom.trim() === "") {
+        this.showError = false;
+        alert("Veuillez renseigner correctement le champ !");
+      } else {
+        try {
+          await axios.post(
+            "http://192.168.224.1:8080/api/pathologie",
+            { nom: this.nom },
+            config
+          );
 
-      try {
-        await axios.post(
-          "http://192.168.224.1:8080/api/pathologie",
-          { nom: this.nom },
-          config
-        );
+          console.log("pathologie ajoutée avec succès !");
 
-        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
-        console.log("pathologie ajoutée avec succès !");
-        // Réinitialisez le champ de texte
-        this.nom = "";
-        this.fetchPathologie();
-      } catch (error) {
-        console.error("Erreur lors de l'ajout de la pathologie :", error);
+          this.nom = "";
+          this.fetchPathologie();
+        } catch (error) {
+          console.error("Erreur lors de l'ajout de la pathologie :", error);
+        }
       }
     },
   },
@@ -243,13 +274,24 @@ export default {
 .header-search {
   border-radius: 5px;
 }
-button {
+.path {
   display: inline-block;
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 10px; /* Augmentation du rayon pour un aspect plus arrondi */
+  border-radius: 10px;
   cursor: pointer;
+}
+.page
+{
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0d8215;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
 }
 </style>

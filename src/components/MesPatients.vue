@@ -52,12 +52,17 @@
 import keycloak from "@/main";
 import axios from "axios";
 
+import jwtDecode from "jwt-decode";
+
 export default {
   name: "MesPatients",
 
   data() {
     return {
       malades: [],
+      doc: "",
+      decodedToken: {},
+      roles: {},
     };
   },
   methods: {
@@ -130,7 +135,24 @@ export default {
     },
   },
   mounted() {
-    this.fetchMalade();
+    if (keycloak.token) {
+      this.decodedToken = jwtDecode(keycloak.token);
+      this.roles = this.decodedToken.realm_access.roles;
+      if (this.roles.includes("patient")) {
+        console.log("hello patient");
+        this.doc = false;
+      }
+      if (this.roles.includes("medecin")) {
+        console.log("hello doc");
+        this.doc = true;
+        console.log(this.doc);
+      }
+    }
+    if (this.doc) {
+      this.fetchMalade();
+    } else {
+      this.$router.push("/");
+    }
   },
 };
 </script>

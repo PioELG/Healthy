@@ -214,6 +214,7 @@ export default {
             )
             .then((response) => {
               console.log("Réponse du serveur :", response.data);
+              this.$router.push("/MesPatients");
             })
             .catch((error) => {
               console.error("Erreur lors de la requête PUT :", error);
@@ -231,7 +232,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/pathologie", config)
+        .get("http://192.168.224.1:8080/api/pathologie/all", config)
         .then((response) => {
           this.pathologies = response.data;
         })

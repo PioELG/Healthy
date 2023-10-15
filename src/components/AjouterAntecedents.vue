@@ -81,6 +81,7 @@ export default {
       pathologies: [],
       searchInput: "",
       filteredPathologies: [],
+      showErrorPoso: false,
     };
   },
   methods: {
@@ -98,6 +99,10 @@ export default {
         },
       };
       const id = this.$route.params.id;
+      if (this.nom.trim() === "" ) {
+        this.showError = false;
+        alert("Veuillez remplir tous les champs !");
+      } else {
 
       try {
         await axios.post(
@@ -109,10 +114,12 @@ export default {
         console.log("Antecedent ajouté avec succès !");
 
         this.nom = "";
+        window.history.back();
       } catch (error) {
         console.error("Erreur lors de l'ajout de la posologie:", error);
       }
-    },
+    }
+  },
     fetchPathologie() {
       const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
 
@@ -124,7 +131,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/pathologie", config) // Utilisez la configuration avec l'en-tête d'autorisation
+        .get("http://192.168.224.1:8080/api/pathologie/all", config) // Utilisez la configuration avec l'en-tête d'autorisation
         .then((response) => {
           this.pathologies = response.data;
         })

@@ -41,8 +41,9 @@
         />
         &nbsp;&nbsp;&nbsp;
 
-        <button @click="submitForm">Enregistrer</button> &nbsp;&nbsp;&nbsp;
-        <button @click="fermerPopup">Annuler</button>
+        <button @click="submitForm" class="BtnMed">Enregistrer</button>
+        &nbsp;&nbsp;&nbsp;
+        <button @click="fermerPopup" class="BtnMed">Annuler</button>
       </div>
     </div>
     <div class="w3-main">
@@ -70,6 +71,20 @@
       </div>
       <br />
     </div>
+    <div class="pagination">
+      <button @click="previousPage" :disabled="currentPage === 0" class="page">
+        Précédent
+      </button>
+      <span style="margin-left: 100px">Page {{ currentPage + 1 }}</span>
+      <button
+        @click="nextPage"
+        :disabled="currentPage === totalPages - 1"
+        class="page"
+        style="margin-left: 200px"
+      >
+        Suivant
+      </button>
+    </div>
   </div>
 </template>
 
@@ -82,16 +97,32 @@ export default {
   data() {
     return {
       modeleMedicaments: [],
+      allModel: [],
       showPopup: false,
+      showError: false,
       nom: "",
       recherche: "",
+      currentPage: 0,
+      totalPages: 1,
     };
   },
   methods: {
+    nextPage() {
+      if (this.currentPage < this.totalPages - 1) {
+        this.currentPage++;
+        this.fetchMedocs();
+      }
+    },
+    previousPage() {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+        this.fetchMedocs();
+      }
+    },
     filtrerMedicaments() {
       const recherche = this.recherche.toLowerCase();
       if (recherche === "") {
-        this.fetchMedocs(); // Rechargez toutes les pathologies si la recherche est vide
+        this.fetchMedocs();
       } else {
         this.modeleMedicaments = this.modeleMedicaments.filter(
           (modeleMedicament) => {
@@ -116,9 +147,34 @@ export default {
       };
 
       axios
-        .get(`http://192.168.224.1:8080/api/modele`, config)
+        .get(
+          `http://192.168.224.1:8080/api/modele?page=${this.currentPage}`,
+          config
+        )
         .then((response) => {
-          this.modeleMedicaments = response.data;
+          this.modeleMedicaments = response.data.content;
+          this.totalPages = response.data.totalPages;
+        })
+        .catch((error) => {
+          console.error(
+            "Erreur lors de la récupération des modeles de médicament:",
+            error
+          );
+        });
+    },
+    fetchAll() {
+      const accessToken = keycloak.token;
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      axios
+        .get(`http://192.168.224.1:8080/api/modele/all`, config)
+        .then((response) => {
+          this.allModel = response.data;
         })
         .catch((error) => {
           console.error(
@@ -151,29 +207,33 @@ export default {
     },
 
     async submitForm() {
-      const accessToken = keycloak.token; // Remplacez par votre jeton d'accès
+      const accessToken = keycloak.token;
 
-      // Définissez l'en-tête d'autorisation avec le jeton d'accès
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Assurez-vous de mettre le type d'autorisation (Bearer) avant le jeton
+          Authorization: `Bearer ${accessToken}`,
         },
       };
+      if (this.nom.trim() === "") {
+        this.showError = false;
+        alert("Veuillez correctement rensigner le champ !");
+      } else {
+        try {
+          await axios.post(
+            "http://192.168.224.1:8080/api/modele",
+            { nom: this.nom },
+            config
+          );
 
-      try {
-        await axios.post(
-          "http://192.168.224.1:8080/api/modele",
-          { nom: this.nom },
-          config
-        );
-
-        // Gérez la réponse de l'API (par exemple, affichez un message de succès)
-        console.log("Modele ajouté avec succès !");
-        // Réinitialisez le champ de texte
-        this.nom = "";
-        this.fetchMedocs();
-      } catch (error) {
-        console.error("Erreur lors de l'ajout du Model de medicament :", error);
+          console.log("Modele ajouté avec succès !");
+          this.nom = "";
+          this.fetchMedocs();
+        } catch (error) {
+          console.error(
+            "Erreur lors de l'ajout du Model de medicament :",
+            error
+          );
+        }
       }
     },
   },
@@ -228,13 +288,22 @@ export default {
 
   z-index: 1000;
 }
-button {
+.BtnMed {
   display: inline-block;
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 10px; /* Augmentation du rayon pour un aspect plus arrondi */
+  border-radius: 10px;
+  cursor: pointer;
+}
+.page {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0d8215;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
 }
 </style>
