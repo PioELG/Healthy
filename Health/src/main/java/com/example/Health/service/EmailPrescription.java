@@ -34,7 +34,7 @@ public class EmailPrescription {
         MimeMessageHelper helper= new MimeMessageHelper(message,true);
         helper.setFrom("HealthyAdministration@gmail.com");
         helper.setTo(receiver);
-        helper.setSubject("Rappel de médicament");
+        helper.setSubject("Nouvelle Prescription");
 
         // Créer un contexte Thymeleaf
         Context context = new Context();
