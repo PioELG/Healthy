@@ -15,6 +15,8 @@ public interface ConstantesService {
 
   List<Constante> LireP(String user_id);
 
+    List<Constante> LireAll(String user_id);
+
 //    Constantes Accepter (Long id);
 //   Constantes Rejeter (Long id);
 //    String SupprimerAll();

@@ -34,4 +34,9 @@ public class DoctorController {
 
         return doctorService.LireD(malade.getTraitant());
     }
+    @GetMapping("/all")
+    public List<Doctor> readAll()
+    {
+        return doctorService.Lire();
+    }
 }

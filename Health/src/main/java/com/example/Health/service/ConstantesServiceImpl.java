@@ -51,5 +51,10 @@ public class ConstantesServiceImpl implements ConstantesService{
         return constantesRepository.findByPatient_id(user_id);
     }
 
+    @Override
+    public List<Constante> LireAll(String user_id) {
+        return constantesRepository.findAllByPatient_id(user_id);
+    }
+
 
 }

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name="Constante")
 @Getter
@@ -30,5 +32,7 @@ public class Constante {
 
     @Column
     private String patient_id;
+    @Column
+    private LocalDate dateModif;
 
 }

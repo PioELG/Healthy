@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -97,6 +98,12 @@ public class ConstantesController {
 
         return constantesService.LireP(id);
     }
+
+    public List<Constante> readAllParPatient(@PathVariable String id)
+    {
+
+        return constantesService.LireAll(id);
+    }
     @PostMapping
     public Constante create(@RequestBody Constante constante,@RequestHeader(value = "Accept")String acceptHeader, Authentication authentication)
     {
@@ -105,6 +112,7 @@ public class ConstantesController {
         String id = jwt.getClaimAsString("sub");
 
         constante.setPatient_id(id);
+        constante.setDateModif(LocalDate.now());
 
         return constantesService.Creer(constante);
     }
