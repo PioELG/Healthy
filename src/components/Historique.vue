@@ -10,7 +10,8 @@
              <li class="chat-item" v-for="medicament in medicaments" :key="medicament.id">
                     <div class="chat-preview" >
                         <p>
-                            <h4>{{ medicament.nom }}</h4>
+                            <h4>{{ medicament.nom }}</h4> prescrit par  {{ getNomPrenom(medicament.medecin_id).nom }} {{ getNomPrenom(medicament.medecin_id).prenom }}
+                            le  {{ medicament.datePresc }}
                 
 
                             <i class="fa fa-plus" style="color: green;" v-if="medicament.prescription!=='Oui'" @click="AjouterMedicament(medicament.id)"></i> 
@@ -39,12 +40,23 @@
          return {
           
           medicaments:[],
+          doctors:[],
          
           statut:""
  
          };
        },
        methods: {
+        getNomPrenom(docId) {
+      const doctor = this.doctors.find((d) => d.id === docId);
+      if (doctor) {
+        return {
+          nom: doctor.nom,
+          prenom: doctor.prenom,
+        };
+      }
+      return { nom: "", prenom: "" };
+    },
          
          fetchMedicaments() {
   const accessToken = keycloak.token; 
@@ -72,7 +84,20 @@
       console.error('Erreur lors de la récupération des médicaments:', error);
     }).finally(()=> this.loading = false);
     
-   
+    axios
+          .get("http://192.168.224.1:8080/api/doctor/all", config)
+
+          .then((response) => {
+            this.doctors = response.data;
+
+            
+          })
+          .catch((error) => {
+            console.error(
+              "Erreur lors de la récupération des docteurs :",
+              error
+            );
+          });
 },
 async AjouterMedicament(MedicamentId) {
     const accessToken = keycloak.token;

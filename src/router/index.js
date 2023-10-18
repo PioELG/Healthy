@@ -27,6 +27,7 @@ import AjouterPosologie from "../components/AjouterPosologie.vue";
 import AjouterAntecedents from "../components/AjouterAntecedents.vue";
 import ListeMedicaments from "../components/ListeMedicaments.vue";
 import ListePathologies from "../components/ListePathologies.vue";
+import EvolutionEtat from "../components/EvolutionEtat.vue";
 const routes = [
   {
     path: "/",
@@ -172,6 +173,11 @@ const routes = [
     path: "/ListePathologies",
     name: "ListePathologies",
     component: ListePathologies,
+  },
+  {
+    path: "/EvolutionEtat/:id",
+    name: "EvolutionEtat",
+    component: EvolutionEtat,
   },
 ];
 

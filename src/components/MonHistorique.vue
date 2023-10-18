@@ -50,7 +50,7 @@
 import keycloak from "@/main";
 import axios from "axios";
 export default {
-  name: "MesConseils", 
+  name: "MesConseils",
   data() {
     return {
       medicaments: [],
@@ -84,7 +84,7 @@ export default {
         this.medicaments = response.data;
 
         axios
-          .get("http://192.168.224.1:8080/api/malade", config) 
+          .get("http://192.168.224.1:8080/api/malade", config)
 
           .then((response) => {
             this.malades = response.data;
@@ -129,7 +129,7 @@ h5 {
   min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
 }
 .medoc {
-  background-color: #f5f5f5e2;
+  background-color: #ffffffe2;
   padding: 1rem;
   border-radius: 5px;
 }

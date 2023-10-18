@@ -17,6 +17,8 @@
         </div>
         
         <div class="constants">
+          <router-link :to="'/EvolutionEtat/' +$route.params.id">   <i class="fa fa-history fa-lg" style="color: rgb(0, 128, 85); margin-left:500px;"></i> </router-link>
+
           <h2>Constantes du Patient</h2>
 <p><strong><i class="fa fa-balance-scale" style="color: rgb(0, 0, 0);"></i> Poids :</strong> {{ constante[0].poids}}  kg</p>
 <p><strong><i class="fa fa-stethoscope" style="color: green;"></i> Tension Artérielle :</strong> {{ constante[0].pressionArterielle }} mmHg</p>
