@@ -80,7 +80,9 @@
         <div class="w3-panel">
           <div class="w3-row-padding" style="">
             <div class="w3-twothird">
-              <b><h4>Notifications</h4></b>
+              <h2>
+                <i class="fa fa-bell fa-fw" style="margin-left: 260px"></i>
+              </h2>
               <table class="w3-table w3-striped w3-white">
                 <tr v-for="notif in notifs" :key="notif.id">
                   <td>
@@ -143,7 +145,7 @@ import keycloak from "@/main";
 import axios from "axios";
 
 export default {
-  name: "NouvelleMedecin", 
+  name: "NouvelleMedecin",
   data() {
     return {
       notifs: [],
@@ -155,17 +157,16 @@ export default {
   },
   methods: {
     fetchNotif() {
-      const accessToken = keycloak.token; 
+      const accessToken = keycloak.token;
 
-      
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, 
+          Authorization: `Bearer ${accessToken}`,
         },
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/notification/doc", config) 
+        .get("http://192.168.224.1:8080/api/notification/doc", config)
         .then((response) => {
           this.notifs = response.data;
         })
@@ -174,7 +175,7 @@ export default {
         });
 
       axios
-        .get("http://192.168.224.1:8080/api/malade/St", config) 
+        .get("http://192.168.224.1:8080/api/malade/St", config)
         .then((response) => {
           this.malades = response.data;
         })
@@ -183,9 +184,8 @@ export default {
         });
     },
     async supprimerNotification(NotifId) {
-      const accessToken = keycloak.token; 
+      const accessToken = keycloak.token;
 
-     
       const config = {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -193,23 +193,19 @@ export default {
       };
       if (confirm("Êtes-vous sûr de vouloir supprimer cette notification ?")) {
         try {
-          
           await axios.delete(
             `http://192.168.224.1:8080/api/notification/${NotifId}`,
             config
           );
 
-          
           console.log("prescription supprimée avec succès !");
 
-        
           this.notifs = this.notifs.filter((n) => n.id !== NotifId);
         } catch (error) {
           console.error(
             "Erreur lors de la suppression de la notification :",
             error
           );
-          
         }
       }
     },
@@ -238,7 +234,6 @@ export default {
         );
         this.rdvs = response.data;
 
-        
         const demain = new Date();
         demain.setDate(demain.getDate() + 1);
 

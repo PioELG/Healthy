@@ -39,15 +39,12 @@
             </div>
           </div>
           <hr />
-          <div class="w3-container">
-            <h5 style="margin-left: 7px"><strong>Dashboard</strong></h5>
-          </div>
+          <router-link to="/" class="link">
+            <div class="w3-container">
+              <h5 style="margin-left: 7px"><strong>Dashboard</strong></h5>
+            </div>
+          </router-link>
           <div class="w3-bar-block">
-            <router-link to="/" class="link">
-              <a href="#" class="w3-bar-item w3-button w3-padding"
-                ><i class="fa fa-bell fa-fw"></i> Notifications</a
-              ></router-link
-            >
             <router-link class="link" to="/ListePatient"
               ><a href="#" class="w3-bar-item w3-button w3-padding"
                 ><i class="fa fa-users fa-fw"></i>  Patients</a
@@ -129,14 +126,11 @@ h5 {
   font-family: "Raleway", sans-serif;
 }
 .w3-container-rounded {
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 .w3-container-rounded:hover {
-  transform: translate(
-    5px,
-    -5px
-  );
-  transition: transform 0.2s ease; 
+  transform: translate(5px, -5px);
+  transition: transform 0.2s ease;
 }
 .link {
   text-decoration: none;

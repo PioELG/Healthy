@@ -10,7 +10,7 @@
           v-for="constante in constantes"
           :key="constante.id"
         >
-          <p>Modifié le {{ constante.dateModif }}</p>
+          <p>Date modification:{{ constante.dateModif }}</p>
           <div class="chat-preview">
             <p>
               <strong
