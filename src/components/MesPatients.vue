@@ -43,7 +43,6 @@
       </table>
     </div>
     <br />
-
   </div>
 </template>
 
@@ -110,8 +109,6 @@ export default {
           console.error("Erreur lors de la requête PUT :", error);
         });
 
-      this.fetchMalade();
-
       axios.delete(`http://192.168.224.1:8080/api/rdv/malade/${idM}`, config);
 
       console.log("Rendez-vous supprimé avec succès !");
@@ -130,6 +127,8 @@ export default {
         `http://192.168.224.1:8080/api/message/malade/${idM}`,
         config
       );
+
+      this.fetchMalade();
       console.log(" supprimé avec succès !");
     },
   },
@@ -197,11 +196,11 @@ export default {
 }
 
 .infos {
-  display: none; 
+  display: none;
 }
 
 .fa-pencil:hover .infos {
-  display: block; 
+  display: block;
 }
 .w3-main {
   height: 100%;

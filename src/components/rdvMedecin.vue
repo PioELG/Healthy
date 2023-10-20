@@ -1,45 +1,44 @@
 <template>
-  <div class="container" style="margin-left: 300px; margin-top: 20px">
+  <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
     <header class="w3-container" style="padding-top: 25px">
       <h5>
         <b><i class="fa fa-address-book fa-fw"></i> Mes Rendez-vous</b>
       </h5>
     </header>
-    <div class="w3-main">
-      <div class="w3-row-padding w3-margin-bottom">
-        <table id="customers">
-          <tr>
-            <th>NomPatient</th>
-            <th>PrenomPatient</th>
-            <th>Pathologie</th>
-            <th>Date Rdv</th>
-            <th>Heure Rdv</th>
 
-            <th>Actions</th>
-          </tr>
-          <tr v-for="rdv in rdvs" :key="rdv.id">
-            <td>{{ getNomPrenom(rdv.malade_id).nom }}</td>
-            <td>{{ getNomPrenom(rdv.malade_id).prenom }}</td>
-            <td>{{ getNomPrenom(rdv.malade_id).pathologie }}</td>
-            <td>{{ rdv.date }}</td>
-            <td>{{ rdv.heure }}</td>
-            <td>
-              <router-link :to="'/ModifierRdv/' + rdv.id"
-                ><i class="fa fa-pencil" style="color: blue"></i
-              ></router-link>
-              &nbsp;&nbsp;&nbsp;
-              <i
-                class="fa fa-trash"
-                style="color: red"
-                @click="supprimerRdv(rdv.id)"
-              ></i
-              >&nbsp;&nbsp;&nbsp;
-            </td>
-          </tr>
-        </table>
-      </div>
-      <br />
+    <div class="w3-row-padding w3-margin-bottom">
+      <table id="customers">
+        <tr>
+          <th>NomPatient</th>
+          <th>PrenomPatient</th>
+          <th>Pathologie</th>
+          <th>Date Rdv</th>
+          <th>Heure Rdv</th>
+
+          <th>Actions</th>
+        </tr>
+        <tr v-for="rdv in rdvs" :key="rdv.id">
+          <td>{{ getNomPrenom(rdv.malade_id).nom }}</td>
+          <td>{{ getNomPrenom(rdv.malade_id).prenom }}</td>
+          <td>{{ getNomPrenom(rdv.malade_id).pathologie }}</td>
+          <td>{{ rdv.date }}</td>
+          <td>{{ rdv.heure }}</td>
+          <td>
+            <router-link :to="'/ModifierRdv/' + rdv.id"
+              ><i class="fa fa-pencil" style="color: blue"></i
+            ></router-link>
+            &nbsp;&nbsp;&nbsp;
+            <i
+              class="fa fa-trash"
+              style="color: red"
+              @click="supprimerRdv(rdv.id)"
+            ></i
+            >&nbsp;&nbsp;&nbsp;
+          </td>
+        </tr>
+      </table>
     </div>
+    <br />
   </div>
 </template>
 
@@ -122,10 +121,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  height: 100%;
-  min-height: 100vh;
-}
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -158,5 +153,37 @@ export default {
 }
 .link {
   text-decoration: none;
+}
+
+.w3-main {
+  height: 100%;
+  min-height: 100vh;
+}
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+select {
+  appearance: none;
+}
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 </style>

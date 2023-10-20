@@ -16,10 +16,7 @@
       />
     </head>
     <body>
-      <div
-        class="container"
-        style="margin-left: 300px; margin-top: 60px; margin-bottom: 500px"
-      >
+      <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
         <header style="margin-left: 20px">
           <h5>
             <b><i class="fa fa-history fa-fw"></i> Mon Historique</b>

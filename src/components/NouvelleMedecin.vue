@@ -80,9 +80,18 @@
         <div class="w3-panel">
           <div class="w3-row-padding" style="">
             <div class="w3-twothird">
-              <h2>
-                <i class="fa fa-bell fa-fw" style="margin-left: 260px"></i>
-              </h2>
+              <table>
+                <tr>
+                  <td>
+                    <h5>Nouvelles</h5>
+                  </td>
+                  &nbsp;&nbsp;
+                  <td>
+                    <h5><i class="fa fa-bell"></i></h5>
+                  </td>
+                </tr>
+              </table>
+
               <table class="w3-table w3-striped w3-white">
                 <tr v-for="notif in notifs" :key="notif.id">
                   <td>

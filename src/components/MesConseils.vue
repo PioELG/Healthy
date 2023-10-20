@@ -16,7 +16,7 @@
       />
     </head>
     <body>
-      <div class="container" style="margin-left: 300px; margin-top: 60px">
+      <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
         <header style="margin-left: 20px">
           <h5>
             <b><i class="fa fa-heart fa-fw"></i> Mes Conseils</b>
@@ -96,16 +96,16 @@ export default {
   },
   methods: {
     fetchConseilsDuJour() {
-      const accessToken = keycloak.token; 
+      const accessToken = keycloak.token;
 
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, 
+          Authorization: `Bearer ${accessToken}`,
         },
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/conseils", config) 
+        .get("http://192.168.224.1:8080/api/conseils", config)
         .then((response) => {
           this.conseils = response.data;
         })
@@ -148,7 +148,7 @@ export default {
         });
     },
     async supprimerConseil(conseilId) {
-      const accessToken = keycloak.token; 
+      const accessToken = keycloak.token;
 
       const config = {
         headers: {

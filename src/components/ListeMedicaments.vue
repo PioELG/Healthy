@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="margin-left: 300px; margin-top: 20px">
+  <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
     <header class="w3-container" style="padding-top: 25px">
       <table>
         <tr>
@@ -14,30 +14,39 @@
               ></i>
             </h5>
           </td>
-          <div
-            class="header-search"
-            style="margin-top: 0px; margin-left: 500px"
-          >
-            <input
-              type="text"
-              placeholder="Rechercher "
-              v-model="recherche"
-              @input="filtrerMedicaments"
-              style="min-width: 80px"
-            />
-            &nbsp;&nbsp;
-            <i class="fa fa-search"></i>
-          </div>
+
+          <td>
+            <div
+              class="header-search"
+              style="margin-top: 30px; margin-left: 500px"
+            >
+              <input
+                type="text"
+                placeholder="Rechercher "
+                v-model="recherche"
+                @input="filtrerMedicaments"
+                style="min-width: 80px; margin-top: 5px"
+              />
+              &nbsp;&nbsp;
+            </div>
+          </td>
           <td></td>
+          <td>
+            <i
+              class="fa fa-search"
+              style="margin-top: 0px; margin-right=100px"
+            ></i>
+          </td>
         </tr>
       </table>
     </header>
     <div class="popup" v-if="showPopup">
       <div class="popup-content">
         <input
+          type="text"
           placeholder="Nom du médicament"
           v-model="nom"
-          style="min-width: 400px; max-width: 600px"
+          style="min-width: 200px; max-width: 400px"
         />
         &nbsp;&nbsp;&nbsp;
 
@@ -71,7 +80,7 @@
       </div>
       <br />
     </div>
-    <div class="pagination">
+    <div class="pagination" style="margin-top: 3px">
       <button
         @click="previousPage"
         :disabled="currentPage === 0"
@@ -250,10 +259,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  height: 100%;
-  min-height: 100vh;
-}
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -288,13 +293,22 @@ export default {
   text-decoration: none;
 }
 
-.popup {
-  padding: 20px;
-  border-radius: 5px;
-
-  z-index: 1000;
+.w3-main {
+  height: 100%;
+  min-height: 100vh;
 }
-.BtnMed {
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+select {
+  appearance: none;
+}
+button {
   display: inline-block;
   padding: 10px 20px;
   background-color: #007bff;
@@ -303,6 +317,21 @@ export default {
   border-radius: 10px;
   cursor: pointer;
 }
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.popup {
+  padding: 20px;
+  border-radius: 5px;
+
+  z-index: 1000;
+}
+
 .page {
   display: inline-block;
   padding: 10px 20px;

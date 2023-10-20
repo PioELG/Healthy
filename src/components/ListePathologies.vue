@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="margin-left: 300px; margin-top: 20px">
+  <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
     <header class="w3-container" style="padding-top: 25px">
       <table>
         <tr>
@@ -17,18 +17,24 @@
           <td>
             <div
               class="header-search"
-              style="margin-top: 0px; margin-left: 500px"
+              style="margin-top: 30px; margin-left: 500px"
             >
               <input
                 type="text"
                 placeholder="Rechercher "
                 v-model="recherche"
                 @input="filtrerPathologies"
-                style="min-width: 150px"
+                style="min-width: 80px; margin-top: 5px"
               />
               &nbsp;&nbsp;
-              <i class="fa fa-search"></i>
             </div>
+          </td>
+          <td></td>
+          <td>
+            <i
+              class="fa fa-search"
+              style="margin-top: 0px; margin-right=100px"
+            ></i>
           </td>
         </tr>
       </table>
@@ -67,8 +73,8 @@
           </tr>
         </table>
       </div>
-      <br />
-      <div class="pagination">
+
+      <div class="pagination" style="margin-top: 35px">
         <button
           @click="previousPage"
           :disabled="currentPage === 0"
@@ -249,10 +255,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  height: 100%;
-  min-height: 100vh;
-}
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -286,19 +288,38 @@ export default {
 .link {
   text-decoration: none;
 }
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+
+.w3-main {
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
+  min-height: 100vh;
+}
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
+select {
+  appearance: none;
+}
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 .popup {
   padding: 20px;
 
