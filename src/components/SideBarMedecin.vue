@@ -74,6 +74,7 @@
             <a href="#" class="w3-bar-item w3-button w3-padding" @click="logout"
               >  <strong>Log Out</strong></a
             ><br /><br />
+           
           </div>
         </nav>
 

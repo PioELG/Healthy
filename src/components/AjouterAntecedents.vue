@@ -18,6 +18,10 @@
         rel="stylesheet"
         href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css"
       />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
     </head>
     <body>
       <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
@@ -99,38 +103,37 @@ export default {
         },
       };
       const id = this.$route.params.id;
-      if (this.nom.trim() === "" ) {
+      if (this.nom.trim() === "") {
         this.showError = false;
         alert("Veuillez remplir tous les champs !");
       } else {
+        try {
+          await axios.post(
+            "http://192.168.224.1:8080/api/antecedent",
+            { nom: this.nom, patient_id: id },
+            config
+          );
 
-      try {
-        await axios.post(
-          "http://192.168.224.1:8080/api/antecedent",
-          { nom: this.nom, patient_id: id },
-          config
-        );
+          console.log("Antecedent ajouté avec succès !");
 
-        console.log("Antecedent ajouté avec succès !");
-
-        this.nom = "";
-        window.history.back();
-      } catch (error) {
-        console.error("Erreur lors de l'ajout de la posologie:", error);
+          this.nom = "";
+          window.history.back();
+        } catch (error) {
+          console.error("Erreur lors de l'ajout de la posologie:", error);
+        }
       }
-    }
-  },
+    },
     fetchPathologie() {
-      const accessToken = keycloak.token; 
+      const accessToken = keycloak.token;
 
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, 
+          Authorization: `Bearer ${accessToken}`,
         },
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/pathologie/all", config) 
+        .get("http://192.168.224.1:8080/api/pathologie/all", config)
         .then((response) => {
           this.pathologies = response.data;
         })

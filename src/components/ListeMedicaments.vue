@@ -1,11 +1,11 @@
 <template>
-  <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
+  <div class="w3-main" style="margin-left: 300px">
     <header class="w3-container" style="padding-top: 25px">
       <table>
         <tr>
           <td>
             <h5>
-              <b><i class="fa fa-medkit fa-fw"></i>Médicaments</b>
+              <b><i class="fa fa-medkit fa-fw"> </i> Médicaments</b>
               &nbsp;&nbsp;&nbsp;
               <i
                 class="fa fa-plus fa-fw"
@@ -78,26 +78,25 @@
           </tr>
         </table>
       </div>
-      <br />
-    </div>
-    <div class="pagination" style="margin-top: 3px">
-      <button
-        @click="previousPage"
-        :disabled="currentPage === 0"
-        class="page"
-        style="margin-left: 10px"
-      >
-        Précédent
-      </button>
-      <span style="margin-left: 100px">Page {{ currentPage + 1 }}</span>
-      <button
-        @click="nextPage"
-        :disabled="currentPage === totalPages - 1"
-        class="page"
-        style="margin-left: 200px"
-      >
-        Suivant
-      </button>
+      <div class="pagination" style="margin-top: 35px">
+        <button
+          @click="previousPage"
+          :disabled="currentPage === 0"
+          class="page"
+          style="margin-left: 10px"
+        >
+          Précédent
+        </button>
+        <span style="margin-left: 100px">Page {{ currentPage + 1 }}</span>
+        <button
+          @click="nextPage"
+          :disabled="currentPage === totalPages - 1"
+          class="page"
+          style="margin-left: 200px"
+        >
+          Suivant
+        </button>
+      </div>
     </div>
   </div>
 </template>

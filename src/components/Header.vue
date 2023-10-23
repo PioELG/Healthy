@@ -10,6 +10,7 @@
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Raleway"
       />
+
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -38,30 +39,33 @@
             </a>
           </router-link>
 
-          <router-link class="link" to="/rdvMedecin"
-          >
-          <a href="#" class="w3-hide-large w3-large">
-            <i class="fa fa-eye fa-fw" style="margin: 10px"></i>
-          </a>
+          <router-link class="link" to="/rdvMedecin">
+            <a href="#" class="w3-hide-large w3-large">
+              <i class="fa fa-eye fa-fw" style="margin: 10px"></i>
+            </a>
           </router-link>
 
           <router-link to="/PublierConseil" class="link">
-          <a href="#" class="w3-hide-large w3-large">
-            <i class="fa fa-heart fa-fw" style="margin: 10px"></i>
-          </a>
-        </router-link>
-
-        <router-link to="/ListeMedicaments" class="link">
-          <a href="#" class="w3-hide-large w3-large">
-            <i class="fa fa-medkit fa-fw" style="margin: 10px"></i>
-          </a>
-         </router-link>
-
-         <router-link to="/ListePathologies" class="link">
-          <a href="#" class="w3-hide-large w3-large">
-            <i class="fa fa-bug fa-fw" style="margin: 10px"></i>
-          </a>
+            <a href="#" class="w3-hide-large w3-large">
+              <i class="fa fa-heart fa-fw" style="margin: 10px"></i>
+            </a>
           </router-link>
+
+          <router-link to="/ListeMedicaments" class="link">
+            <a href="#" class="w3-hide-large w3-large">
+              <i class="fa fa-medkit fa-fw" style="margin: 10px"></i>
+            </a>
+          </router-link>
+
+          <router-link to="/ListePathologies" class="link">
+            <a href="#" class="w3-hide-large w3-large">
+              <i class="fa fa-bug fa-fw" style="margin: 10px"></i>
+            </a>
+          </router-link>
+
+          <a href="#" class="w3-hide-large w3-large link" @click="logout">
+            <i class="fas fa-sign-out-alt" style="margin: 10px"></i>
+          </a>
         </div>
         <div v-if="!doc">
           <router-link to="/" class="link">
@@ -87,6 +91,10 @@
               <i class="fa fa-stethoscope fa-fw" style="margin: 10px"></i>
             </a>
           </router-link>
+
+          <a href="#" class="w3-hide-large w3-large link" @click="logout">
+            <i class="fas fa-sign-out-alt" style="margin: 10px"></i>
+          </a>
         </div>
       </div>
       <SideBarMedecin v-if="active" />
@@ -111,7 +119,12 @@ export default {
       roles: {},
     };
   },
-  methods: {},
+  methods: {
+    logout() {
+      keycloak.logout();
+      this.$router.push("/");
+    },
+  },
   mounted() {
     if (keycloak.token) {
       this.decodedToken = jwtDecode(keycloak.token);
