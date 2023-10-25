@@ -40,17 +40,13 @@
           <hr />
           <router-link to="/" class="link">
             <div class="w3-container">
-              <h5 style="margin-left: 7px"><strong>Dashboard</strong></h5>
+              <h5 style="margin-right: 50px">
+                <strong>Tableau de Bord</strong>
+              </h5>
             </div>
           </router-link>
           <div class="w3-bar-block">
-            <a
-              href="#"
-              class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
-              onclick="w3_close()"
-              title="close menu"
-              ><i class="fa fa-remove fa-fw"></i>  Close Menu</a
-            >
+           
 
             <router-link to="/rdvPatient" class="link">
               <a href="#" class="w3-bar-item w3-button w3-padding"

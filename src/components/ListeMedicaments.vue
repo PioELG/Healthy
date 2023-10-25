@@ -85,14 +85,14 @@
           class="page"
           style="margin-left: 10px"
         >
-          Précédent
-        </button>
-        <span style="margin-left: 100px">Page {{ currentPage + 1 }}</span>
+          Précédent</button
+        >&nbsp;&nbsp;&nbsp;
+        <span style="margin-right: 10px">Page {{ currentPage + 1 }}</span>
         <button
           @click="nextPage"
           :disabled="currentPage === totalPages - 1"
           class="page"
-          style="margin-left: 200px"
+          style="margin-left: 40px"
         >
           Suivant
         </button>

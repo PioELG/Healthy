@@ -13,7 +13,7 @@
         <!-- Header -->
         <header class="w3-container" style="padding-top: 27px">
           <h4>
-            <b><i class="fa fa-dashboard"></i> Mon Tableau de bord</b>
+            <b style="margin-left: 30px">Mon Tableau de bord</b>
           </h4>
         </header>
 

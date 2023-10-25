@@ -12,9 +12,9 @@
       <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
         <!-- Header -->
         <header class="w3-container" style="padding-top: 27px">
-          <h5>
-            <b><i class="fa fa-dashboard"></i> Mon Tableau de bord</b>
-          </h5>
+          <h4>
+            <b style="margin-left: 30px">Mon Tableau de bord</b>
+          </h4>
         </header>
 
         <div class="w3-row-padding w3-margin-bottom">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="w3-right"></div>
                 <div class="w3-clear"></div>
-                <h4>MesMessages</h4>
+                <h4>Mes Messages</h4>
               </div>
             </router-link>
           </div>
@@ -41,7 +41,7 @@
                 <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
                 <div class="w3-right"></div>
                 <div class="w3-clear"></div>
-                <h4>MesRendez-Vous</h4>
+                <h4>Mes Rendez-Vous</h4>
               </div>
             </router-link>
           </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="w3-right"></div>
                 <div class="w3-clear"></div>
-                <h4>MesConseils</h4>
+                <h4>Mes Conseils</h4>
               </div>
             </router-link>
           </div>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="w3-right"></div>
                 <div class="w3-clear"></div>
-                <h4>MonEtat</h4>
+                <h4>Mon Etat</h4>
               </div>
             </router-link>
           </div>

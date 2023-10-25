@@ -1,99 +1,99 @@
 <template>
-    <div class="w3-main" style="margin-left:300px;margin-top:20px;">
-      
-       
-      <div class="container">
-        <router-link to="/VoirPrescription" class="link">
-          <div class="left-div">
-              <h1>Ma Prescription</h1>
-              <p>Cliquez ici pour consulter les prescriptions du médecin.</p>
-          </div>
-        </router-link>
-        <router-link to="/AjouterConstantes"  class="link" >
-          <div class="right-div">
-              <h1>Mon Etat</h1>
-              <p >Cliquez ici pour mettre à jour ou surveiller votre état de santé.</p>
-          </div>
-        </router-link>
-      </div>
-      
-      </div>
-     
+  <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
+    <div class="container">
+      <router-link to="/VoirPrescription" class="link">
+        <div class="left-div" style="padding: 7px">
+          <h1>Ma Prescription</h1>
+          <p style="text-align: center">
+            Cliquez ici pour consulter les prescriptions du médecin.
+          </p>
+        </div>
+      </router-link>
+      <router-link to="/AjouterConstantes" class="link">
+        <div class="right-div" style="padding: 7px">
+          <h1>Mon Etat</h1>
+          <p style="text-align: center">
+            Cliquez ici pour mettre à jour ou surveiller votre état de santé.
+          </p>
+        </div>
+      </router-link>
+    </div>
+  </div>
 </template>
-  
-  <script>
 
-  export default {
-    name: 'MaSante', 
-    data() {
-      return {
-      
+<script>
+export default {
+  name: "MaSante",
+  data() {
+    return {};
+  },
+  methods: {},
+  mounted() {},
+};
+</script>
 
-      };
-    },
-    methods: {
-    },
-    mounted(){
-     
- }
-    ,
-  };
-  </script>
-  
-  <style scoped>
-  html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-  .link
-    {
-        text-decoration: none;
-    }
-    
-          .container {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            height: 100vh;
-        }
+<style scoped>
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Raleway", sans-serif;
+}
+.link {
+  text-decoration: none;
+}
 
-        .left-div, .right-div {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            height: 400px;
-            transition: transform 0.3s ease;
-        }
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+}
 
-        .left-div:hover, .right-div:hover {
-            transform: scale(1.05);
-        }
+.left-div,
+.right-div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  height: 400px;
+  transition: transform 0.3s ease;
+}
 
-        h1 {
-            font-size: 24px;
-            margin: 10px 0;
-            color: #333;
-        }
+.left-div:hover,
+.right-div:hover {
+  transform: scale(1.05);
+}
 
-        p {
-            font-size: 16px;
-            color: #666;
-        }
+h1 {
+  font-size: 24px;
+  margin: 10px 0;
+  color: #333;
+}
 
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
+p {
+  font-size: 16px;
+  color: #666;
+}
 
-            .left-div, .right-div {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-        }
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
 
-  </style>
-  
+  .left-div,
+  .right-div {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+</style>

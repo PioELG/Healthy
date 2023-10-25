@@ -41,7 +41,9 @@
           <hr />
           <router-link to="/" class="link">
             <div class="w3-container">
-              <h5 style="margin-left: 7px"><strong>Dashboard</strong></h5>
+              <h5 style="margin-right: 50px">
+                <strong>Tableau de Bord</strong>
+              </h5>
             </div>
           </router-link>
           <div class="w3-bar-block">
@@ -71,10 +73,13 @@
               ></router-link
             >
             <br />
-            <a href="#" class="w3-bar-item w3-button w3-padding" @click="logout"
+            <a
+              href="#"
+              class="w3-bar-item w3-button w3-padding"
+              @click="logout"
+              style="margin-right: 50px"
               >  <strong>Log Out</strong></a
             ><br /><br />
-           
           </div>
         </nav>
 
