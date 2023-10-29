@@ -10,7 +10,7 @@
           v-for="constante in constantes"
           :key="constante.id"
         >
-          <p>Date modification:{{ constante.dateModif }}</p>
+          <p>Date modification:{{ formatDate(constante.dateModif) }}</p>
           <div class="chat-preview">
             <p>
               <strong
@@ -91,6 +91,26 @@ export default {
             error
           );
         });
+    },
+    formatDate(dateString) {
+      const currentDate = new Date();
+      const targetDate = new Date(dateString);
+
+      if (
+        targetDate.getDate() === currentDate.getDate() + 1 &&
+        targetDate.getMonth() === currentDate.getMonth() &&
+        targetDate.getFullYear() === currentDate.getFullYear()
+      ) {
+        return "demain";
+      } else {
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        return targetDate.toLocaleDateString("fr-FR", options);
+      }
     },
   },
   mounted() {

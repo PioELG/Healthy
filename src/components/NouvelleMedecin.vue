@@ -257,12 +257,22 @@ export default {
         );
       }
     },
+    requestNotificationPermission() {
+      if (Notification.permission !== "granted") {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            // L'autorisation a été accordée, vous pouvez maintenant afficher des notifications.
+          }
+        });
+      }
+    },
   },
   mounted() {
     this.fetchNotif();
     console.log(this.notifs);
     console.log(this.malades);
     this.fetchRdv();
+    this.requestNotificationPermission();
   },
 };
 </script>

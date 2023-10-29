@@ -46,7 +46,7 @@
             </router-link>
           </div>
 
-          <div class="w3-quarter">
+          <div class="w3-quarter" style="max-height: 50px">
             <router-link to="/MesconseilsP" class="link">
               <div
                 class="w3-container w3-teal w3-padding-16 w3-container-rounded"
@@ -130,7 +130,6 @@
                     <i
                       class="fas fa-check-circle"
                       style="font-size: 24px; color: green"
-                      @click="supprimerNotification(notif.id)"
                     ></i>
                   </td>
                 </tr>

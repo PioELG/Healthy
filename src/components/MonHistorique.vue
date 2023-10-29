@@ -34,7 +34,7 @@
               >Vous avez prescrit du {{ medicament.nom }} à
               {{ getNomPrenom(medicament.patient_id).nom }}
               {{ getNomPrenom(medicament.patient_id).prenom }} le
-              {{ medicament.datePresc }}</strong
+              {{ formatDate(medicament.datePresc) }}</strong
             >
           </p>
         </div>
@@ -96,6 +96,26 @@ export default {
           });
       } catch (error) {
         console.error("Erreur lors de la récupération des médicaments:", error);
+      }
+    },
+    formatDate(dateString) {
+      const currentDate = new Date();
+      const targetDate = new Date(dateString);
+
+      if (
+        targetDate.getDate() === currentDate.getDate() + 1 &&
+        targetDate.getMonth() === currentDate.getMonth() &&
+        targetDate.getFullYear() === currentDate.getFullYear()
+      ) {
+        return "demain";
+      } else {
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        return targetDate.toLocaleDateString("fr-FR", options);
       }
     },
   },

@@ -11,7 +11,7 @@
                     <div class="chat-preview" >
                         <p>
                             <h4>{{ medicament.nom }}</h4> prescrit par  {{ getNomPrenom(medicament.medecin_id).nom }} {{ getNomPrenom(medicament.medecin_id).prenom }}
-                            le  {{ medicament.datePresc }}
+                            le  {{ formatDate( medicament.datePresc) }}
                 
 
                             <i class="fa fa-plus" style="color: green;" v-if="medicament.prescription!=='Oui'" @click="AjouterMedicament(medicament.id)"></i> 
@@ -122,7 +122,26 @@ const config = {
       }
     }
   },
+  formatDate(dateString) {
+      const currentDate = new Date();
+      const targetDate = new Date(dateString);
 
+      if (
+        targetDate.getDate() === currentDate.getDate() + 1 &&
+        targetDate.getMonth() === currentDate.getMonth() &&
+        targetDate.getFullYear() === currentDate.getFullYear()
+      ) {
+        return "demain";
+      } else {
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        return targetDate.toLocaleDateString("fr-FR", options);
+      }
+    },
        
  
          
