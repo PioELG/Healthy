@@ -30,40 +30,11 @@ public class ConseilController {
 
     @GetMapping()
     public List<Conseil> read(@RequestHeader(value = "Accept")String acceptHeader, Authentication authentication) {
-        Doctor doctor=new Doctor();
+        
         Jwt jwt = (Jwt) authentication.getPrincipal();
 
         String id = jwt.getClaimAsString("sub");
-        String email = jwt.getClaimAsString("email");
-        String nom= jwt.getClaimAsString("family_name");
-        String prenom=jwt.getClaimAsString("given_name");
-        Object realmAccessClaim = jwt.getClaim("realm_access");
 
-        List<String> roles = null;
-        if (realmAccessClaim instanceof Map) {
-            Map<String, Object> realmAccess = (Map<String, Object>) realmAccessClaim;
-
-            // Vérifier si la clé "roles" existe dans realmAccess
-            if (realmAccess.containsKey("roles")) {
-                Object rolesClaim = realmAccess.get("roles");
-
-                if (rolesClaim instanceof List) {
-                    roles = (List<String>) rolesClaim;
-
-                    // Maintenant, la liste 'roles' contient les rôles associés à l'utilisateur
-                    for (String role : roles) {
-                        System.out.println("Rôle : " + role);
-                    }
-                }
-            }
-        }
-        if (roles.contains("medecin")) {
-            doctor.setId(id);
-            doctor.setEmail(email);
-            doctor.setNom(nom);
-            doctor.setPrenom(prenom);
-            doctorService.Creer(doctor);
-        }
 
         return conseilService.LireP(id);
     }

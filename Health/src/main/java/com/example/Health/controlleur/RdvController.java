@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -57,8 +59,13 @@ public class RdvController {
     @GetMapping("/patient")
     public List<Rdv> readParMedecin(Authentication authentication)
     {
+
+
         Jwt jwt = (Jwt) authentication.getPrincipal();
         String idP = jwt.getClaimAsString("sub");
+
+
+
         return rdvService.LireP(idP);
     }
     @PostMapping()
@@ -75,9 +82,10 @@ public class RdvController {
         malade= maladeRepository.Single(rdv.getMalade_id());
 
 
-
-
-        emailServiceRdv.sendEmail(malade.getNom(),malade.getPrenom(),malade.getEmail(), rdv.getDate(), rdv.getHeure());
+        LocalDate appointmentDate = LocalDate.parse(rdv.getDate());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d MMMM yyyy");
+        String formattedDate = appointmentDate.format(formatter);
+        emailServiceRdv.sendEmail(malade.getNom(),malade.getPrenom(),malade.getEmail(),  formattedDate, rdv.getHeure());
 
         return  rdv;
     }
@@ -88,7 +96,11 @@ public class RdvController {
         Malade malade;
         malade= maladeRepository.Single(rdv.getMalade_id());
 
-         emailModifRdv.sendEmail(malade.getNom(),malade.getPrenom(),malade.getEmail(), rdv.getDate(), rdv.getHeure());
+        LocalDate appointmentDate = LocalDate.parse(rdv.getDate());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d MMMM yyyy");
+        String formattedDate = appointmentDate.format(formatter);
+
+         emailModifRdv.sendEmail(malade.getNom(),malade.getPrenom(),malade.getEmail(), formattedDate, rdv.getHeure());
 
         return rdv;
     }
