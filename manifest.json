@@ -1,0 +1,63 @@
+{
+  "name": "Healthy",
+  "short_name": "Healthy",
+  "description": "Healthy est une application de suivi médical post-consultation",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "assets/icon/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#EDF2F4",
+  "display": "standalone",
+  "theme_color": "#B20422",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "rdvMedecin",
+      "short_name": "rdvMedecin",
+      "description": "Les rendez-vous de medecin",
+      "url": "/rdvMedecin",
+      "icons": [
+        {
+          "src": "/assets/icon/icon-152x152.png",
+          "sizes": "152x152"
+        }
+      ]
+    },
+    {
+      "name": "ListeMedicaments",
+      "short_name": "ListeMedicaments",
+      "description": "ListeMedicaments",
+      "url": "/ListeMedicaments",
+      "icônes": [
+        {
+          "src": "/assets/icon/icon-152x152.png",
+          "sizes": "152x152"
+        }
+      ]
+    }
+  ]
+}

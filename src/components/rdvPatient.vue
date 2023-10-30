@@ -99,7 +99,12 @@ export default {
         targetDate.getFullYear() === currentDate.getFullYear()
       ) {
         return "demain";
-      } else {
+      }  if (
+        targetDate.getDate() === currentDate.getDate() 
+       
+      ) {
+        return "Aujourd'hui";
+      }else {
         const options = {
           weekday: "long",
           year: "numeric",

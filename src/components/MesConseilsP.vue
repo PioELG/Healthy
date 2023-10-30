@@ -43,7 +43,7 @@
                   </tr>
                 </table>
 
-                <p>{{ conseil.contenu }}</p>
+                <p style="font-size: 1.2em">{{ conseil.contenu }}</p>
               </article>
             </section>
           </main>

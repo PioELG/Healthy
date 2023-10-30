@@ -150,8 +150,15 @@ export default {
         targetDate.getMonth() === currentDate.getMonth() &&
         targetDate.getFullYear() === currentDate.getFullYear()
       ) {
-        return "demain";
-      } else {
+        return "Demain";
+      } 
+      if (
+        targetDate.getDate() === currentDate.getDate() 
+       
+      ) {
+        return "Aujourd'hui";
+      }
+      else {
         const options = {
           weekday: "long",
           year: "numeric",
