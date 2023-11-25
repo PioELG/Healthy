@@ -30,7 +30,7 @@ public class ConseilController {
 
     @GetMapping()
     public List<Conseil> read(@RequestHeader(value = "Accept")String acceptHeader, Authentication authentication) {
-        
+
         Jwt jwt = (Jwt) authentication.getPrincipal();
 
         String id = jwt.getClaimAsString("sub");

@@ -14,7 +14,7 @@ public interface MedicamentService {
     List<Medicament> LirePat(String patient_id);
     List<Medicament> LireMed(String medecin_id);
 
-    Medicament Modifier(Medicament medicament, Long id);
+    Medicament ModifierDuree(Medicament medicament, Long id);
     Medicament ModifierStatut(Medicament medicament, Long id);
     String Supprimer(Long id);
 

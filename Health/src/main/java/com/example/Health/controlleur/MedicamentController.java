@@ -96,10 +96,10 @@ public class MedicamentController {
             emailPrescription.sendEmail(malade.getNom(),malade.getPrenom(),malade.getEmail());
 
         }
-    @PutMapping("/{id}")
+    @PutMapping("duree/{id}")
     public Medicament update(@RequestBody Medicament medicament, @PathVariable Long id )
     {
-        return medicamentService.Modifier(medicament,id);
+        return medicamentService.ModifierDuree(medicament,id);
     }
     @PutMapping("statut/{id}")
     public Medicament updateStatut(@RequestBody Medicament medicament, @PathVariable Long id )

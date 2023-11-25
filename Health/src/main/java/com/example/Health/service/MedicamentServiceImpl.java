@@ -45,12 +45,9 @@ public class MedicamentServiceImpl implements MedicamentService{
 
 
     @Override
-    public Medicament Modifier(Medicament medicament, Long id) {
+    public Medicament ModifierDuree(Medicament medicament, Long id) {
         return medicamentRepository.findById(id).map(m->{
-            if(medicament.getNom()!=null)
-            {
-                m.setNom(medicament.getNom());
-            }
+
             if(medicament.getDuree()!=null)
             {
                 m.setDuree(medicament.getDuree());

@@ -33,6 +33,13 @@ public class PosologieController {
     {
         return posologieService.Lire();
     }
+
+    @GetMapping("poso/{id}")
+    public List<Posologie> readPar(@PathVariable Long id)
+    {
+
+        return posologieService.LireP(id);
+    }
     @PostMapping
     public Posologie create(@RequestBody Posologie posologie)
     {
