@@ -2,25 +2,9 @@
   <!DOCTYPE html>
   <html>
     <head>
-      <title>Wrapper Component</title>
-
       <link
         rel="stylesheet"
-        type="text/css"
-        href="https://unpkg.com/select2@4.0.3/dist/css/select2.min.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css"
-      />
-
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
       />
     </head>
     <body>

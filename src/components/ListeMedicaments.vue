@@ -1,4 +1,13 @@
 <template>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
+    </head>
+    <body>
   <div class="w3-main" style="margin-left: 300px">
     <header class="w3-container" style="padding-top: 25px">
       <table>
@@ -99,6 +108,8 @@
       </div>
     </div>
   </div>
+  </body>
+  </html>
 </template>
 
 <script>

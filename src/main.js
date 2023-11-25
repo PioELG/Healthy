@@ -3,6 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import Keycloak from "keycloak-js";
 import "vue-search-select/dist/VueSearchSelect.css";
+import "./registerServiceWorker";
+import firebaseMessaging from "../public/firebase";
+//import OneSignalVuePlugin from "@onesignal/onesignal-vue3"; // Import OneSignalVuePlugin here
 
 let initOptions = {
   url: "http://localhost:8180",
@@ -23,6 +26,11 @@ keycloak
       const app = createApp(App, { props: { keycloak: keycloak } });
       app.use(router);
 
+      // Add OneSignalVuePlugin to your Vue app with the appropriate configuration
+      /*app.use(OneSignalVuePlugin, {
+        appId: "7c64ae25-3c67-4c80-865b-3157777905a1",
+      });*/
+      app.config.globalProperties.$messaging = firebaseMessaging;
       app.mount("#app");
     }
 
@@ -58,4 +66,5 @@ keycloak
     console.log(e);
     console.error("Authentication Failed");
   });
+
 export default keycloak;

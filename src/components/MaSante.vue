@@ -1,4 +1,13 @@
 <template>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
+    </head>
+    <body>
   <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
     <div class="container">
       <router-link to="/VoirPrescription" class="link">
@@ -19,6 +28,8 @@
       </router-link>
     </div>
   </div>
+  </body>
+  </html>
 </template>
 
 <script>

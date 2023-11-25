@@ -46,8 +46,6 @@
             </div>
           </router-link>
           <div class="w3-bar-block">
-           
-
             <router-link to="/rdvPatient" class="link">
               <a href="#" class="w3-bar-item w3-button w3-padding"
                 ><i class="fa fa-eye fa-fw"></i>  Rendez-vous</a
@@ -69,7 +67,7 @@
               class="w3-bar-item w3-button w3-padding"
               @click="logout"
             >
-              &nbsp;<strong> Log Out </strong> </a
+              &nbsp;<strong> Se déconnecter</strong> </a
             ><br /><br />
           </div>
         </nav>

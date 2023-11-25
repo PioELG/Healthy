@@ -1,82 +1,102 @@
 <template>
-  <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
-    <br />
-    <div class="container">
-      <div class="constants">
-        <table>
-          <tr>
-            <td><h2>Mes Constantes</h2></td>
-            <td></td>
-            <td></td>
-            <td>
-              <router-link to="/AjouterConstantes"
-                ><i class="fa fa-pencil" style="color: blue"></i
-              ></router-link>
-            </td>
-          </tr>
-        </table>
-        <p>
-          <strong
-            ><i class="fa fa-balance-scale" style="color: rgb(0, 255, 140)"></i>
-            Poids :</strong
-          >
-          {{ constantes.poids }} kg
-        </p>
-        <p>
-          <strong
-            ><i class="fa fa-stethoscope" style="color: green"></i> Pression
-            Artérielle :</strong
-          >{{ constantes.pressionArterielle }}mmHg
-        </p>
-        <p>
-          <strong
-            ><i class="fa fa-heartbeat" style="color: red"></i> Fréquence
-            Cardiaque :</strong
-          >
-          {{ constantes.freqCar }} bpm
-        </p>
-        <p>
-          <strong
-            ><i class="fa fa-cloud" style="color: rgb(0, 136, 255)"></i>
-            Fréquence Respiratoire :</strong
-          >
-          {{ constantes.freqRes }} cycles/min
-        </p>
-        <p>
-          <strong
-            ><i class="fa fa-thermometer" style="color: rgb(236, 141, 6)"></i>
-            Température :</strong
-          >{{ constantes.temperature }}°C
-        </p>
-      </div>
-      <div class="symptoms">
-        <table>
-          <tr>
-            <td><h2>Mes Symptômes</h2></td>
-            <td></td>
-            <td></td>
-            <td>
-              <router-link to="/AjouterSymptomes"
-                ><i class="fa fa-plus" style="color: green"></i
-              ></router-link>
-            </td>
-          </tr>
-        </table>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
+    </head>
+    <body class="w3-light-grey">
+      <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
+        <br />
+        <div class="container">
+          <div class="constants">
+            <table>
+              <tr>
+                <td><h2>Mes Constantes</h2></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <router-link to="/AjouterConstantes"
+                    ><i class="fa fa-pen" style="color: blue"></i
+                  ></router-link>
+                </td>
+              </tr>
+            </table>
+            <h5>
+              <strong
+                ><i
+                  class="fa fa-balance-scale"
+                  style="color: rgb(0, 255, 140)"
+                ></i>
+                Poids :</strong
+              >
+              {{ constantes.poids }} kg
+            </h5>
+            <h5>
+              <strong
+                ><i class="fa fa-stethoscope" style="color: green"></i> Pression
+                Artérielle :</strong
+              >{{ constantes.pressionArterielle }}mmHg
+            </h5>
+            <h5>
+              <strong
+                ><i class="fa fa-heartbeat" style="color: red"></i> Fréquence
+                Cardiaque :</strong
+              >
+              {{ constantes.freqCar }} bpm
+            </h5>
+            <h5>
+              <strong
+                ><i class="fa fa-cloud" style="color: rgb(0, 136, 255)"></i>
+                Fréquence Respiratoire :</strong
+              >
+              {{ constantes.freqRes }} cycles/min
+            </h5>
+            <h5>
+              <strong
+                ><i
+                  class="fa fa-thermometer"
+                  style="color: rgb(236, 141, 6)"
+                ></i>
+                Température :</strong
+              >{{ constantes.temperature }}°C
+            </h5>
+          </div>
+          <div class="symptoms">
+            <table>
+              <tr>
+                <td><h2>Mes Symptômes</h2></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <router-link to="/AjouterSymptomes"
+                    ><i class="fa fa-plus" style="color: green"></i
+                  ></router-link>
+                </td>
+              </tr>
+            </table>
 
-        <ul v-for="symptome in symptomes" :key="symptome.id">
-          <li>
-            {{ symptome.nom }} &nbsp;&nbsp;&nbsp;
-            <i
-              class="fa fa-trash"
-              style="color: red"
-              @click="supprimerSymptome(symptome.id)"
-            ></i>
-          </li>
-          <!-- Ajoutez d'autres symptômes ici -->
-        </ul>
+            <ul v-for="symptome in symptomes" :key="symptome.id">
+              <li>
+                <h5>
+                  {{ symptome.nom }}
+                  <i
+                    class="fa fa-trash"
+                    style="color: red"
+                    @click="supprimerSymptome(symptome.id)"
+                  ></i>
+                </h5>
+              </li>
+
+              <!-- Ajoutez d'autres symptômes ici -->
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </body>
+  </html>
 </template>
 
 <script>

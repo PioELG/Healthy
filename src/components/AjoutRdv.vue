@@ -63,11 +63,11 @@ export default {
   },
   methods: {
     async submitForm() {
-      const accessToken = keycloak.token; 
+      const accessToken = keycloak.token;
 
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, 
+          Authorization: `Bearer ${accessToken}`,
         },
       };
       const id = this.$route.params.id;
@@ -84,6 +84,8 @@ export default {
           { contexte: "un rendez-vous", cible: id },
           config
         );
+
+       
 
         console.log("rdv ajouté avec succès !");
         this.date = "";

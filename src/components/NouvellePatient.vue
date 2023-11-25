@@ -145,7 +145,8 @@
 <script>
 import keycloak from "@/main";
 import axios from "axios";
-
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { app } from "/public/firebase";
 export default {
   name: "NouvellePatient",
   data() {
@@ -229,11 +230,69 @@ export default {
         );
       }
     },
+    requestNotificationPermission() {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          console.log("Notification permission granted");
+          this.subscribeToNotifications();
+        } else {
+          console.log("Notification permission denied");
+        }
+      });
+    },
+
+    subscribeToNotifications() {
+      try {
+        const messaging = getMessaging(app); // Get the messaging instance
+
+        onMessage(messaging, (payload) => {
+          console.log("Message received. ", payload);
+          // ...
+        });
+
+        console.log("yo voici les message", messaging);
+
+        const currentToken = getToken(messaging, {
+          vapidKey:
+            "BG2oABfYY_5Ud9CI92wD7SV7ndU5aXZJRHdZL6tcmmwFR9pqVsDM17Zu-hH1INfQ2shj73F9LtbtTeHSlHCfrHo",
+        });
+
+        if (currentToken) {
+          // You can now send the 'currentToken' to your server to associate it with the user.
+          console.log("FCM Token:", currentToken);
+        } else {
+          console.log("No registration token available.");
+        }
+      } catch (error) {
+        console.error("Error getting FCM token:", error);
+      }
+    },
+
+    async sendNotification() {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      try {
+        await axios.post(
+          "http://192.168.224.1:8080/api/notification/doc",
+          "Connectez vous ",
+          config
+        );
+        console.log("Notification sent successfully!");
+      } catch (error) {
+        console.error("Error sending notification:", error);
+      }
+    },
   },
   mounted() {
     this.fetchNotif();
     console.log(this.notifs);
     this.fetchRdv();
+
+    this.requestNotificationPermission();
   },
 };
 </script>

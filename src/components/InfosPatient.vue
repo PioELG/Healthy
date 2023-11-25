@@ -1,6 +1,14 @@
 <template>
-  
-    <div class="w3-main" style="margin-left:300px;margin-top:20px;">
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
+    </head>
+    <body>
+  <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
         
       <br> <br>
@@ -8,11 +16,11 @@
       <div class="container" v-if="patient.length !== 0 && constante.length !== 0 ">
         <div class="patient-info">
             <h2>Informations du Patient</h2>
-            <p><strong>Nom : </strong> {{ patient[0].nom}}</p>
-            <p><strong>Prénom : </strong> {{ patient[0].prenom}}</p>
-            <p><strong>Âge :</strong> 35 ans</p>
-            <p><strong>Diagnostic :</strong>{{ patient[0].pathologie}}</p>
-            <p><strong>Statut :</strong> {{ patient[0].statut}}</p>
+            <h5><strong>Nom : </strong> {{ patient[0].nom}}</h5>
+            <h5><strong>Prénom : </strong> {{ patient[0].prenom}}</h5>
+            <h5><strong>Âge :</strong> 35 ans</h5>
+            <h5><strong>Diagnostic :</strong>{{ patient[0].pathologie}}</h5>
+            <h5><strong>Statut :</strong> {{ patient[0].statut}}</h5>
             
         </div>
         
@@ -20,11 +28,11 @@
           <router-link :to="'/EvolutionEtat/' +$route.params.id">   <i class="fa fa-history fa-lg" style="color: rgb(0, 128, 85); margin-left:500px;"></i> </router-link>
 
           <h2>Constantes du Patient</h2>
-<p><strong><i class="fa fa-balance-scale" style="color: rgb(0, 0, 0);"></i> Poids :</strong> {{ constante[0].poids}}  kg</p>
-<p><strong><i class="fa fa-stethoscope" style="color: green;"></i> Tension Artérielle :</strong> {{ constante[0].pressionArterielle }} mmHg</p>
-<p><strong><i class="fa fa-heartbeat" style="color: red;"></i> Fréquence Cardiaque :</strong> {{ constante[0].freqCar }} bpm</p>
-<p><strong><i class="fa fa-cloud" style="color: rgb(0, 136, 255) ;"></i>  Fréquence Respiratoire :</strong> {{ constante[0].freqRes}} cycles/min</p>
-<p><strong><i class="fa fa-thermometer" style="color: rgb(236, 141, 6);"></i> Température :</strong> {{constante[0].temperature}}°C</p>
+<h5><strong><i class="fa fa-balance-scale" style="color: rgb(0, 0, 0);"></i> Poids :</strong> {{ constante[0].poids}}  kg</h5>
+<h5><strong><i class="fa fa-stethoscope" style="color: green;"></i> Tension Artérielle :</strong> {{ constante[0].pressionArterielle }} mmHg</h5>
+<h5><strong><i class="fa fa-heartbeat" style="color: red;"></i> Fréquence Cardiaque :</strong> {{ constante[0].freqCar }} bpm</h5>
+<h5><strong><i class="fa fa-cloud" style="color: rgb(0, 136, 255) ;"></i>  Fréquence Respiratoire :</strong> {{ constante[0].freqRes}} cycles/min</h5>
+<h5><strong><i class="fa fa-thermometer" style="color: rgb(236, 141, 6);"></i> Température :</strong> {{constante[0].temperature}}°C</h5>
         
 
   </div>
@@ -47,7 +55,7 @@
             </tr>
             <tr>
               <div v-for="antecedent in antecedents" :key="antecedent.id">
-                <p>{{antecedent.nom}}</p>  
+                <h5>{{antecedent.nom}}</h5>  
             </div>
             </tr>
           </table>
@@ -56,7 +64,7 @@
         <div class="symptoms">
           <h2>Symptomes  </h2>
           <ul v-for="symptome in symptomes" :key="symptome.id">
-              <li>{{symptome.nom}}</li>
+              <li> <h5>{{symptome.nom}}</h5></li>
               
              
           </ul>
@@ -94,23 +102,19 @@
                     <router-link :to="'/AjouterPosologie/' +medicament.id">  <i class="fa fa-plus" style="color: green;"></i> </router-link>  &nbsp;&nbsp;&nbsp; 
                     <i class="fa fa-eye" @click="toggle"></i>
                   </p>
-                    <p v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"  > 
+                    <h5 v-for="posologie in getPosologies(medicament.id)" :key="posologie.id"  > 
                       {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
         
                       <div>
                         <transition name="fade" mode="out-in">
                           <p v-if="show">
-                            <router-link :to="'/ModifierPosologie/' +posologie.id"> <i class="fa fa-pencil" style="color: blue;" ></i> </router-link> &nbsp;&nbsp;&nbsp;
+                            <router-link :to="'/ModifierPosologie/' +posologie.id"> <i class="fa fa-pen" style="color: blue;" ></i> </router-link> &nbsp;&nbsp;&nbsp;
                             <i class="fa fa-trash" style="color: red; " @click="supprimerPosologie(posologie.id)"  ></i> &nbsp;&nbsp;&nbsp;   
                             </p>
                         </transition>
                         
                       </div>
-
-
-                    
-                     
-                    </p>
+                    </h5>
                     
                 </div>
             </li>
@@ -145,7 +149,8 @@
     </div>
     
     </div>
-    
+   </body>
+   </html> 
   </template>
     
     <script>
@@ -430,9 +435,10 @@ async sendMail() {
             `http://192.168.224.1:8080/api/medicament/prescription/${id}`,
             config
           );
+          alert("Mail envoyé au patient");
           
         } catch (error) {
-          console.error("Erreur lors de l'ajout de la presc:", error);
+          console.error("Erreur lors de l'envoi du mail:", error);
         }
 
         

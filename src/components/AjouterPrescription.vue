@@ -4,6 +4,18 @@
     <h3 style="text-align: center">Ajouter un nouveau médicament</h3>
 
     <p style="text-align: center">{{ this.nom }}</p>
+    <p
+      v-for="posologie in posologieFiltred"
+      :key="posologie.id"
+      style="text-align: center"
+    >
+      {{ posologie.quantite }} {{ posologie.unite }} {{ posologie.heurePrise }}
+    </p>
+
+    <p style="text-align: center" v-if="showPosologie">
+      pendant {{ nb1 }} {{ nb2 }}
+    </p>
+
     <div class="container" style="margin: 50px">
       <div class="form-group" v-if="!showPosologie">
         <label for="medicament">Médicament :</label>
@@ -25,33 +37,6 @@
             {{ modeleMedicament.nom }}
           </option>
         </select>
-
-        <div class="posologie">
-          <div class="form-group" style="max-width: 200px: margin-top: 20px">
-            <label for="jours"> A prendre pendant</label>
-            <input
-              type="number"
-              id="quantite"
-              name="quantite"
-              min="1"
-              required
-              v-model="nb1"
-              @input="validateQuantite"
-            />
-            {{ nb1 }} {{ nb2 }}
-          </div>
-
-          <div
-            class="form-group"
-            style="margin-right: 300px; max-width: 200px; margin-top: 20px"
-          >
-            <select id="duree" name="duree" v-model="nb2">
-              <option value="jours" selected>jour(s)</option>
-              <option value="semaine(s)">semaine(s)</option>
-              <option value="mois">mois</option>
-            </select>
-          </div>
-        </div>
 
         <button
           type="button"
@@ -78,9 +63,9 @@
         <div class="form-group">
           <label for="unite">Unité :</label>
           <select id="unite" name="unite" v-model="unite">
-            <option value="comprimés">Comprimé(s)</option>
+            <option value="comprimé(s)">Comprimé(s)</option>
             <option value="ml">ml</option>
-            <option value="dose">dose</option>
+            <option value="dose(s)">dose(s)</option>
           </select>
         </div>
 
@@ -93,6 +78,7 @@
             <option value="Toutes les 2h">toutes les 2 heures</option>
           </select>
         </div>
+
         <button
           type="button"
           id="ajouterPosologie"
@@ -102,13 +88,40 @@
           Ajouter Posologie
         </button>
       </div>
+
+      <div class="posologie" v-if="showPosologie">
+        <div class="form-group" style="max-width: 200px: margin-top: 20px">
+          <label for="jours"> A prendre pendant</label>
+          <input
+            type="number"
+            id="quantite"
+            name="quantite"
+            min="1"
+            required
+            v-model="nb1"
+            @input="validateQuantite"
+          />
+          {{ nb1 }} {{ nb2 }}
+        </div>
+
+        <div
+          class="form-group"
+          style="margin-right: 300px; max-width: 200px; margin-top: 20px"
+        >
+          <select id="duree" name="duree" v-model="nb2">
+            <option value="jours" selected>jour(s)</option>
+            <option value="semaine(s)">semaine(s)</option>
+            <option value="mois">mois</option>
+          </select>
+        </div>
+      </div>
+
       <button
         v-if="showPosologie"
         type="button"
         id="ajouterPrescription"
         class="btn"
-        @click="goback"
-        style="margin-left: 50px"
+        @click="AddDuree"
       >
         Valider
       </button>
@@ -126,6 +139,7 @@ export default {
       prescription: [],
       medicament: [],
       posologie: [],
+      posologieFiltred: [],
       nom: "",
       showError: false,
       quantite: "",
@@ -168,24 +182,21 @@ export default {
       };
       const id = this.$route.params.id;
 
-      if (this.nom.trim() === "" || this.nb1 === "") {
+      if (this.nom.trim() === "") {
         this.showError = false;
         alert("Veuillez remplir tous les champs !");
       } else {
         this.forMPoso();
         try {
-          this.nb = this.nb1 + this.nb2;
-
           const response = await axios.post(
             "http://192.168.224.1:8080/api/medicament",
-            { nom: this.nom, patient_id: id, duree: this.nb },
+            { nom: this.nom, patient_id: id },
             config
           );
           alert("Médicament ajouté à la prescription avec succès");
           console.log("medicament ajoutée avec succès !");
           this.medicamentId = response.data.id;
 
-          console.log("salut");
           console.log(this.medicamentId);
         } catch (error) {
           console.error("Erreur lors de l'ajout de la presc:", error);
@@ -220,6 +231,8 @@ export default {
             },
             config
           );
+
+          this.fetchPosologieFiltred();
 
           await axios.post(
             "http://192.168.224.1:8080/api/notification/doc",
@@ -268,12 +281,68 @@ export default {
         this.nb1 = 1;
       }
     },
+    async AddDuree() {
+      const accessToken = keycloak.token;
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      const id = this.$route.params.id;
+      if (this.nb1 === "") {
+        this.showError = false;
+        alert("Veuillez remplir tous les champs !");
+      } else {
+        this.nb = this.nb1 + this.nb2;
+
+        try {
+          await axios.put(
+            `http://192.168.224.1:8080/api/medicament/duree/${this.medicamentId}`,
+            { duree: this.nb },
+            config
+          );
+          this.goback();
+        } catch (error) {
+          console.error(
+            "Erreur lors de la suppression de la prescription :",
+            error
+          );
+        }
+      }
+    },
+    fetchPosologieFiltred() {
+      const accessToken = keycloak.token;
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      const id = this.$route.params.id;
+
+      axios
+        .get(
+          `http://192.168.224.1:8080/api/posologie/poso/${this.medicamentId}`,
+          config
+        )
+        .then((response) => {
+          this.posologieFiltred = response.data;
+        })
+        .catch((error) => {
+          console.error(
+            "Erreur lors de la récupération des posologies:",
+            error
+          );
+        })
+        .finally(() => (this.loading = false));
+    },
   },
   mounted() {
     this.fetchMedocs();
     console.log(this.modeles);
-
     this.nb2 = "jours";
+    this.fetchPosologieFiltred();
   },
 };
 </script>

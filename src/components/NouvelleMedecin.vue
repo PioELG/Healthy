@@ -8,6 +8,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
       />
     </head>
+
     <body>
       <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
         <!-- Header -->
@@ -152,6 +153,8 @@
 <script>
 import keycloak from "@/main";
 import axios from "axios";
+import "select2";
+//import firebase from "firebase/app";
 
 export default {
   name: "NouvelleMedecin",
@@ -257,22 +260,66 @@ export default {
         );
       }
     },
+    /*async subscribeToNotifications() {
+      const messaging = firebase.messaging();
+      try {
+        const registration = await navigator.serviceWorker.register(
+          "/firebase-messaging-sw.js"
+        );
+        await messaging.useServiceWorker(registration);
+
+        const token = await messaging.getToken();
+        console.log("Token d'abonnement aux notifications :", token);
+        // Envoyez ce token au serveur pour permettre l'envoi de notifications.
+      } catch (error) {
+        console.error("Erreur lors de l'abonnement aux notifications :", error);
+      }
+    },*/
     requestNotificationPermission() {
       if (Notification.permission !== "granted") {
         Notification.requestPermission().then((permission) => {
           if (permission === "granted") {
-            // L'autorisation a été accordée, vous pouvez maintenant afficher des notifications.
+            //this.subscribeToNotifications();
           }
         });
       }
     },
+
+    /* showDailyNotification() {
+      const now = new Date();
+      const targetTime = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        15, // Heure à laquelle vous voulez afficher la notification (7h)
+        13, // Minutes
+        0 // Secondes
+      );
+
+      if (now > targetTime) {
+        targetTime.setDate(targetTime.getDate() + 1);
+      }
+
+      const timeUntilNotification = targetTime - now;
+
+      setTimeout(() => {
+        const notificationMessage =
+          "Connectez-vous à votre application Healthy.com aujourd'hui pour vérifier votre prise de médicament.";
+
+        const notification = new Notification("Rappel quotidien", {
+          body: notificationMessage,
+        });
+
+        notification.onclick = () => {};
+      }, timeUntilNotification);
+    },*/
   },
   mounted() {
     this.fetchNotif();
-    console.log(this.notifs);
-    console.log(this.malades);
     this.fetchRdv();
     this.requestNotificationPermission();
+    // this.subscribeToNotifications();
+    // this.showDailyNotification();
   },
 };
 </script>
@@ -288,21 +335,18 @@ h5 {
   font-family: "Raleway", sans-serif;
 }
 .w3-container-rounded {
-  border-radius: 10px; /* Vous pouvez ajuster le rayon selon vos préférences */
+  border-radius: 10px;
 }
 .w3-container-rounded:hover {
-  transform: translate(
-    5px,
-    -5px
-  ); /* Déplacez la div vers le bas et vers la droite */
-  transition: transform 0.2s ease; /* Ajoutez une transition fluide */
+  transform: translate(5px, -5px);
+  transition: transform 0.2s ease;
 }
 .w3-container {
   padding-top: 22px;
 }
 .w3-main {
   height: 100%;
-  min-height: 100vh; /*le code qui m'a permis d'étendre la div sur toute la page */
+  min-height: 100vh;
 }
 .w3-row-padding {
   margin-left: 20px;
@@ -320,24 +364,20 @@ h5 {
   min-width: 100vh;
 }
 .w3-table td i {
-  /* Couleur de l'icône */
-  margin-right: 10px; /* Marge à droite de l'icône */
+  margin-right: 10px;
 }
 
-/* Ajoutez une animation de transition pour les notifications */
 .w3-table td {
   transition: transform 0.2s ease;
 }
 
-/* Lorsque vous survolez une ligne de notification, appliquez une transformation */
 .w3-table tr:hover td {
-  transform: translateX(10px); /* Déplacez la ligne vers la droite au survol */
+  transform: translateX(10px);
 }
 
-/* Style pour le titre "Notifications" */
 h5 {
-  font-size: 18px; /* Taille de police */
-  margin-bottom: 10px; /* Marge en bas du titre */
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 .contexte {
   border-radius: 10px;

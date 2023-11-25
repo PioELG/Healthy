@@ -78,7 +78,7 @@
               class="w3-bar-item w3-button w3-padding"
               @click="logout"
               style="margin-right: 50px"
-              >  <strong>Log Out</strong></a
+              >  <strong>Se déconnecter</strong></a
             ><br /><br />
           </div>
         </nav>

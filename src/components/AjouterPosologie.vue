@@ -1,61 +1,72 @@
 <template>
-  <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
-    <br />
-    <br />
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
+    </head>
+    <body>
+      <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
+        <br />
+        <br />
 
-    <h3 style="margin-left: 100px">
-      Ajouter à <strong>{{ medicament.nom }} </strong>
-    </h3>
-    <div
-      class="posologie"
-      style="margin-left: 50px; margin-right: 50px; padding: 70px"
-    >
-      <div class="form-group">
-        <label for="quantite">Quantité :</label>
-        <input
-          type="number"
-          id="quantite"
-          name="quantite"
-          required
-          v-model="quantite"
-        />
-      </div>
+        <h3 style="margin-left: 100px">
+          Ajouter à <strong>{{ medicament.nom }} </strong>
+        </h3>
+        <div
+          class="posologie"
+          style="margin-left: 50px; margin-right: 50px; padding: 70px"
+        >
+          <div class="form-group">
+            <label for="quantite">Quantité :</label>
+            <input
+              type="number"
+              id="quantite"
+              name="quantite"
+              required
+              v-model="quantite"
+            />
+          </div>
 
-      <div class="form-group">
-        <label for="unite">Unité :</label>
-        <select id="unite" name="unite" v-model="unite">
-          <option value="comprimés">Comprimés</option>
-          <option value="ml">ml</option>
-          <option value="dose">dose</option>
-        </select>
-      </div>
+          <div class="form-group">
+            <label for="unite">Unité :</label>
+            <select id="unite" name="unite" v-model="unite">
+              <option value="comprimés">Comprimés</option>
+              <option value="ml">ml</option>
+              <option value="dose">dose</option>
+            </select>
+          </div>
 
-      <div class="form-group">
-        <label for="temps">Temps de Prise :</label>
-        <select id="temps" name="temps" required v-model="heurePrise">
-          <option value="le matin">Matin</option>
-          <option value="à midi">Midi</option>
-          <option value="le soir">Soir</option>
-          <option value="Toutes les 2h">Toutes les 2 heures</option>
-        </select>
+          <div class="form-group">
+            <label for="temps">Temps de Prise :</label>
+            <select id="temps" name="temps" required v-model="heurePrise">
+              <option value="le matin">Matin</option>
+              <option value="à midi">Midi</option>
+              <option value="le soir">Soir</option>
+              <option value="Toutes les 2h">Toutes les 2 heures</option>
+            </select>
+          </div>
+          <button
+            type="button"
+            id="ajouterPosologie"
+            class="btn"
+            @click="submitPoso"
+          >
+            Ajouter
+          </button>
+        </div>
       </div>
-      <button
-        type="button"
-        id="ajouterPosologie"
-        class="btn"
-        @click="submitPoso"
-      >
-        Ajouter
-      </button>
-    </div>
-  </div>
+    </body>
+  </html>
 </template>
 
 <script>
 import keycloak from "@/main";
 import axios from "axios";
 export default {
-  name: "AjouterPosologie", 
+  name: "AjouterPosologie",
   data() {
     return {
       quantite: "",
@@ -118,13 +129,13 @@ export default {
 
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`, 
+          Authorization: `Bearer ${accessToken}`,
         },
       };
       const id = this.$route.params.id;
 
       axios
-        .get(`http://192.168.224.1:8080/api/medicament/unique/${id}`, config) 
+        .get(`http://192.168.224.1:8080/api/medicament/unique/${id}`, config)
         .then((response) => {
           this.medicament = response.data;
         })
@@ -140,7 +151,6 @@ export default {
     this.fetchMedicament();
     console.log(this.medicament);
   },
-  
 };
 </script>
 
@@ -202,12 +212,12 @@ select {
 }
 
 .posologie label {
-  width: 100%; 
+  width: 100%;
   margin-right: 70 px;
 }
 
 .posologie select {
-  width: 100%; 
+  width: 100%;
 }
 
 .btn {
@@ -216,7 +226,7 @@ select {
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 10px; 
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -225,8 +235,8 @@ select {
 }
 
 #ajouterPrescription {
-  margin-top: 20px; 
-  background-color: #009900; 
+  margin-top: 20px;
+  background-color: #009900;
 }
 
 @media (max-width: 768px) {
@@ -245,6 +255,6 @@ select {
 
 .w3-main {
   height: 100%;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 </style>

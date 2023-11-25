@@ -1,60 +1,74 @@
 <template>
-  <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
-    <br /><br />
-    <div class="historique">
-      <h4>Evolution de l'Etat de santé du patient</h4>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
+    </head>
+    <body>
+      <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
+        <br /><br />
+        <div class="historique">
+          <h4>Evolution de l'Etat de santé du patient</h4>
 
-      <ul class="chat-list">
-        <li
-          class="chat-item"
-          v-for="constante in constantes"
-          :key="constante.id"
-        >
-          <p>Date modification:{{ formatDate(constante.dateModif) }}</p>
-          <div class="chat-preview">
-            <p>
-              <strong
-                ><i class="fa fa-balance-scale" style="color: rgb(0, 0, 0)"></i>
-                Poids :</strong
-              >
-              {{ constante.poids }} kg
-            </p>
-            <p>
-              <strong
-                ><i class="fa fa-stethoscope" style="color: green"></i> Tension
-                Artérielle :</strong
-              >
-              {{ constante.pressionArterielle }} mmHg
-            </p>
-            <p>
-              <strong
-                ><i class="fa fa-heartbeat" style="color: red"></i> Fréquence
-                Cardiaque :</strong
-              >
-              {{ constante.freqCar }} bpm
-            </p>
-            <p>
-              <strong
-                ><i class="fa fa-cloud" style="color: rgb(0, 136, 255)"></i>
-                Fréquence Respiratoire :</strong
-              >
-              {{ constante.freqRes }} cycles/min
-            </p>
-            <p>
-              <strong
-                ><i
-                  class="fa fa-thermometer"
-                  style="color: rgb(236, 141, 6)"
-                ></i>
-                Température :</strong
-              >
-              {{ constante.temperature }}°C
-            </p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
+          <ul class="chat-list">
+            <li
+              class="chat-item"
+              v-for="constante in constantes"
+              :key="constante.id"
+            >
+              <p>Date modification:{{ formatDate(constante.dateModif) }}</p>
+              <div class="chat-preview">
+                <h5>
+                  <strong
+                    ><i
+                      class="fa fa-balance-scale"
+                      style="color: rgb(0, 0, 0)"
+                    ></i>
+                    Poids :</strong
+                  >
+                  {{ constante.poids }} kg
+                </h5>
+                <h5>
+                  <strong
+                    ><i class="fa fa-stethoscope" style="color: green"></i>
+                    Tension Artérielle :</strong
+                  >
+                  {{ constante.pressionArterielle }} mmHg
+                </h5>
+                <h5>
+                  <strong
+                    ><i class="fa fa-heartbeat" style="color: red"></i>
+                    Fréquence Cardiaque :</strong
+                  >
+                  {{ constante.freqCar }} bpm
+                </h5>
+                <h5>
+                  <strong
+                    ><i class="fa fa-cloud" style="color: rgb(0, 136, 255)"></i>
+                    Fréquence Respiratoire :</strong
+                  >
+                  {{ constante.freqRes }} cycles/min
+                </h5>
+                <h5>
+                  <strong
+                    ><i
+                      class="fa fa-thermometer"
+                      style="color: rgb(236, 141, 6)"
+                    ></i>
+                    Température :</strong
+                  >
+                  {{ constante.temperature }}°C
+                </h5  >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </body>
+  </html>
 </template>
 
 <script>

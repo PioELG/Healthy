@@ -16,9 +16,13 @@
         </header>
 
         <main style="margin-left: 30px; margin-right: 30px">
+          <p v-if="rdvs.length === 0">Aucun rendez-vous prévu avec votre médecin pour l'instant</p>
           <ul class="chat-list" v-for="rdv in rdvs" :key="rdv.id">
             <li class="chat-item">
               <div class="chat-preview">
+
+                
+                
                 <h4>
                   Rendez-Vous avec votre médecin: &nbsp;&nbsp;
                   <strong>{{ doctor.nom }} {{ doctor.prenom }}</strong>

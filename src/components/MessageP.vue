@@ -1,9 +1,15 @@
 <template>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
+    </head>
+    <body>
     <div class="w3-main" style="margin-left:300px;margin-top:20px;">
 
-        <!-- Header -->
-       
-      
         <main>
             <br>
             <div class="chat" v-for="message in messages" :key="message.id" v-bind:class="{'patient':(message.sender==='Patient'), 'doctor':(message.sender === 'Medecin')}"
@@ -26,7 +32,8 @@
       
         <!-- End page content -->
       </div>
-     
+     </body>
+     </html>
    </template>
      
      <script>
