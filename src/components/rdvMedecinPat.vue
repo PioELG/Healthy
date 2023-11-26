@@ -93,10 +93,10 @@
         const id = this.$route.params.id;
   
         try {
-          const rdvResponse = await axios.get(`http://192.168.224.1:8080/api/rdv/${id}`, config);
+          const rdvResponse = await axios.get(`http://localhost:8080/api/rdv/${id}`, config);
           this.rdvs = rdvResponse.data;
   
-          const maladeResponse = await axios.get('http://192.168.224.1:8080/api/malade/St', config);
+          const maladeResponse = await axios.get('http://localhost:8080/api/malade/St', config);
           this.malades = maladeResponse.data;
         } catch (error) {
           console.error('Erreur lors de la récupération des rendez-vous ou des malades:', error);
@@ -111,7 +111,7 @@
             }
           };
           try {
-            await axios.delete(`http://192.168.224.1:8080/api/rdv/${rdvId}`, config);
+            await axios.delete(`http://localhost:8080/api/rdv/${rdvId}`, config);
             console.log('Rendez-vous supprimé avec succès !');
             this.rdvs = this.rdvs.filter(r => r.id !== rdvId);
           } catch (error) {

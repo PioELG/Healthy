@@ -93,7 +93,7 @@ export default {
       } else {
         try {
           await axios.post(
-            "http://192.168.224.1:8080/api/antecedent",
+            "http://localhost:8080/api/antecedent",
             { nom: this.nom, patient_id: id },
             config
           );
@@ -117,7 +117,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/pathologie/all", config)
+        .get("http://localhost:8080/api/pathologie/all", config)
         .then((response) => {
           this.pathologies = response.data;
         })

@@ -122,7 +122,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/constantes", config)
+        .get("http://localhost:8080/api/constantes", config)
         .then((response) => {
           this.constantes = response.data;
           console.log(response.data);
@@ -144,7 +144,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/symptomes", config)
+        .get("http://localhost:8080/api/symptomes", config)
         .then((response) => {
           this.symptomes = response.data;
           console.log(response.data);
@@ -167,7 +167,7 @@ export default {
       if (confirm("Votre symptôme a t'il disparu ?")) {
         try {
           await axios.delete(
-            `http://192.168.224.1:8080/api/symptomes/${symptomeId}`,
+            `http://localhost:8080/api/symptomes/${symptomeId}`,
             config
           );
 

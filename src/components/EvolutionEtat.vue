@@ -95,7 +95,7 @@ export default {
       const id = this.$route.params.id;
 
       axios
-        .get(`http://192.168.224.1:8080/api/constantes/${id}`, config)
+        .get(`http://localhost:8080/api/constantes/${id}`, config)
         .then((response) => {
           this.constantes = response.data;
         })

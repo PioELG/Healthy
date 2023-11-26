@@ -65,12 +65,12 @@ export default {
 
       try {
         await axios.post(
-          "http://192.168.224.1:8080/api/conseils",
+          "http://localhost:8080/api/conseils",
           { contenu: this.nouveauConseil },
           config
         );
         await axios.post(
-          "http://192.168.224.1:8080/api/notification/doc",
+          "http://localhost:8080/api/notification/doc",
           { contexte: "un nouveau conseil de santé", cible: "tous" },
           config
         );

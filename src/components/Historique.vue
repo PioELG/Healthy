@@ -83,7 +83,7 @@
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/medicament/all/${id}`, config) 
+  axios.get(`http://localhost:8080/api/medicament/all/${id}`, config) 
     .then(response => {
       
        
@@ -96,7 +96,7 @@
     }).finally(()=> this.loading = false);
     
     axios
-          .get("http://192.168.224.1:8080/api/doctor/all", config)
+          .get("http://localhost:8080/api/doctor/all", config)
 
           .then((response) => {
             this.doctors = response.data;
@@ -123,7 +123,7 @@ const config = {
         
         
 
-        await axios.put(`http://192.168.224.1:8080/api/medicament/statut/${MedicamentId}`,{prescription:"Oui"},config);
+        await axios.put(`http://localhost:8080/api/medicament/statut/${MedicamentId}`,{prescription:"Oui"},config);
         this.fetchMedicaments();
 
 

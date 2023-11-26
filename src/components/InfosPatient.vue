@@ -196,7 +196,7 @@
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/malade/${id}`, config) 
+  axios.get(`http://localhost:8080/api/malade/${id}`, config) 
     .then(response => {
       
        
@@ -225,7 +225,7 @@ fetchConstante() {
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/constantes/${id}`, config) 
+  axios.get(`http://localhost:8080/api/constantes/${id}`, config) 
     .then(response => {
       
        
@@ -254,7 +254,7 @@ fetchSymptomes() {
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/symptomes/${id}`, config) 
+  axios.get(`http://localhost:8080/api/symptomes/${id}`, config) 
     .then(response => {
       
        
@@ -282,7 +282,7 @@ fetchMedicaments() {
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/medicament/${id}`, config) 
+  axios.get(`http://localhost:8080/api/medicament/${id}`, config) 
     .then(response => {
       
        
@@ -309,7 +309,7 @@ fetchPosologie() {
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/posologie`, config) 
+  axios.get(`http://localhost:8080/api/posologie`, config) 
     .then(response => {
       
        
@@ -340,7 +340,7 @@ const config = {
         
         
 
-        await axios.put(`http://192.168.224.1:8080/api/medicament/statut/${MedicamentId}`,{prescription:"Non"},config);
+        await axios.put(`http://localhost:8080/api/medicament/statut/${MedicamentId}`,{prescription:"Non"},config);
         this.fetchMedicaments();
 
 
@@ -361,7 +361,7 @@ const config = {
         const id = this.$route.params.id;
   
         try {
-          const rdvResponse = await axios.get(`http://192.168.224.1:8080/api/rdv/${id}`, config);
+          const rdvResponse = await axios.get(`http://localhost:8080/api/rdv/${id}`, config);
           this.rdvs = rdvResponse.data;
   
          
@@ -379,7 +379,7 @@ const config = {
 };
     if (confirm("Êtes-vous sûr de vouloir supprimer  ?")) {
       try {
-         await axios.delete(`http://192.168.224.1:8080/api/posologie/${posologieId}`,config);
+         await axios.delete(`http://localhost:8080/api/posologie/${posologieId}`,config);
 
         console.log('posologie supprimé avec succès !');
 
@@ -402,7 +402,7 @@ const config = {
  
  
 
-  axios.get(`http://192.168.224.1:8080/api/antecedent/${id}`, config) 
+  axios.get(`http://localhost:8080/api/antecedent/${id}`, config) 
     .then(response => {
       
        
@@ -432,7 +432,7 @@ async sendMail() {
         try {
 
            await axios.get(
-            `http://192.168.224.1:8080/api/medicament/prescription/${id}`,
+            `http://localhost:8080/api/medicament/prescription/${id}`,
             config
           );
           alert("Mail envoyé au patient");

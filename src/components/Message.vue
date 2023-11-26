@@ -86,12 +86,12 @@ export default {
 
       try {
         await axios.post(
-          "http://192.168.224.1:8080/api/message/doc",
+          "http://localhost:8080/api/message/doc",
           { contenu: this.msg, patient_id: id },
           config
         );
         await axios.post(
-          "http://192.168.224.1:8080/api/notification/doc",
+          "http://localhost:8080/api/notification/doc",
           { contexte: "un nouveau message", cible: id },
           config
         );
@@ -114,7 +114,7 @@ export default {
       const id = this.$route.params.id;
 
       axios
-        .get(`http://192.168.224.1:8080/api/message/MedecinMP/${id}`, config) 
+        .get(`http://localhost:8080/api/message/MedecinMP/${id}`, config) 
         .then((response) => {
           this.messages = response.data;
         })
@@ -136,7 +136,7 @@ export default {
       if (confirm("Êtes-vous sûr de vouloir supprimer ce Message ?")) {
         try {
           await axios.delete(
-            `http://192.168.224.1:8080/api/message/${MessageId}`,
+            `http://localhost:8080/api/message/${MessageId}`,
             config
           );
 

@@ -47,12 +47,12 @@
                 >
                   {{ posologie.quantite }} {{ posologie.unite }}
                   {{ posologie.heurePrise }}
-                  <input
+                  <!--  <input
                     type="checkbox"
                     :id="'myCheckbox_' + posologie.id"
                     :v-model="checkboxStates[medicament.id]"
                     @change="handleCheckboxChange(medicament.id)"
-                  />
+                  /> -->
                 </h4>
               </div>
             </li>
@@ -87,7 +87,7 @@ export default {
         },
       };
       axios
-        .get(`http://192.168.224.1:8080/api/medicament`, config)
+        .get(`http://localhost:8080/api/medicament`, config)
         .then((response) => {
           this.medicaments = response.data;
         })
@@ -108,7 +108,7 @@ export default {
         },
       };
       axios
-        .get(`http://192.168.224.1:8080/api/posologie`, config)
+        .get(`http://localhost:8080/api/posologie`, config)
         .then((response) => {
           this.posologies = response.data;
         })

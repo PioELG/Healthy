@@ -286,12 +286,41 @@ export default {
         console.error("Error sending notification:", error);
       }
     },
+
+    showDailyNotification() {
+      const now = new Date();
+      const targetTime = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        19, // Heure à laquelle vous voulez afficher la notification (7h)
+        50, // Minutes
+        0 // Secondes
+      );
+
+      if (now > targetTime) {
+        targetTime.setDate(targetTime.getDate() + 1);
+      }
+
+      const timeUntilNotification = targetTime - now;
+
+      setTimeout(() => {
+        const notificationMessage =
+          "Connectez-vous à votre application Healthy.com aujourd'hui pour vérifier votre prise de médicament.";
+
+        const notification = new Notification("Rappel quotidien", {
+          body: notificationMessage,
+        });
+
+        notification.onclick = () => {};
+      }, timeUntilNotification);
+    },
   },
   mounted() {
     this.fetchNotif();
     console.log(this.notifs);
     this.fetchRdv();
-
+    this.showDailyNotification();
     this.requestNotificationPermission();
   },
 };

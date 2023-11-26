@@ -94,7 +94,7 @@ export default {
       } else {
         try {
           await axios.post(
-            "http://192.168.224.1:8080/api/posologie",
+            "http://localhost:8080/api/posologie",
             {
               quantite: this.quantite,
               unite: this.unite,
@@ -105,7 +105,7 @@ export default {
           );
 
           await axios.post(
-            "http://192.168.224.1:8080/api/notification/doc",
+            "http://localhost:8080/api/notification/doc",
             {
               contexte: "une modification de la prescription",
               cible: this.medicament.patient_id,
@@ -135,7 +135,7 @@ export default {
       const id = this.$route.params.id;
 
       axios
-        .get(`http://192.168.224.1:8080/api/medicament/unique/${id}`, config)
+        .get(`http://localhost:8080/api/medicament/unique/${id}`, config)
         .then((response) => {
           this.medicament = response.data;
         })

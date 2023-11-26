@@ -67,13 +67,13 @@ export default {
 
       try {
         const response = await axios.get(
-          "http://192.168.224.1:8080/api/medicament/medecin",
+          "http://localhost:8080/api/medicament/medecin",
           config
         );
         this.medicaments = response.data;
 
         axios
-          .get("http://192.168.224.1:8080/api/malade", config)
+          .get("http://localhost:8080/api/malade", config)
 
           .then((response) => {
             this.malades = response.data;

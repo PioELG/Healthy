@@ -168,7 +168,7 @@ export default {
 
       axios
         .get(
-          `http://192.168.224.1:8080/api/pathologie?page=${this.currentPage}`,
+          `http://localhost:8080/api/pathologie?page=${this.currentPage}`,
           config
         )
         .then((response) => {
@@ -193,7 +193,7 @@ export default {
       };
 
       axios
-        .get(`http://192.168.224.1:8080/api/pathologie/all`, config)
+        .get(`http://localhost:8080/api/pathologie/all`, config)
         .then((response) => {
           this.pathologiesAll = response.data;
         })
@@ -214,7 +214,7 @@ export default {
         };
         try {
           await axios.delete(
-            `http://192.168.224.1:8080/api/pathologie/${Id}`,
+            `http://localhost:8080/api/pathologie/${Id}`,
             config
           );
           console.log("Pathologie supprimé avec succès !");
@@ -242,7 +242,7 @@ export default {
       } else {
         try {
           await axios.post(
-            "http://192.168.224.1:8080/api/pathologie",
+            "http://localhost:8080/api/pathologie",
             { nom: this.nom },
             config
           );

@@ -66,7 +66,7 @@ export default {
 
       try {
         await axios.post(
-          "http://192.168.224.1:8080/api/conseils",
+          "http://localhost:8080/api/conseils",
           { contenu: this.nouveauConseil },
           config
         );

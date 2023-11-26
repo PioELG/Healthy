@@ -81,8 +81,8 @@ const config = {
 
     
     try {
-       await axios.post('http://192.168.224.1:8080/api/constantes', { poids: this.poids,freqCar:this.fc,freqRes:this.fr,pressionArterielle:this.pa, temperature:this.temperature},config);
-       await axios.post('http://192.168.224.1:8080/api/notification/patient', { contexte:"ses constantes"},config);
+       await axios.post('http://localhost:8080/api/constantes', { poids: this.poids,freqCar:this.fc,freqRes:this.fr,pressionArterielle:this.pa, temperature:this.temperature},config);
+       await axios.post('http://localhost:8080/api/notification/patient', { contexte:"ses constantes"},config);
 
 
       

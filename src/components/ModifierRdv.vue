@@ -70,7 +70,7 @@ export default {
 
       try {
         await axios.put(
-          `http://192.168.224.1:8080/api/rdv/${id}`,
+          `http://localhost:8080/api/rdv/${id}`,
           { date: this.date, heure: this.heure, malade_id: id },
           config
         );

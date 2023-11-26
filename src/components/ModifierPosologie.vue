@@ -91,7 +91,7 @@ export default {
       } else {
         try {
           await axios.put(
-            `http://192.168.224.1:8080/api/posologie/${id}`,
+            `http://localhost:8080/api/posologie/${id}`,
             {
               quantite: this.quantite,
               unite: this.unite,

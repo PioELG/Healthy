@@ -74,13 +74,13 @@ export default {
 
       try {
         await axios.post(
-          "http://192.168.224.1:8080/api/rdv",
+          "http://localhost:8080/api/rdv",
           { date: this.date, heure: this.heure, malade_id: id },
           config
         );
 
         await axios.post(
-          "http://192.168.224.1:8080/api/notification/doc",
+          "http://localhost:8080/api/notification/doc",
           { contexte: "un rendez-vous", cible: id },
           config
         );

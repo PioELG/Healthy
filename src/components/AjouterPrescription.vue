@@ -189,7 +189,7 @@ export default {
         this.forMPoso();
         try {
           const response = await axios.post(
-            "http://192.168.224.1:8080/api/medicament",
+            "http://localhost:8080/api/medicament",
             { nom: this.nom, patient_id: id },
             config
           );
@@ -222,7 +222,7 @@ export default {
       } else {
         try {
           await axios.post(
-            "http://192.168.224.1:8080/api/posologie",
+            "http://localhost:8080/api/posologie",
             {
               quantite: this.quantite,
               unite: this.unite,
@@ -235,7 +235,7 @@ export default {
           this.fetchPosologieFiltred();
 
           await axios.post(
-            "http://192.168.224.1:8080/api/notification/doc",
+            "http://localhost:8080/api/notification/doc",
             { contexte: "une prescription", cible: id },
             config
           );
@@ -262,7 +262,7 @@ export default {
       };
 
       axios
-        .get(`http://192.168.224.1:8080/api/modele/all`, config)
+        .get(`http://localhost:8080/api/modele/all`, config)
         .then((response) => {
           this.modeles = response.data;
         })
@@ -298,7 +298,7 @@ export default {
 
         try {
           await axios.put(
-            `http://192.168.224.1:8080/api/medicament/duree/${this.medicamentId}`,
+            `http://localhost:8080/api/medicament/duree/${this.medicamentId}`,
             { duree: this.nb },
             config
           );
@@ -323,7 +323,7 @@ export default {
 
       axios
         .get(
-          `http://192.168.224.1:8080/api/posologie/poso/${this.medicamentId}`,
+          `http://localhost:8080/api/posologie/poso/${this.medicamentId}`,
           config
         )
         .then((response) => {

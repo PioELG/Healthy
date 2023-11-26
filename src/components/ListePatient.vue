@@ -8,107 +8,111 @@
       />
     </head>
     <body>
-  <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
-    <!-- Header -->
-    <header class="w3-container" style="padding-top: 22px">
-      <h5>
-        <b
-          ><router-link to="/MesPatients" class="link"
-            ><i class="fa fa-users fa-fw"></i> Mes Patients</router-link
-          ></b
+      <div class="w3-main" style="margin-left: 300px; margin-top: 20px">
+        <!-- Header -->
+        <header class="w3-container" style="padding-top: 22px">
+          <h5>
+            <b
+              ><router-link to="/MesPatients" class="link"
+                ><i class="fa fa-users fa-fw"></i> Mes Patients</router-link
+              ></b
+            >
+          </h5>
+        </header>
+        <label for="statutFiltre" style="margin-left: 30px"
+          >Filtrer par statut:</label
         >
-      </h5>
-    </header>
-    <label for="statutFiltre" style="margin-left: 30px"
-      >Filtrer par statut:</label
-    >
-    <select
-      id="statutFiltre"
-      name="statutFiltre"
-      v-model="statutFiltre"
-      style="margin-left: 30px; max-width: 300px"
-    >
-      <option value="Tous">Tous</option>
-      <option value="Sous traitement">Sous traitement</option>
-      <option value="FinTraitement">Fin de traitement</option>
-      <option value="Non traité">Non traité</option>
-    </select>
-
-    <div class="w3-row-padding w3-margin-bottom">
-      <table id="customers">
-        <tr>
-          <th>Nom</th>
-          <th>Prenom</th>
-          <th>Email</th>
-          <th>Pathologie</th>
-          <th>Statut</th>
-
-          <th>Actions</th>
-        </tr>
-        <tr
-          v-for="malade in malades.filter((m) => filtrerParStatut(m.statut))"
-          :key="malade.id"
+        <select
+          id="statutFiltre"
+          name="statutFiltre"
+          v-model="statutFiltre"
+          style="margin-left: 30px; max-width: 300px"
         >
-          <td>{{ malade.nom }}</td>
-          <td>{{ malade.prenom }}</td>
-          <td>{{ malade.email }}</td>
-          <td>{{ malade.pathologie }}</td>
-          <td>{{ malade.statut }}</td>
-          <td>
-            <i
-              class="fa fa-plus"
-              style="color: green"
-              @click="ouvrirFormulaire(malade, malade.id)"
-              v-if="malade.statut === 'Non traité'"
-            ></i>
-            &nbsp;&nbsp;&nbsp;
-          </td>
-        </tr>
-        <tr></tr>
-        <tr v-if="maladeEnCoursDeMiseAJour !== null">
-          <td colspan="6">
-            <form @submit.prevent="soumettreFormulaire" style="padding: 20px">
-              <label for="medicament" style="margin-bottom: 200px"
-                >Nouveau Diagnostic
-                <strong
-                  >{{ maladeSingle.nom }} {{ maladeSingle.prenom }} </strong
-                >:</label
-              >
-              <br />
+          <option value="Tous">Tous</option>
+          <option value="Sous traitement">Sous traitement</option>
+          <option value="FinTraitement">Fin de traitement</option>
+          <option value="Non traité">Non traité</option>
+        </select>
 
-              <input
-                type="text"
-                v-model="searchInput"
-                @input="filterOptions"
-                placeholder="Filtrer Pathologie"
-              />
+        <div class="w3-row-padding w3-margin-bottom">
+          <table id="customers">
+            <tr>
+              <th>Nom</th>
+              <th>Prenom</th>
+              <th>Email</th>
+              <th>Pathologie</th>
+              <th>Statut</th>
 
-              <select id="pathologie" name="pathologie" v-model="nom">
-                <option value="" disabled selected>
-                  Sélectionnez une pathologie
-                </option>
-                <option
-                  v-for="pathologie in searchInput
-                    ? filteredPathologies
-                    : pathologies"
-                  :value="pathologie.nom"
-                  :key="pathologie.id"
+              <th>Actions</th>
+            </tr>
+            <tr
+              v-for="malade in malades.filter((m) =>
+                filtrerParStatut(m.statut)
+              )"
+              :key="malade.id"
+            >
+              <td>{{ malade.nom }}</td>
+              <td>{{ malade.prenom }}</td>
+              <td>{{ malade.email }}</td>
+              <td>{{ malade.pathologie }}</td>
+              <td>{{ malade.statut }}</td>
+              <td>
+                <i
+                  class="fa fa-plus"
+                  style="color: green"
+                  @click="ouvrirFormulaire(malade, malade.id)"
+                  v-if="malade.statut === 'Non traité'"
+                ></i>
+                &nbsp;&nbsp;&nbsp;
+              </td>
+            </tr>
+            <tr></tr>
+            <tr v-if="maladeEnCoursDeMiseAJour !== null">
+              <td colspan="6">
+                <form
+                  @submit.prevent="soumettreFormulaire"
+                  style="padding: 20px"
                 >
-                  {{ pathologie.nom }}
-                </option>
-              </select>
+                  <label for="medicament" style="margin-bottom: 200px"
+                    >Nouveau Diagnostic
+                    <strong
+                      >{{ maladeSingle.nom }} {{ maladeSingle.prenom }} </strong
+                    >:</label
+                  >
+                  <br />
 
-              <button type="submit">Enregistrer</button> &nbsp;&nbsp;&nbsp;
-              <button @click="fermer">Annuler</button>
-            </form>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <br />
+                  <input
+                    type="text"
+                    v-model="searchInput"
+                    @input="filterOptions"
+                    placeholder="Filtrer Pathologie"
+                  />
 
-  </div>
-  </body>
+                  <select id="pathologie" name="pathologie" v-model="nom">
+                    <option value="" disabled selected>
+                      Sélectionnez une pathologie
+                    </option>
+                    <option
+                      v-for="pathologie in searchInput
+                        ? filteredPathologies
+                        : pathologies"
+                      :value="pathologie.nom"
+                      :key="pathologie.id"
+                    >
+                      {{ pathologie.nom }}
+                    </option>
+                  </select>
+
+                  <button type="submit">Enregistrer</button> &nbsp;&nbsp;&nbsp;
+                  <button @click="fermer">Annuler</button>
+                </form>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <br />
+      </div>
+    </body>
   </html>
 </template>
 
@@ -118,7 +122,7 @@ import jwtDecode from "jwt-decode";
 import axios from "axios";
 
 export default {
-  name: "ListePatient", 
+  name: "ListePatient",
 
   data() {
     return {
@@ -152,7 +156,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/malade", config)
+        .get("http://localhost:8080/api/malade", config)
         .then((response) => {
           this.malades = response.data;
         })
@@ -177,7 +181,7 @@ export default {
       };
 
       axios
-        .get(`http://192.168.224.1:8080/api/malade/single/${IdSingle}`, config)
+        .get(`http://localhost:8080/api/malade/single/${IdSingle}`, config)
         .then((response) => {
           this.maladeSingle = response.data;
         })
@@ -218,7 +222,7 @@ export default {
         } else {
           axios
             .put(
-              `http://192.168.224.1:8080/api/malade/${this.maladeEnCoursDeMiseAJour.id}`,
+              `http://localhost:8080/api/malade/${this.maladeEnCoursDeMiseAJour.id}`,
               newData,
               config
             )
@@ -242,7 +246,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/pathologie/all", config)
+        .get("http://localhost:8080/api/pathologie/all", config)
         .then((response) => {
           this.pathologies = response.data;
         })

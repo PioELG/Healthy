@@ -53,12 +53,12 @@ export default {
 
       try {
         await axios.post(
-          "http://192.168.224.1:8080/api/symptomes",
+          "http://localhost:8080/api/symptomes",
           { nom: this.titre },
           config
         );
         await axios.post(
-          "http://192.168.224.1:8080/api/notification/patient",
+          "http://localhost:8080/api/notification/patient",
           { contexte: "ses symptômes" },
           config
         );

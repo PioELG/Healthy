@@ -66,7 +66,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/conseils/doc", config)
+        .get("http://localhost:8080/api/conseils/doc", config)
         .then((response) => {
           this.conseils = response.data;
         })

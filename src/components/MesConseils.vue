@@ -97,7 +97,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/conseils", config)
+        .get("http://localhost:8080/api/conseils", config)
         .then((response) => {
           this.conseils = response.data;
         })
@@ -123,7 +123,7 @@ export default {
       conseil.conseilEdition = conseil.contenu;
       axios
         .put(
-          `http://192.168.224.1:8080/api/conseils/${conseil.id}`,
+          `http://localhost:8080/api/conseils/${conseil.id}`,
           {
             contenu: conseil.conseilEdition,
           },
@@ -150,7 +150,7 @@ export default {
       if (confirm("Êtes-vous sûr de vouloir supprimer ce conseil ?")) {
         try {
           await axios.delete(
-            `http://192.168.224.1:8080/api/conseils/${conseilId}`,
+            `http://localhost:8080/api/conseils/${conseilId}`,
             config
           );
 

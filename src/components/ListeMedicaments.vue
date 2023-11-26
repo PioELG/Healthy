@@ -171,7 +171,7 @@ export default {
 
       axios
         .get(
-          `http://192.168.224.1:8080/api/modele?page=${this.currentPage}`,
+          `http://localhost:8080/api/modele?page=${this.currentPage}`,
           config
         )
         .then((response) => {
@@ -196,7 +196,7 @@ export default {
       };
 
       axios
-        .get(`http://192.168.224.1:8080/api/modele/all`, config)
+        .get(`http://localhost:8080/api/modele/all`, config)
         .then((response) => {
           this.allModel = response.data;
         })
@@ -217,7 +217,7 @@ export default {
         };
         try {
           await axios.delete(
-            `http://192.168.224.1:8080/api/modele/${Id}`,
+            `http://localhost:8080/api/modele/${Id}`,
             config
           );
           console.log("Medicament supprimé avec succès !");
@@ -244,7 +244,7 @@ export default {
       } else {
         try {
           await axios.post(
-            "http://192.168.224.1:8080/api/modele",
+            "http://localhost:8080/api/modele",
             { nom: this.nom },
             config
           );

@@ -79,13 +79,13 @@ export default {
 
       try {
         const rdvResponse = await axios.get(
-          "http://192.168.224.1:8080/api/rdv/patient",
+          "http://localhost:8080/api/rdv/patient",
           config
         );
         this.rdvs = rdvResponse.data;
 
         const doctorResponse = await axios.get(
-          "http://192.168.224.1:8080/api/doctor",
+          "http://localhost:8080/api/doctor",
           config
         );
         this.doctor = doctorResponse.data;

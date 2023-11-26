@@ -85,7 +85,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/malade/St", config)
+        .get("http://localhost:8080/api/malade/St", config)
         .then((response) => {
           this.malades = response.data;
         })
@@ -109,7 +109,7 @@ export default {
 
       axios
         .put(
-          `http://192.168.224.1:8080/api/malade/Ft/${idM}`,
+          `http://localhost:8080/api/malade/Ft/${idM}`,
           { statut: "FinTraitement" },
           config
         )
@@ -120,22 +120,22 @@ export default {
           console.error("Erreur lors de la requête PUT :", error);
         });
 
-      axios.delete(`http://192.168.224.1:8080/api/rdv/malade/${idM}`, config);
+      axios.delete(`http://localhost:8080/api/rdv/malade/${idM}`, config);
 
       console.log("Rendez-vous supprimé avec succès !");
 
       axios.delete(
-        `http://192.168.224.1:8080/api/notification/malade/${idM}`,
+        `http://localhost:8080/api/notification/malade/${idM}`,
         config
       );
 
       axios.delete(
-        `http://192.168.224.1:8080/api/symptomes/malade/${idM}`,
+        `http://localhost:8080/api/symptomes/malade/${idM}`,
         config
       );
 
       axios.delete(
-        `http://192.168.224.1:8080/api/message/malade/${idM}`,
+        `http://localhost:8080/api/message/malade/${idM}`,
         config
       );
 

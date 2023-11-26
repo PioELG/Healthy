@@ -178,7 +178,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/notification/doc", config)
+        .get("http://localhost:8080/api/notification/doc", config)
         .then((response) => {
           this.notifs = response.data;
         })
@@ -187,7 +187,7 @@ export default {
         });
 
       axios
-        .get("http://192.168.224.1:8080/api/malade/St", config)
+        .get("http://localhost:8080/api/malade/St", config)
         .then((response) => {
           this.malades = response.data;
         })
@@ -206,7 +206,7 @@ export default {
       if (confirm("Êtes-vous sûr de vouloir supprimer cette notification ?")) {
         try {
           await axios.delete(
-            `http://192.168.224.1:8080/api/notification/${NotifId}`,
+            `http://localhost:8080/api/notification/${NotifId}`,
             config
           );
 
@@ -241,7 +241,7 @@ export default {
 
       try {
         const response = await axios.get(
-          "http://192.168.224.1:8080/api/rdv",
+          "http://localhost:8080/api/rdv",
           config
         );
         this.rdvs = response.data;
@@ -285,14 +285,14 @@ export default {
       }
     },
 
-    /* showDailyNotification() {
+    showDailyNotification() {
       const now = new Date();
       const targetTime = new Date(
         now.getFullYear(),
         now.getMonth(),
         now.getDate(),
-        15, // Heure à laquelle vous voulez afficher la notification (7h)
-        13, // Minutes
+        19, // Heure à laquelle vous voulez afficher la notification (7h)
+        48, // Minutes
         0 // Secondes
       );
 
@@ -312,14 +312,14 @@ export default {
 
         notification.onclick = () => {};
       }, timeUntilNotification);
-    },*/
+    },
   },
   mounted() {
     this.fetchNotif();
     this.fetchRdv();
     this.requestNotificationPermission();
     // this.subscribeToNotifications();
-    // this.showDailyNotification();
+    this.showDailyNotification();
   },
 };
 </script>

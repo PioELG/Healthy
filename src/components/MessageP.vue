@@ -76,8 +76,8 @@ const config = {
 const id = this.$route.params.id;
 
     try {
-       await axios.post('http://192.168.224.1:8080/api/message/patient', {contenu:this.msg},config);
-       await axios.post('http://192.168.224.1:8080/api/notification/patient', { contexte:"un nouveau message"},config);
+       await axios.post('http://localhost:8080/api/message/patient', {contenu:this.msg},config);
+       await axios.post('http://localhost:8080/api/notification/patient', { contexte:"un nouveau message"},config);
 
 
       console.log('message envoyé avec succès !');
@@ -100,7 +100,7 @@ fetchMessage() {
 
 
 
-  axios.get('http://192.168.224.1:8080/api/message/Patient', config) 
+  axios.get('http://localhost:8080/api/message/Patient', config) 
     .then(response => {
       this.messages = response.data;
       
@@ -120,7 +120,7 @@ const config = {
 };
     if (confirm("Êtes-vous sûr de vouloir supprimer ce Message ?")) {
       try {
-         await axios.delete(`http://192.168.224.1:8080/api/message/${MessageId}`,config);
+         await axios.delete(`http://localhost:8080/api/message/${MessageId}`,config);
 
         console.log('Message supprimé avec succès !');
 
