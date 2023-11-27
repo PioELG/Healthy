@@ -167,7 +167,7 @@ export default {
       };
 
       axios
-        .get("http://192.168.224.1:8080/api/notification/patient", config)
+        .get("http://localhost:8080/api/notification/patient", config)
         .then((response) => {
           this.notifs = response.data;
         })
@@ -186,7 +186,7 @@ export default {
       if (confirm("Êtes-vous sûr de vouloir supprimer cette notification ?")) {
         try {
           await axios.delete(
-            `http://192.168.224.1:8080/api/notification/${NotifId}`,
+            `http://localhost:8080/api/notification/${NotifId}`,
             config
           );
 
@@ -211,7 +211,7 @@ export default {
 
       try {
         const response = await axios.get(
-          "http://192.168.224.1:8080/api/rdv/patient",
+          "http://.224.1:8080/api/rdv/patient",
           config
         );
         this.rdvs = response.data;
@@ -277,7 +277,7 @@ export default {
 
       try {
         await axios.post(
-          "http://192.168.224.1:8080/api/notification/doc",
+          "http://localhost:8080/api/notification/doc",
           "Connectez vous ",
           config
         );
