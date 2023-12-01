@@ -31,7 +31,7 @@
                 <p>
                 <h5>
                   <span class="icon"
-                    ><i class="fas fa-calendar" style="color: #49f094"></i
+                    ><i class="fas fa-calendar" style="color: #e1dd72"></i
                   ></span>
                   
                   &nbsp; &nbsp; Date : &nbsp;
@@ -41,7 +41,7 @@
                 <p>
                 <h5>
                   <span class="icon"
-                    ><i class="fas fa-clock" style="color: #ff0000"></i
+                    ><i class="fas fa-clock" style="color: #a8c66c"></i
                   ></span>
                   
                   &nbsp;&nbsp; Heure :&nbsp;<strong>{{ rdv.heure }}</strong>

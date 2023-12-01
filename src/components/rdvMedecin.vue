@@ -23,13 +23,13 @@
                   Rendez-Vous avec le patient: &nbsp;&nbsp;
                   <strong>{{ getNomPrenom(rdv.malade_id).nom  }} {{ getNomPrenom(rdv.malade_id).prenom }}</strong>  &nbsp;&nbsp;&nbsp;
                   <router-link :to="'/ModifierRdv/' + rdv.id">
-                     <i class="fa fa-pen" style="color: blue"></i>
+                     <i class="fa fa-pen" style="color: rgb(127, 127, 197)"></i>
                   </router-link>
                   &nbsp;&nbsp;&nbsp;
 
                   <i
               class="fa fa-trash"
-              style="color: red"
+              style="color: rgb(208, 85, 85)"
               @click="supprimerRdv(rdv.id)"
             ></i>
                 </h4>
@@ -37,7 +37,7 @@
               <p>
                 <h5>
                   <span class="icon"
-                    ><i class="fas fa-calendar" style="color: #49f094"></i
+                    ><i class="fas fa-calendar" style="color: #e1dd72"></i
                   ></span>
                   
                   &nbsp; &nbsp; Date : &nbsp;
@@ -47,7 +47,7 @@
               <p>
                 <h5>
                   <span class="icon"
-                    ><i class="fas fa-clock" style="color: #ff0000"></i
+                    ><i class="fas fa-clock" style="color: #a8c66c"></i
                   ></span>
                   
                   &nbsp;&nbsp; Heure :&nbsp;<strong>{{ rdv.heure }}</strong>
@@ -56,7 +56,7 @@
                <p>
                 <h5>
                   <span class="icon"
-                    > <i class="fa fa-bug fa" style="color: #9000ff"></i></span>
+                    > <i class="fa fa-bug fa" style="color: #1b6535"></i></span>
                   
                   &nbsp;&nbsp; Pathologie du patient :&nbsp;<strong>{{ getNomPrenom(rdv.malade_id).pathologie }}</strong>
                 </h5>
